@@ -16,7 +16,7 @@ public class JavaFXApp extends Application {
         VBox root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/login.fxml")));
 
         // Create the scene with the VBox root layout
-        Scene scene = new Scene(root, 300, 275);
+        Scene scene = new Scene(root, 1440, 600);
 
         // Set up the stage and show the scene
         primaryStage.setTitle("Login");

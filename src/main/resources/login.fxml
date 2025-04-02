@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
 
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.LoginController" spacing="0" alignment="CENTER" style="-fx-background-color: #fcfbe9;">
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Test.LoginController" spacing="10" alignment="CENTER" style="-fx-padding: 10px;">
-    <TextField fx:id="usernameField" promptText="Username" />
-    <PasswordField fx:id="passwordField" promptText="Password" />
-    <Button fx:id="loginButton" text="Login" />
+    <!-- HBox to arrange Image on the left and form on the right -->
+    <HBox spacing="0" alignment="CENTER" style="-fx-padding: 0px;">
+
+        <!-- Left Side: Image -->
+        <StackPane HBox.hgrow="ALWAYS">
+            <ImageView fx:id="loginImage" fitWidth="720" fitHeight="900" preserveRatio="true"/>
+        </StackPane>
+
+        <!-- Right Side: Login Form -->
+        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="15" style="-fx-padding: 20px; -fx-background-color: #fcfbe9;" prefWidth="720">
+            <Label text="Bem Vindo Utilizador!" style="-fx-font-size: 24px;"/>
+            <Label text="Por favor, faça login para continuar." style="-fx-font-size: 14px;"/>
+
+            <TextField fx:id="usernameField" promptText="Username" prefWidth="250" prefHeight="30" maxWidth="300"/>
+            <PasswordField fx:id="passwordField" promptText="Password" prefWidth="250" prefHeight="30" maxWidth="300"/>
+
+            <Button fx:id="loginButton" text="Login" onAction="#handleLogin" prefWidth="100" prefHeight="30"/>
+
+            <Label text="Esqueceu a palavra-passe?" style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
+            <Label text="Registar-se" style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
+        </VBox>
+    </HBox>
+
 </VBox>
+

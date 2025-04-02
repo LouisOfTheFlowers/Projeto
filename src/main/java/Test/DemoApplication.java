@@ -199,7 +199,6 @@ public class DemoApplication  implements CommandLineRunner  {
 		propostaPlantio.setIdAgricultor(agricultor);
 		propostaPlantio.setIdGestor(gestorProducao);
 		propostaPlantioService.save(propostaPlantio);
-
 		CronogramaTerrenoId cronogramaTerrenoId = new CronogramaTerrenoId();
 		cronogramaTerrenoId.setIdCronograma(cronograma.getId());
 		cronogramaTerrenoId.setIdTerreno(terreno.getId());
