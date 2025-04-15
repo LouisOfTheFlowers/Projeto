@@ -46,7 +46,7 @@ public class LoginController {
 
     private void loadHomeScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/home.fxml")));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/homepage_agricultor.fxml")));
             Scene homeScene = new Scene(loader.load());
 
             Stage stage = (Stage) usernameField.getScene().getWindow(); // Get current window
