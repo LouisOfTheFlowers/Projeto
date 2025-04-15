@@ -88,4 +88,8 @@ public class RegistarController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    @FXML
+    private void goBack(ActionEvent event) {
+        loadScene(event, "/login.fxml", "Homepage Agricultor");
+    }
 }
