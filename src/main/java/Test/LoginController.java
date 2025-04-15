@@ -1,60 +1,77 @@
 package Test;
 
-import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController {
-    @FXML
-    private ImageView loginImage;
+    @FXML private ImageView loginImage;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
 
     @FXML
-    private TextField usernameField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private void handleLogin(ActionEvent event) {
-        System.out.println("Login button clicked!"); // Debugging
-
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        System.out.println("Username: " + username + ", Password: " + password); // Debugging
-
-        if ("admin".equals(username) && "password".equals(password)) {
-            System.out.println("Login successful! Redirecting...");
-            loadHomeScreen();
-        } else {
-            showAlert("Login Failed", "Invalid username or password.");
+    public void initialize() {
+        try {
+            Image image = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/images/novaImagem.jpg")));
+            loginImage.setImage(image);
+        } catch (NullPointerException e) {
+            System.err.println("Failed to load login image: " + e.getMessage());
         }
     }
 
+    @FXML
+    private void handleLogin(ActionEvent event) {
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
 
-    private void loadHomeScreen() {
-        try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/homepage_agricultor.fxml")));
-            Scene homeScene = new Scene(loader.load());
-
-            Stage stage = (Stage) usernameField.getScene().getWindow(); // Get current window
-            stage.setScene(homeScene); // Switch to home scene
-            stage.setTitle("Home");
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load home screen.");
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert("Login Failed", "Please enter both username and password");
+            return;
         }
+
+        if (authenticate(username, password)) {
+            loadScene(event, "/homepage_agricultor.fxml", "Agricultor Dashboard");
+        } else {
+            showAlert("Login Failed", "Invalid credentials");
+        }
+    }
+
+    private boolean authenticate(String username, String password) {
+        // Replace with proper authentication logic
+        return "admin".equals(username) && "password".equals(password);
+    }
+
+    private void loadScene(ActionEvent event, String fxmlPath, String title) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getResource(fxmlPath)));
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Error", "Failed to load screen: " + title);
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleRegistarLink(ActionEvent event) {
+        loadScene(event, "/registar.fxml", "User Registration");
     }
 
     private void showAlert(String title, String message) {
@@ -64,26 +81,4 @@ public class LoginController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    @FXML
-    public void initialize() {
-
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/novaImagem.jpg")));
-        loginImage.setImage(image);
-    }
-
-    @FXML
-    private void handleRegistarLink(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registar.fxml"));
-            Scene registarScene = new Scene(loader.load());
-
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(registarScene);
-            stage.setTitle("Registar");
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Erro", "Não foi possível abrir a página de registo.");
-        }
-    }
-
 }

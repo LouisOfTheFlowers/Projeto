@@ -26,4 +26,15 @@ public class HomeController {
             e.printStackTrace();
         }
     }
+    private void loadHomePage(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homePage.fxml"));
+            Scene homeScene = new Scene(loader.load(), 1440, 600);
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(homeScene);
+            stage.setTitle("Home");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

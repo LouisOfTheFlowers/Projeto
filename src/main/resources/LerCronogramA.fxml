@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableCell?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Test.LerCronogramaController" spacing="20" alignment="CENTER">
+    <Label text="Cronograma" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
+        <Button fx:id="backButton" onAction="#goBack"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Back">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <graphic>
+                <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <Image url="Icons/back.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- TableView for displaying the schedule -->
+    <TableView fx:id="cronogramaTable" prefWidth="600" prefHeight="400">
+        <columns>
+            <TableColumn fx:id="dataColumn" text="Data" prefWidth="200"/>
+            <TableColumn fx:id="descricaoColumn" text="Descrição" prefWidth="400"/>
+        </columns>
+    </TableView>
+
+    <!-- Button to refresh or go back -->
+
+</VBox>
+
