@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.Region?>
 
+<?import javafx.scene.control.Hyperlink?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.LoginController" spacing="0" alignment="CENTER" style="-fx-background-color: #fcfbe9;">
 
@@ -32,7 +33,7 @@
             <Button fx:id="loginButton" text="Login" onAction="#handleLogin" prefWidth="100" prefHeight="30"/>
 
             <Label text="Esqueceu a palavra-passe?" style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
-            <Label text="Registar-se" style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
+            <Hyperlink text="Registar-se" onAction="#handleRegistarLink" style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
         </VBox>
     </HBox>
 

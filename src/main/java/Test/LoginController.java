@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-;
 import javafx.scene.image.ImageView;
 
 
@@ -46,7 +45,7 @@ public class LoginController {
 
     private void loadHomeScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/home.fxml")));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/homepage_agricultor.fxml")));
             Scene homeScene = new Scene(loader.load());
 
             Stage stage = (Stage) usernameField.getScene().getWindow(); // Get current window
@@ -71,4 +70,20 @@ public class LoginController {
         Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/novaImagem.jpg")));
         loginImage.setImage(image);
     }
+
+    @FXML
+    private void handleRegistarLink(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registar.fxml"));
+            Scene registarScene = new Scene(loader.load());
+
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(registarScene);
+            stage.setTitle("Registar");
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível abrir a página de registo.");
+        }
+    }
+
 }
