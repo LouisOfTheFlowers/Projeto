@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class DadosController {
     @FXML private Button backButton;
@@ -19,6 +20,7 @@ public class DadosController {
 
     @FXML
     private void goBack(ActionEvent event) {
+
         loadScene(event, "/homepage_agricultor.fxml", "Área do Agricultor");
     }
 
@@ -33,11 +35,7 @@ public class DadosController {
 
             System.out.println("Carregando arquivo de: " + fxmlUrl);
 
-            Parent root = FXMLLoader.load(fxmlUrl);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Registrar Dados");
-            stage.show();
+            loadScene(event, "/RegistarDados.fxml", "Registrar Dados");
         } catch (IOException e) {
             System.err.println("ERRO: " + e.getMessage());
             e.printStackTrace();
@@ -52,19 +50,15 @@ public class DadosController {
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            URL url = getClass().getResource(fxmlPath);
-            if (url == null) {
-                throw new IOException("Arquivo não encontrado: " + fxmlPath);
-            }
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getResource(fxmlPath)));
 
-            Parent root = FXMLLoader.load(url);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Erro", "Erro ao carregar: " + title + "\n" + e.getMessage());
         }
     }
 

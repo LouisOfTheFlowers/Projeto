@@ -11,30 +11,16 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
 
 public class ConsultarPropostasController {
     @FXML private Button backButton;
 
     @FXML
     private void goBack(ActionEvent event) {
-        try {
-            // Carrega a página intermediária de propostas
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/proposta_plantio.fxml"));
-            Parent root = loader.load();
 
-            // Obtém a janela atual
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Configura a nova cena
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Propostas de Plantio");
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Erro", "Não foi possível voltar para as propostas de plantio");
-        }
+        loadScene(event, "/proposta_plantio.fxml", "Área do Agricultor");
     }
 
     // Adicione aqui outros métodos específicos da consulta de propostas
@@ -45,5 +31,18 @@ public class ConsultarPropostasController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    private void loadScene(ActionEvent event, String fxmlPath, String title) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getResource(fxmlPath)));
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class RegistarDadosController {
     @FXML private Button backButton;
@@ -30,10 +31,7 @@ public class RegistarDadosController {
             }
 
             Parent root = FXMLLoader.load(url);
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Registro de Dados");
-            stage.show();
+            loadScene(event, "/Dados.fxml", "Dados");
         } catch (IOException e) {
             showAlert("Erro", "Não foi possível voltar: " + e.getMessage());
             e.printStackTrace();
@@ -64,5 +62,18 @@ public class RegistarDadosController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    private void loadScene(ActionEvent event, String fxmlPath, String title) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getResource(fxmlPath)));
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

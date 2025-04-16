@@ -38,19 +38,19 @@ public class LoginController {
         String password = passwordField.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Login Failed", "Please enter both username and password");
+            showAlert("Login Falhou", "Por favor, insira o nome de utilizador e a palavra-passe.");
             return;
         }
 
         if (authenticate(username, password)) {
             loadScene(event, "/homepage_agricultor.fxml", "Agricultor Dashboard");
         } else {
-            showAlert("Login Failed", "Invalid credentials");
+            showAlert("Login Falhou", "Credenciais inválidas.");
         }
     }
 
     private boolean authenticate(String username, String password) {
-        // Replace with proper authentication logic
+        // Autenticação simples para teste
         return "admin".equals(username) && "password".equals(password);
     }
 
@@ -64,14 +64,19 @@ public class LoginController {
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
-            showAlert("Error", "Failed to load screen: " + title);
+            showAlert("Erro", "Não foi possível carregar o ecrã: " + title);
             e.printStackTrace();
         }
     }
 
     @FXML
     private void handleRegistarLink(ActionEvent event) {
-        loadScene(event, "/registar.fxml", "User Registration");
+        loadScene(event, "/registar.fxml", "Registar Utilizador");
+    }
+
+    @FXML
+    private void handleForgotPassword(ActionEvent event) {
+        loadScene(event, "/esqueceu_password.fxml", "Recuperar Palavra-Passe");
     }
 
     private void showAlert(String title, String message) {

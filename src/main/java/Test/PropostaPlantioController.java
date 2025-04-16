@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class PropostaPlantioController {
     @FXML private Button backButton;
@@ -19,24 +20,8 @@ public class PropostaPlantioController {
 
     @FXML
     private void goBack(ActionEvent event) {
-        try {
-            // Carrega a homepage do agricultor
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepage_agricultor.fxml"));
-            Parent root = loader.load();
 
-            // Obtém a janela atual
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Configura a nova cena
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Área do Agricultor");
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Erro", "Não foi possível voltar para a homepage");
-        }
+        loadScene(event, "/homepage_agricultor.fxml", "Área do Agricultor");
     }
 
     @FXML
@@ -51,14 +36,15 @@ public class PropostaPlantioController {
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getResource(fxmlPath)));
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Erro", "Não foi possível carregar a página: " + title);
         }
     }
 

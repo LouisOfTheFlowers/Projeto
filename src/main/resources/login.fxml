@@ -8,9 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Region?>
-
 <?import javafx.scene.control.Hyperlink?>
+
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.LoginController" spacing="0" alignment="CENTER" style="-fx-background-color: #fcfbe9;">
 
@@ -23,19 +22,23 @@
         </StackPane>
 
         <!-- Right Side: Login Form -->
-        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="15" style="-fx-padding: 20px; -fx-background-color: #fcfbe9;" prefWidth="720">
-            <Label text="Bem Vindo Utilizador!" style="-fx-font-size: 24px;"/>
-            <Label text="Por favor, faça login para continuar." style="-fx-font-size: 14px;"/>
+        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="15"
+              style="-fx-padding: 20px; -fx-background-color: #fcfbe9;" prefWidth="720">
+
+            <Label text="Bem Vindo Utilizador!" style="-fx-font-size: 24px;" />
+            <Label text="Por favor, faça login para continuar." style="-fx-font-size: 14px;" />
 
             <TextField fx:id="usernameField" promptText="Username" prefWidth="250" prefHeight="30" maxWidth="300"/>
             <PasswordField fx:id="passwordField" promptText="Password" prefWidth="250" prefHeight="30" maxWidth="300"/>
 
             <Button fx:id="loginButton" text="Login" onAction="#handleLogin" prefWidth="100" prefHeight="30"/>
 
-            <Label text="Esqueceu a palavra-passe?" style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
-            <Hyperlink text="Registar-se" onAction="#handleRegistarLink" style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
+            <Hyperlink text="Esqueceu-se da palavra-passe?" onAction="#handleForgotPassword"
+                       style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
+
+            <Hyperlink text="Registar-se" onAction="#handleRegistarLink"
+                       style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;" />
         </VBox>
     </HBox>
 
 </VBox>
-
