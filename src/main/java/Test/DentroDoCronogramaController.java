@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
@@ -40,19 +41,20 @@ public class DentroDoCronogramaController {
 
     @FXML
     private void goBack(ActionEvent event) {
-
-        loadScene(event, "/proposta_plantio.fxml", "Área do Agricultor");
-    }
-    private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(
-                    getClass().getResource(fxmlPath)));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LerCronogramA.fxml"));
+            Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
-            stage.setTitle(title);
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root, 1440, 600));
+            currentStage.setTitle("Detalhes do Cronograma");
+
         } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro de Navegação");
+            alert.setHeaderText(null);
+            alert.setContentText("Não foi possível voltar para a página anterior");
+            alert.showAndWait();
             e.printStackTrace();
         }
     }

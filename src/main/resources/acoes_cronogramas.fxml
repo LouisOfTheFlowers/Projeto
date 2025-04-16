@@ -9,10 +9,10 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.AcoesCronogramaController"
       spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
 
-    <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 20 0;">
+    <!-- Cabeçalho com botão de voltar no topo esquerdo -->
+    <HBox alignment="TOP_LEFT" style="-fx-padding: 0 0 20 0;">
         <Button fx:id="backButton" onAction="#goBack"
                 style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
             <cursor>
@@ -24,12 +24,19 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Cronogramas" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
     </HBox>
 
-    <!-- Conteúdo principal -->
-    <VBox spacing="30" alignment="CENTER" style="-fx-padding: 20;">
-        <!-- Botão para ler cronogramas -->
+    <!-- Título principal centralizado -->
+    <Label text="Cronogramas"
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"
+           alignment="CENTER"/>
+
+    <!-- Área de ações alinhada à esquerda -->
+    <VBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 0 0 20 20;">
+        <Label text="Ações em Cronogramas"
+               style="-fx-font-size: 18px; -fx-text-fill: #666;"/>
+
+        <!-- Botão de ação -->
         <Button fx:id="lerCronogramaButton"
                 text="Ler Cronogramas"
                 onAction="#abrirLerCronograma"
@@ -38,8 +45,5 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </Button>
-
-        <!-- Espaço para adicionar mais botões/opções no futuro -->
-        <VBox fx:id="opcoesAdicionais" spacing="15" alignment="CENTER"/>
     </VBox>
 </VBox>

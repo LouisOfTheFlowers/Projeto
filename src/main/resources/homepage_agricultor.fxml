@@ -79,7 +79,7 @@
 
                 <!-- Categoria Dados -->
                 <Button fx:id="dadosButton"
-                        text="Registro de Dados"
+                        text="Gestão de Dados"
                         onAction="#abrirDados"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="1" GridPane.rowIndex="1">
