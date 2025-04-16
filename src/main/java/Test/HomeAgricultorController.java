@@ -14,12 +14,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class HomeAgricultorController {
-    @FXML private Button backButton;
-    @FXML private Button lerCronogramaButton;
-    @FXML private Button registarPropostaPlantioButton;
-    @FXML private Button registarDadosButton;
-    @FXML private Button registarTerrenoButton;
-    @FXML private Button consultarPropostasButton;
+    @FXML private Button logoutButton;
+    @FXML private Button cronogramasButton;
+    @FXML private Button propostasButton;
+    @FXML private Button terrenosButton;
+    @FXML private Button dadosButton;
 
     @FXML
     public void initialize() {
@@ -33,9 +32,8 @@ public class HomeAgricultorController {
                 + "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
 
         Button[] buttons = {
-                lerCronogramaButton, registarPropostaPlantioButton,
-                registarDadosButton, registarTerrenoButton,
-                consultarPropostasButton, backButton
+                cronogramasButton, propostasButton,
+                terrenosButton, dadosButton, logoutButton
         };
 
         for (Button button : buttons) {
@@ -46,32 +44,27 @@ public class HomeAgricultorController {
     }
 
     @FXML
-    private void lerCronograma(ActionEvent event) {
-        loadScene(event, "/LerCronogramA.fxml", "Cronograma");
+    private void abrirCronogramas(ActionEvent event) {
+        loadScene(event, "/acoes_cronogramas.fxml", "Ações de Cronogramas");
     }
 
     @FXML
-    private void registarPropostaPlantio(ActionEvent event) {
-        loadScene(event, "/registar_proposta_plantio.fxml", "Proposta de Plantio");
+    private void abrirPropostas(ActionEvent event) {
+        loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
     }
 
     @FXML
-    private void registarDados(ActionEvent event) {
-        loadScene(event, "/RegistarDados.fxml", "Registro de Dados");
+    private void abrirTerrenos(ActionEvent event) {
+        loadScene(event, "/terreno.fxml", "Gestão de Terrenos");
     }
 
     @FXML
-    private void registarTerreno(ActionEvent event) {
-        loadScene(event, "/registar_terreno.fxml", "Registro de Terreno");
+    private void abrirDados(ActionEvent event) {
+        loadScene(event, "/dados.fxml", "Registro de Dados");
     }
 
     @FXML
-    private void consultarPropostas(ActionEvent event) {
-        loadScene(event, "/ConsultarPropostas.fxml", "Consulta de Propostas");
-    }
-
-    @FXML
-    private void goBack(ActionEvent event) {
+    private void logout(ActionEvent event) {
         loadScene(event, "/login.fxml", "Login");
     }
 

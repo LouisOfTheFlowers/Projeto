@@ -12,14 +12,15 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class ConsultarPropostasController {
+public class AcoesCronogramaController {
     @FXML private Button backButton;
+    @FXML private Button lerCronogramaButton;
 
     @FXML
     private void goBack(ActionEvent event) {
         try {
-            // Carrega a página intermediária de propostas
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/proposta_plantio.fxml"));
+            // Carrega a homepage do agricultor
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepage_agricultor.fxml"));
             Parent root = loader.load();
 
             // Obtém a janela atual
@@ -28,16 +29,28 @@ public class ConsultarPropostasController {
             // Configura a nova cena
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Propostas de Plantio");
+            stage.setTitle("Área do Agricultor");
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Erro", "Não foi possível voltar para as propostas de plantio");
+            showAlert("Erro", "Não foi possível voltar para a homepage");
         }
     }
 
-    // Adicione aqui outros métodos específicos da consulta de propostas
+    @FXML
+    private void abrirLerCronograma(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/LerCronogramA.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Cronogramas Disponíveis");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível abrir os cronogramas");
+        }
+    }
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

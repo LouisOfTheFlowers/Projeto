@@ -14,7 +14,7 @@
       spacing="0"
       prefWidth="800"
       prefHeight="600"
-      style="-fx-background-color: #ffffff;">
+      style="-fx-background-color: #fcfbe9;">
     <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
         <Button fx:id="backButton" onAction="#goBack"
                 style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Back">

@@ -35,7 +35,7 @@ public class RegistarTerrenoController {
     }
     @FXML
     private void goBack(ActionEvent event) {
-        loadScene(event, "/homepage_agricultor.fxml", "Homepage Agricultor");
+        loadScene(event, "/terreno.fxml", "Gestão de Terrenos");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {

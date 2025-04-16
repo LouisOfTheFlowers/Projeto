@@ -17,7 +17,7 @@ public class RegistarPropostaPlantioController {
     @FXML
     private void registarPropostaPlantio(ActionEvent event) {
         try {
-            // Your logic to register a new planting proposal
+            // Sua lógica para registrar uma nova proposta de plantio
             System.out.println("Registar Proposta de Plantio button clicked!");
             showAlert(Alert.AlertType.INFORMATION, "Registar Proposta de Plantio", "Opening Planting Proposal Registration...");
         } catch (Exception e) {
@@ -33,9 +33,11 @@ public class RegistarPropostaPlantioController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
     private void goBack(ActionEvent event) {
-        loadScene(event, "/homepage_agricultor.fxml", "Homepage Agricultor");
+        // Alterado para voltar para a página intermediária de propostas
+        loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
@@ -48,7 +50,8 @@ public class RegistarPropostaPlantioController {
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
-
+            showAlert(Alert.AlertType.ERROR, "Erro de Navegação",
+                    "Não foi possível carregar a página: " + title);
             e.printStackTrace();
         }
     }

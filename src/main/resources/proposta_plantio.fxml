@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.PropostaPlantioController"
+      spacing="20" alignment="TOP_CENTER"
+      style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+
+    <!-- Cabeçalho com botão de voltar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 20 0;">
+        <Button fx:id="backButton" onAction="#goBack"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@Icons/back.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label text="Propostas de Plantio" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Conteúdo principal -->
+    <VBox spacing="30" alignment="CENTER" style="-fx-padding: 20;">
+        <!-- Botão para registrar proposta -->
+        <Button fx:id="registrarPropostaButton"
+                text="Registrar Nova Proposta"
+                onAction="#abrirRegistrarProposta"
+                style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 30;">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+
+        <!-- Botão para consultar propostas -->
+        <Button fx:id="consultarPropostasButton"
+                text="Consultar Propostas"
+                onAction="#abrirConsultarPropostas"
+                style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 30;">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+    </VBox>
+</VBox>
