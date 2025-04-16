@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.DentroDoCronogramaController" spacing="20"
+      style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+
+    <!-- Cabeçalho com botão de voltar -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Button fx:id="backButton" onAction="#goBack"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <Image url="Icons/back.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label fx:id="tituloLabel" text="Detalhes do Cronograma"
+               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Corpo do cronograma -->
+    <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 20;
+                 -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);"
+          spacing="15">
+
+        <!-- Informações do cronograma -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Nome:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="nomeCronogramaLabel" style="-fx-font-size: 14px;"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Data:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="dataCronogramaLabel" style="-fx-font-size: 14px;"/>
+        </HBox>
+
+        <Separator/>
+
+        <!-- Tabela de atividades -->
+        <Label text="Atividades:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+
+        <TableView fx:id="atividadesTable" prefHeight="300">
+            <columns>
+                <TableColumn fx:id="horaColumn" text="Hora" prefWidth="100"/>
+                <TableColumn fx:id="atividadeColumn" text="Atividade" prefWidth="300"/>
+                <TableColumn fx:id="responsavelColumn" text="Responsável" prefWidth="200"/>
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>

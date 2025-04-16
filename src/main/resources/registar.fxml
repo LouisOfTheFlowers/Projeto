@@ -1,69 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+    <?import javafx.geometry.*?>
+    <?import javafx.scene.control.*?>
+    <?import javafx.scene.image.*?>
+    <?import javafx.scene.layout.*?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
+    <?import javafx.collections.FXCollections?>
+    <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <HBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.RegistarController"
       spacing="0"
       prefWidth="800"
       prefHeight="600"
-      style="-fx-background-color: #ffffff;">
-
-    <!-- Lado esquerdo: imagem -->
-    <StackPane style="-fx-background-color: #fcfbe9;"
-               HBox.hgrow="ALWAYS">
-        <ImageView fx:id="registarImage"
-                   fitWidth="300"
-                   fitHeight="300"
-                   preserveRatio="true"/>
-    </StackPane>
-
-    <!-- Lado direito: formulário -->
-    <VBox alignment="CENTER"
-          spacing="15"
-          style="-fx-padding: 50; -fx-background-color: #ffffff;"
-          HBox.hgrow="ALWAYS">
-
-        <Label text="Registo"
-               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-
-        <TextField fx:id="usernameField"
-                   promptText="E-mail:"
-                   prefWidth="250"/>
-
-        <PasswordField fx:id="passwordField"
-                       promptText="Password:"
-                       prefWidth="250"/>
-
-        <PasswordField fx:id="confirmPasswordField"
-                       promptText="Confirm Password:"
-                       prefWidth="250"/>
-
-        <ComboBox fx:id="roleComboBox"
-                  prefWidth="250"
-                  promptText="Papel">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Agricultor"/>
-                    <String fx:value="Gestor de Produção"/>
-                    <String fx:value="Analista de Dados"/>
-                </FXCollections>
-            </items>
-        </ComboBox>
-
-        <Button text="Registar"
-                onAction="#handleRegistar"
-                prefWidth="150"
-                style="-fx-background-color: black; -fx-text-fill: white; -fx-background-radius: 20;">
-            <VBox.margin>
-                <Insets top="20"/>
-            </VBox.margin>
+      style="-fx-background-color: #fcfbe9;">
+    <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
+        <Button fx:id="backButton" onAction="#goBack"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Back">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <graphic>
+                <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <Image url="Icons/back.png"/>
+                </ImageView>
+            </graphic>
         </Button>
-    </VBox>
-</HBox>
+    </HBox>
+
+        <!-- Lado esquerdo: imagem -->
+        <StackPane style="-fx-background-color: #fcfbe9;"
+                   HBox.hgrow="ALWAYS">
+            <ImageView fx:id="registarImage"
+                       fitWidth="300"
+                       fitHeight="300"
+                       preserveRatio="true"/>
+        </StackPane>
+
+        <!-- Lado direito: formulário -->
+        <VBox alignment="CENTER"
+              spacing="15"
+              style="-fx-padding: 50; -fx-background-color: #fcfbe9;"
+              HBox.hgrow="ALWAYS">
+
+            <Label text="Registo"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <TextField fx:id="usernameField"
+                       promptText="E-mail:"
+                       prefWidth="250"/>
+
+            <PasswordField fx:id="passwordField"
+                           promptText="Password:"
+                           prefWidth="250"/>
+
+            <PasswordField fx:id="confirmPasswordField"
+                           promptText="Confirm Password:"
+                           prefWidth="250"/>
+
+            <ComboBox fx:id="roleComboBox"
+                      prefWidth="250"
+                      promptText="Papel">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Agricultor"/>
+                        <String fx:value="Gestor de Produção"/>
+                        <String fx:value="Analista de Dados"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <Button text="Registar"
+                    onAction="#handleRegistar"
+                    prefWidth="150"
+                    style="-fx-background-color: black; -fx-text-fill: white; -fx-background-radius: 20;">
+                <VBox.margin>
+                    <Insets top="20"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </HBox>

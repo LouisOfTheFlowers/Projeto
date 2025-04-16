@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -18,21 +17,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class RegistarController {
-
-    @FXML
-    private TextField usernameField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private PasswordField confirmPasswordField;
-
-    @FXML
-    private ImageView registarImage;
-
-
-    private Stage currentStage;  // Guarda referência ao stage atual
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private ImageView registarImage;
 
     @FXML
     public void initialize() {
@@ -41,95 +29,67 @@ public class RegistarController {
                     getClass().getResourceAsStream("/images/novaImagem.jpg")));
             registarImage.setImage(image);
         } catch (Exception e) {
-            System.err.println("Erro ao carregar imagem: " + e.getMessage());
+            System.err.println("Error loading image: " + e.getMessage());
         }
     }
 
     @FXML
     private void handleRegistar(ActionEvent event) {
-        String username = usernameField.getText();
+        String username = usernameField.getText().trim();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            showAlert("Erro", "Todos os campos são obrigatórios.");
+        if (!validateInput(username, password, confirmPassword)) {
             return;
+        }
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Registration successful!");
+        loadScene(event, "/login.fxml", "Login");
+    }
+
+    private boolean validateInput(String username, String password, String confirmPassword) {
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "All fields are required");
+            return false;
         }
 
         if (!password.equals(confirmPassword)) {
-            showAlert("Erro", "As palavras-passe não coincidem.");
-            return;
+            showAlert(Alert.AlertType.ERROR, "Error", "Passwords don't match");
+            return false;
         }
 
-        // Lógica de registro...
-        showAlert("Sucesso", "Registo concluído com sucesso!");
+        if (password.length() < 8) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters");
+            return false;
+        }
 
-        // Fecha completamente a janela de registro
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-        stage.close();
-
-        // Reabre a janela de login (opcional)
-        abrirJanelaLogin();
+        return true;
     }
 
-    private void abrirJanelaLogin() {
+    private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Parent root = loader.load();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getResource(fxmlPath)));
 
-            Stage loginStage = new Stage();
-            loginStage.setTitle("Login");
-            loginStage.setScene(new Scene(root));
-            loginStage.show();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle(title);
+            stage.show();
         } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load screen");
             e.printStackTrace();
         }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    public void setStageAndSetupListeners(Stage stage) {
-        this.currentStage = stage;  // Guarda a referência ao stage atual
-
-        // Configurar comportamento de redimensionamento
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            double newWidth = newVal.doubleValue();
-            registarImage.setFitWidth(newWidth * 0.3);
-        });
-
-        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            double newHeight = newVal.doubleValue();
-            registarImage.setFitHeight(newHeight * 0.5);
-        });
-
-        // Configurar tamanho mínimo
-        stage.setMinWidth(600);
-        stage.setMinHeight(400);
-    }
-
     @FXML
-    private void voltarParaLogin(ActionEvent event) {
-        try {
-            // Carrega a cena de login
-            Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
-
-            // Obtém a janela atual
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Substitui a cena atual pela cena de login
-            stage.setScene(new Scene(root));
-
-            // Opcional: Ajusta o tamanho da janela
-            stage.sizeToScene();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Erro", "Não foi possível voltar para a página de login.");
-        }
+    private void goBack(ActionEvent event) {
+        loadScene(event, "/login.fxml", "Homepage Agricultor");
     }
 }
