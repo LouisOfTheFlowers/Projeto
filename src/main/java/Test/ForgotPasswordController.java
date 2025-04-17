@@ -3,16 +3,16 @@ package Test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Objects;
 
+@Component
 public class ForgotPasswordController {
 
     @FXML
@@ -27,7 +27,6 @@ public class ForgotPasswordController {
             return;
         }
 
-        // Simulação de recuperação — aqui você pode integrar com um sistema real
         showAlert("Instruções Enviadas", "Se o e-mail ou nome estiver correto, irá receber instruções em breve.");
         emailField.clear();
     }
@@ -35,9 +34,10 @@ public class ForgotPasswordController {
     @FXML
     private void handleBackToLogin(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(
-                    getClass().getResource("/login.fxml"))); // Altere se o ficheiro tiver outro nome
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/login.fxml")));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
 
+            Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle("Login");
@@ -56,4 +56,3 @@ public class ForgotPasswordController {
         alert.showAndWait();
     }
 }
-

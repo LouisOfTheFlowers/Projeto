@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ConsultarPropostasController {
     @FXML private Button backButton;
@@ -21,14 +22,10 @@ public class ConsultarPropostasController {
         try {
             // Carrega a cena anterior
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/proposta_plantio.fxml"));
+           loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
             Parent root = loader.load();
 
-            // Obtém o stage atual (mesmo stage)
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Define a nova cena no mesmo stage
-            stage.setScene(new Scene(root));
-            stage.show();
 
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível voltar à página anterior");
@@ -68,5 +65,19 @@ public class ConsultarPropostasController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    private void loadScene(ActionEvent event, String fxmlPath, String title) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(
+                    getClass().getResource(fxmlPath)));
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar o ecrã: " + title);
+            e.printStackTrace();
+        }
     }
 }
