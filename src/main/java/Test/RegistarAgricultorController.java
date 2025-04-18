@@ -5,9 +5,15 @@ import Services.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class RegistarAgricultorController {
@@ -49,10 +55,11 @@ public class RegistarAgricultorController {
             return;
         }
 
-        String codPostal = codigoPostalField.getText();
+        String codPostal = codigoPostalField.getText().trim();
         Localidade localidade = em.find(Localidade.class, codPostal);
         if (localidade == null) {
             showAlert("Erro", "Código postal não encontrado na base de dados.");
+            abrirFormularioLocalidade();
             return;
         }
 
@@ -80,6 +87,23 @@ public class RegistarAgricultorController {
             showAlert("Erro", "Falha ao registar agricultor.");
         }
     }
+
+    public void abrirFormularioLocalidade() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registar_localidade.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Nova Localidade");
+            stage.setScene(new Scene(root, 400, 250));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
