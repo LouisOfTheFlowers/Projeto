@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableCell?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Test.ConsultarPropostasController" spacing="20" alignment="CENTER">
-    <Label text="Consultar Propostas de Plantio" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-    <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
+<?import javafx.scene.layout.Region?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.ConsultarPropostasController" spacing="20" alignment="TOP_CENTER"
+      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
+
+    <!-- Cabeçalho com botão de voltar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 20 0;">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Back">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
@@ -25,20 +26,42 @@
                 </ImageView>
             </graphic>
         </Button>
+        <Label text="Propostas Submetidas:" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
     </HBox>
 
-    <!-- TableView for displaying the proposals -->
-    <TableView fx:id="propostasTable" prefWidth="600" prefHeight="400">
-        <columns>
-            <TableColumn fx:id="idPropostaColumn" text="ID Proposta" prefWidth="100"/>
-            <TableColumn fx:id="dataPropostaColumn" text="Data Proposta" prefWidth="150"/>
-            <TableColumn fx:id="descricaoColumn" text="Descrição" prefWidth="350"/>
-        </columns>
-    </TableView>
+    <!-- Lista de Propostas -->
+    <VBox fx:id="propostasContainer" spacing="15" alignment="TOP_CENTER">
+        <!-- Primeira proposta -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Proposta 1" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Em análise" style="-fx-text-fill: #666;"/>
+            </HBox>
+            <Button text="Ver Proposta" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;"
+                    onAction="#verProposta" fx:id="verProposta1"/>
+        </VBox>
 
-    <!-- Buttons for actions -->
-    <HBox spacing="10" alignment="CENTER">
+        <!-- Segunda proposta -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Proposta 2" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Aceite" style="-fx-text-fill: #666;"/>
+            </HBox>
+            <Button text="Ver Proposta" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;"
+                    onAction="#verProposta" fx:id="verProposta2"/>
+        </VBox>
 
-    </HBox>
+        <!-- Terceira proposta -->
+        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Proposta 3" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Recusada" style="-fx-text-fill: #666;"/>
+            </HBox>
+            <Button text="Ver Proposta" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;"
+                    onAction="#verProposta" fx:id="verProposta3"/>
+        </VBox>
+    </VBox>
 </VBox>
-

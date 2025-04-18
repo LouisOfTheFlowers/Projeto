@@ -9,7 +9,8 @@ import java.util.Set;
 @Table(name = "\"Gestor_Producao\"")
 public class GestorProducao {
     @Id
-    @Column(name = "id_gestor", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // OU AUTO, dependendo do banco
+    @Column(name = "id_gestor")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

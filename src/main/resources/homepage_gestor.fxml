@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.Cursor?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Test.HomeAgricultorController"
+            fx:controller="Test.HomeGestorController"
             style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
 
     <top>
@@ -21,7 +19,7 @@
                 </cursor>
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-                        <Image url="Icons/back.png"/>
+                        <Image url="@Icons/back.png"/>
                     </ImageView>
                 </graphic>
             </Button>
@@ -30,7 +28,7 @@
 
     <center>
         <VBox spacing="30" alignment="CENTER" style="-fx-padding: 0 40 40 40;">
-            <Label text="Bem-vindo, Agricultor"
+            <Label text="Bem-vindo, Gestor de Produção"
                    style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2e8b57; -fx-padding-bottom: 20px;"/>
 
             <GridPane hgap="20" vgap="30" alignment="CENTER">
@@ -44,10 +42,9 @@
                     <RowConstraints prefHeight="120"/>
                 </rowConstraints>
 
-                <!-- Categoria Cronogramas -->
-                <Button fx:id="cronogramasButton"
-                        text="Cronogramas"
-                        onAction="#abrirCronogramas"
+                <Button fx:id="produzirButton"
+                        text="Produção"
+                        onAction="#abrirProducao"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <cursor>
@@ -55,10 +52,9 @@
                     </cursor>
                 </Button>
 
-                <!-- Categoria Propostas -->
-                <Button fx:id="propostasButton"
-                        text="Propostas de Plantio"
-                        onAction="#abrirPropostas"
+                <Button fx:id="gerirProdutosButton"
+                        text="Gerir Produtos"
+                        onAction="#abrirGestaoProdutos"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <cursor>
@@ -66,10 +62,9 @@
                     </cursor>
                 </Button>
 
-                <!-- Categoria Terrenos -->
-                <Button fx:id="terrenosButton"
-                        text="Gestão de Terrenos"
-                        onAction="#abrirTerrenos"
+                <Button fx:id="verRelatoriosButton"
+                        text="Relatórios"
+                        onAction="#abrirRelatorios"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <cursor>
@@ -77,10 +72,9 @@
                     </cursor>
                 </Button>
 
-                <!-- Categoria Dados -->
-                <Button fx:id="dadosButton"
-                        text="Gestão de Dados"
-                        onAction="#abrirDados"
+                <Button fx:id="gestaoTerrenosButton"
+                        text="Gestão de Terrenos"
+                        onAction="#abrirTerrenos"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <cursor>
@@ -91,3 +85,4 @@
         </VBox>
     </center>
 </BorderPane>
+

@@ -1,14 +1,15 @@
 package Models.trabalhoprojeto;
 
 import jakarta.persistence.*;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "\"Trabalhador\"")
 public class Trabalhador {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_trabalhador", nullable = false)
     private Integer id;
 
@@ -40,6 +41,7 @@ public class Trabalhador {
     @OneToMany(mappedBy = "idTrabalhador")
     private Set<Telefone> telefones = new LinkedHashSet<>();
 
+    // Getters e Setters
     public Integer getId() {
         return id;
     }
@@ -119,5 +121,4 @@ public class Trabalhador {
     public void setTelefones(Set<Telefone> telefones) {
         this.telefones = telefones;
     }
-
 }

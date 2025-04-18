@@ -9,44 +9,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
-
+@Component
 public class LerCronogramaController {
 
     @FXML
     private void lerCronograma(ActionEvent event) {
         try {
-            // Carrega o arquivo FXML da página de detalhes
-            FXMLLoader loader = new FXMLLoader();
-            // Certifique-se que o caminho está correto - ajuste conforme sua estrutura de pacotes
-            loader.setLocation(getClass().getResource("/Dentro_do_cronograma.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dentro_do_cronograma.fxml"));
             Parent root = loader.load();
 
-            // Obtém o controller da nova cena
-            DentroDoCronogramaController controller = loader.getController();
+            // Obtém a janela atual (em vez de criar uma nova)
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Configura a cena
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Detalhes do Cronograma");
-
-            // Fecha a janela atual (opcional)
-            // ((Node)(event.getSource())).getScene().getWindow().hide();
-
-            stage.show();
+            // Substitui a cena atual
+            currentStage.setScene(new Scene(root, 1440, 600));
+            currentStage.setTitle("Detalhes do Cronograma");
 
         } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível abrir os detalhes do cronograma");
             e.printStackTrace();
-            // Mostra mensagem de erro para o usuário
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Não foi possível abrir o cronograma");
-            alert.setContentText("O arquivo de visualização não foi encontrado.");
-            alert.showAndWait();
         }
     }
 
@@ -66,16 +52,20 @@ public class LerCronogramaController {
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(
-                    getClass().getResource(fxmlPath)));
+            URL resource = getClass().getResource(fxmlPath);
+            Objects.requireNonNull(resource, "❌ FXML não encontrado: " + fxmlPath);
+
+            FXMLLoader loader = new FXMLLoader(resource);
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+
+            Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle(title);
             stage.show();
-        } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Erro de Navegação",
-                    "Não foi possível carregar a página: " + title);
+        } catch (Exception e) {
+
             e.printStackTrace();
         }
     }

@@ -1,15 +1,15 @@
 package Models.trabalhoprojeto;
 
 import jakarta.persistence.*;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "\"Localidade\"")
 public class Localidade {
+
     @Id
-    @Column(name = "\"codigo-postal\"", nullable = false, length = 20)
+    @Column(name = "\"codigo-postal\"", length = 20, nullable = false)
     private String codigoPostal;
 
     @Column(name = "localidade", length = 100)
@@ -21,6 +21,7 @@ public class Localidade {
     @OneToMany(mappedBy = "codigoPostal")
     private Set<Trabalhador> trabalhadores = new LinkedHashSet<>();
 
+    // Getters e Setters
     public String getCodigoPostal() {
         return codigoPostal;
     }
@@ -52,5 +53,4 @@ public class Localidade {
     public void setTrabalhadores(Set<Trabalhador> trabalhadores) {
         this.trabalhadores = trabalhadores;
     }
-
 }
