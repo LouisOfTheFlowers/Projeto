@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="Test.DadosAnalistaController"
+      spacing="20" alignment="CENTER"
+      style="-fx-background-color: #fcfbe9; -fx-padding: 40;">
+
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Button fx:id="backButton" onAction="#goBack"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <Image url="Icons/back.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label fx:id="tituloLabel" text="Detalhes da Proposta"
+               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <Label text="Visualização de Dados"
+           style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+
+    <TableView fx:id="tabelaDados" prefWidth="800" prefHeight="400">
+        <!-- Exemplo de colunas (devem ser adaptadas aos teus dados reais) -->
+        <columns>
+            <TableColumn text="ID"/>
+            <TableColumn text="Tipo"/>
+            <TableColumn text="Valor"/>
+        </columns>
+    </TableView>
+</VBox>

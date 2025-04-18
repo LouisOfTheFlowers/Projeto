@@ -1,4 +1,3 @@
-// HomeAnalistaController.java
 package Test;
 
 import javafx.event.ActionEvent;
@@ -46,12 +45,12 @@ public class HomeAnalistaController {
 
     @FXML
     private void abrirRelatorios(ActionEvent event) {
-        showAlert("Função", "Abrir relatórios de dados (a implementar).");
+        loadScene(event, "/relatorios.fxml", "Relatórios de Dados");
     }
 
     @FXML
     private void abrirDados(ActionEvent event) {
-        showAlert("Função", "Visualizar dados registados (a implementar).");
+        loadScene(event, "/dados_analista.fxml", "Visualização de Dados");
     }
 
     @FXML
@@ -74,7 +73,6 @@ public class HomeAnalistaController {
             e.printStackTrace();
         }
     }
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

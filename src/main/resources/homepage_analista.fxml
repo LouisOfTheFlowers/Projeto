@@ -34,7 +34,7 @@
                    style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
             <Button fx:id="relatoriosButton"
-                    text="Relatórios de Dados"
+                    text="Relatórios"
                     onAction="#abrirRelatorios"
                     style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
                     prefWidth="300" prefHeight="50">
@@ -44,7 +44,7 @@
             </Button>
 
             <Button fx:id="dadosButton"
-                    text="Visualizar Dados"
+                    text="Dados"
                     onAction="#abrirDados"
                     style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
                     prefWidth="300" prefHeight="50">
