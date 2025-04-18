@@ -9,7 +9,8 @@ import java.util.Set;
 @Table(name = "\"Analista_Dados\"")
 public class AnalistaDado {
     @Id
-    @Column(name = "id_analista", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_analista")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

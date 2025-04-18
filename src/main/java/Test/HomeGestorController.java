@@ -3,24 +3,23 @@ package Test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
+
 @Component
-public class HomeAgricultorController {
+public class HomeGestorController {
+
     @FXML private Button logoutButton;
-    @FXML private Button cronogramasButton;
-    @FXML private Button propostasButton;
-    @FXML private Button terrenosButton;
-    @FXML private Button dadosButton;
+    @FXML private Button produzirButton;
+    @FXML private Button gerirProdutosButton;
+    @FXML private Button verRelatoriosButton;
+    @FXML private Button gestaoTerrenosButton;
 
     @FXML
     public void initialize() {
@@ -34,8 +33,8 @@ public class HomeAgricultorController {
                 + "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
 
         Button[] buttons = {
-                cronogramasButton, propostasButton,
-                terrenosButton, dadosButton, logoutButton
+                produzirButton, gerirProdutosButton,
+                verRelatoriosButton, gestaoTerrenosButton, logoutButton
         };
 
         for (Button button : buttons) {
@@ -46,23 +45,23 @@ public class HomeAgricultorController {
     }
 
     @FXML
-    private void abrirCronogramas(ActionEvent event) {
-        loadScene(event, "/acoes_cronogramas.fxml", "Ações de Cronogramas");
+    private void abrirProducao(ActionEvent event) {
+        loadScene(event, "/producao.fxml", "Produção");
     }
 
     @FXML
-    private void abrirPropostas(ActionEvent event) {
-        loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
+    private void abrirGestaoProdutos(ActionEvent event) {
+        loadScene(event, "/gestao_produtos.fxml", "Gestão de Produtos");
+    }
+
+    @FXML
+    private void abrirRelatorios(ActionEvent event) {
+        loadScene(event, "/relatorios.fxml", "Relatórios");
     }
 
     @FXML
     private void abrirTerrenos(ActionEvent event) {
         loadScene(event, "/terreno.fxml", "Gestão de Terrenos");
-    }
-
-    @FXML
-    private void abrirDados(ActionEvent event) {
-        loadScene(event, "/dados.fxml", "Registro de Dados");
     }
 
     @FXML
@@ -72,29 +71,26 @@ public class HomeAgricultorController {
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            URL resource = getClass().getResource(fxmlPath);
-            Objects.requireNonNull(resource, "❌ FXML não encontrado: " + fxmlPath);
-
-            FXMLLoader loader = new FXMLLoader(resource);
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
-
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle(title);
             stage.show();
-        } catch (Exception e) {
+        } catch (IOException | NullPointerException e) {
             showAlert("Erro", "Não foi possível carregar o ecrã: " + title);
             e.printStackTrace();
         }
     }
 
-    private void showAlert(String title, String message) {
+    private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle(titulo);
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(mensagem);
         alert.showAndWait();
     }
 }
+

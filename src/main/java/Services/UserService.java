@@ -2,6 +2,7 @@ package Services;
 
 import Models.trabalhoprojeto.*;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -61,5 +62,28 @@ public class UserService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public User findByUsername(String username) {
+        try {
+            return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    @Transactional
+    public String autenticarComRole(String username, String password) {
+        User user = findByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            Trabalhador trabalhador = user.getTrabalhador();
+            if (trabalhador != null) {
+                if (trabalhador.getAgricultores() != null && !trabalhador.getAgricultores().isEmpty()) return "agricultor";
+                if (trabalhador.getGestoresProducao() != null && !trabalhador.getGestoresProducao().isEmpty()) return "gestor";
+                if (trabalhador.getAnalistaDados() != null && !trabalhador.getAnalistaDados().isEmpty()) return "analista";
+            }
+        }
+        return null;
     }
 }

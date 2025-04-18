@@ -10,11 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
-
+@Component
 public class RegistarDadosController {
     @FXML private Button backButton;
     @FXML private TextField campoNomeField;
@@ -65,14 +66,20 @@ public class RegistarDadosController {
     }
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(
-                    getClass().getResource(fxmlPath)));
+            URL resource = getClass().getResource(fxmlPath);
+            Objects.requireNonNull(resource, "❌ FXML não encontrado: " + fxmlPath);
+
+            FXMLLoader loader = new FXMLLoader(resource);
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+
+            Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle(title);
             stage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
+
             e.printStackTrace();
         }
     }

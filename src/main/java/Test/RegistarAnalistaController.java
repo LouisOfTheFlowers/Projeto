@@ -1,9 +1,8 @@
 package Test;
 
 import Models.trabalhoprojeto.*;
+import Services.LocalidadeService;
 import Services.UserService;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,76 +17,77 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class RegistarAgricultorController {
+public class RegistarAnalistaController {
 
     @FXML private TextField nomeField;
     @FXML private TextField ruaField;
     @FXML private TextField portaField;
     @FXML private TextField codigoPostalField;
-
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
-    @FXML private TextField emailField; // Novo campo para email
+    @FXML private TextField emailField;
 
     @Autowired
     private UserService userService;
 
-    @PersistenceContext
-    private EntityManager em;
+    @Autowired
+    private LocalidadeService localidadeService;
 
     @FXML
-    void handleRegistar() {
-        String username = usernameField.getText().trim();
+    private void handleRegistar() {
+        String nome = nomeField.getText();
+        String rua = ruaField.getText();
+        String porta = portaField.getText();
+        String codigoPostal = codigoPostalField.getText();
+        String username = usernameField.getText();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
-        String email = emailField.getText().trim();
+        String email = emailField.getText();
 
-        if (username.isEmpty() || password.isEmpty() || email.isEmpty() || !password.equals(confirmPassword)) {
-            showAlert("Erro", "Verifique os dados do utilizador (campos obrigatórios ou passwords não coincidem).");
+        if (nome.isEmpty() || rua.isEmpty() || porta.isEmpty() || codigoPostal.isEmpty() ||
+                username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
+            showAlert("Erro", "Todos os campos são obrigatórios.");
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            showAlert("Erro", "As passwords não coincidem.");
+            return;
+        }
+
+        Localidade localidade = localidadeService.findById(codigoPostal).orElse(null);
+        if (localidade == null) {
+            showAlert("Erro", "Código postal inválido. Adicione primeiro a localidade.");
             return;
         }
 
         Trabalhador trabalhador = new Trabalhador();
-        trabalhador.setNome(nomeField.getText());
-        trabalhador.setRua(ruaField.getText());
-
-        try {
-            trabalhador.setNumeroPorta(Integer.parseInt(portaField.getText()));
-        } catch (NumberFormatException e) {
-            showAlert("Erro", "Número da porta inválido.");
-            return;
-        }
-
-        String codPostal = codigoPostalField.getText();
-        Localidade localidade = em.find(Localidade.class, codPostal);
-        if (localidade == null) {
-            showAlert("Erro", "Código postal não encontrado na base de dados.");
-            return;
-        }
-
+        trabalhador.setNome(nome);
+        trabalhador.setRua(rua);
+        trabalhador.setNumeroPorta(Integer.parseInt(porta));
         trabalhador.setCodigoPostal(localidade);
 
-        Agricultor agricultor = new Agricultor();
-        agricultor.setIdTrabalhador(trabalhador);
-        agricultor.setNome(trabalhador.getNome());
-        agricultor.setRua(trabalhador.getRua());
-        agricultor.setNumeroPorta(trabalhador.getNumeroPorta());
-        agricultor.setCodigoPostal(codPostal);
+        AnalistaDado analista = new AnalistaDado();
+        analista.setIdTrabalhador(trabalhador);
+        analista.setCodigoPostal(codigoPostal);
+        analista.setNome(trabalhador.getNome());
+        analista.setRua(trabalhador.getRua());
+        analista.setNumeroPorta(trabalhador.getNumeroPorta());
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setEmail(email); // Usa o email inserido pelo utilizador
+        user.setEmail(email);
         user.setTrabalhador(trabalhador);
 
-        boolean sucesso = userService.registarAgricultor(user, trabalhador, agricultor);
+        boolean sucesso = userService.registarAnalista(user, trabalhador, analista);
 
         if (sucesso) {
-            showAlert("Sucesso", "Registo de Agricultor concluído.");
-            limparCampos();
+            showAlert("Sucesso", "Analista registado com sucesso!");
+            clearForm();
         } else {
-            showAlert("Erro", "Falha ao registar agricultor.");
+            showAlert("Erro", "Falha ao registar analista.");
         }
     }
 
@@ -99,7 +99,7 @@ public class RegistarAgricultorController {
         alert.showAndWait();
     }
 
-    private void limparCampos() {
+    private void clearForm() {
         nomeField.clear();
         ruaField.clear();
         portaField.clear();
@@ -109,9 +109,8 @@ public class RegistarAgricultorController {
         confirmPasswordField.clear();
         emailField.clear();
     }
-
     @FXML
-    private void voltarTipoUtilizador(ActionEvent event) {
+    private void voltarLogin(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/selecionar_tipo_utilizador.fxml"));
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
@@ -123,6 +122,7 @@ public class RegistarAgricultorController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert("Erro", "Não foi possível voltar ao menu anterior.");
         }
     }
 }

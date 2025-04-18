@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Test.HomeAnalistaController"
+            style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
+
+    <top>
+        <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
+            <Button fx:id="logoutButton" onAction="#logout"
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Logout">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                        <Image url="Icons/back.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="30" alignment="CENTER" style="-fx-padding: 40;">
+            <Label text="Bem-vindo, Analista de Dados"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+
+            <Button fx:id="relatoriosButton"
+                    text="Relatórios de Dados"
+                    onAction="#abrirRelatorios"
+                    style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
+                    prefWidth="300" prefHeight="50">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Button>
+
+            <Button fx:id="dadosButton"
+                    text="Visualizar Dados"
+                    onAction="#abrirDados"
+                    style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
+                    prefWidth="300" prefHeight="50">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Button>
+        </VBox>
+    </center>
+</BorderPane>

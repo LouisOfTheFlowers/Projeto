@@ -9,18 +9,19 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Test.RegistarAgricultorController"
+            fx:controller="Test.RegistarAnalistaController"
             style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
 
     <top>
         <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
-            <Button onAction="#voltarTipoUtilizador"
-                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+            <Button text="Voltar"
+                    onAction="#voltarLogin"
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <graphic>
-                    <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                         <Image url="Icons/back.png"/>
                     </ImageView>
                 </graphic>
@@ -30,7 +31,7 @@
 
     <center>
         <VBox alignment="CENTER" spacing="15" style="-fx-padding: 40;">
-            <Label text="Registar Agricultor"
+            <Label text="Registar Analista de Dados"
                    style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
             <TextField fx:id="nomeField" promptText="Nome" prefWidth="300"/>
@@ -41,9 +42,9 @@
             <Separator prefWidth="300"/>
 
             <TextField fx:id="usernameField" promptText="Username" prefWidth="300"/>
-            <TextField fx:id="emailField" promptText="Email" prefWidth="300"/> <!-- Novo campo -->
             <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300"/>
             <PasswordField fx:id="confirmPasswordField" promptText="Confirmar Password" prefWidth="300"/>
+            <TextField fx:id="emailField" promptText="Email" prefWidth="300"/>
 
             <Button text="Registar" onAction="#handleRegistar"
                     style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"

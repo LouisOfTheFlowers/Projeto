@@ -9,7 +9,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Test.RegistarAgricultorController"
+            fx:controller="Test.RegistarGestorController"
             style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
 
     <top>
@@ -30,7 +30,7 @@
 
     <center>
         <VBox alignment="CENTER" spacing="15" style="-fx-padding: 40;">
-            <Label text="Registar Agricultor"
+            <Label text="Registar Gestor de Produção"
                    style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
             <TextField fx:id="nomeField" promptText="Nome" prefWidth="300"/>
@@ -41,7 +41,7 @@
             <Separator prefWidth="300"/>
 
             <TextField fx:id="usernameField" promptText="Username" prefWidth="300"/>
-            <TextField fx:id="emailField" promptText="Email" prefWidth="300"/> <!-- Novo campo -->
+            <TextField fx:id="emailField" promptText="Email" prefWidth="300"/>
             <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300"/>
             <PasswordField fx:id="confirmPasswordField" promptText="Confirmar Password" prefWidth="300"/>
 

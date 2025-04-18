@@ -13,9 +13,10 @@ import javafx.scene.control.TextArea;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+@Component
 public class DentroDaPropostaController {
     @FXML private Label tituloLabel;
     @FXML private Label tituloPropostaLabe;

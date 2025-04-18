@@ -44,6 +44,22 @@ public class SelecionarTipoUtilizadorController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void voltarLogin(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 

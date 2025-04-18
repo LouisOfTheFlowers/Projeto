@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import Test.SelecionarTipoUtilizadorController?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Test.SelecionarTipoUtilizadorController"
+            style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="Test.SelecionarTipoUtilizadorController">
-    <VBox alignment="CENTER" spacing="20" layoutX="100" layoutY="50">
-        <Label text="Escolha o tipo de utilizador:"/>
-        <Button text="Agricultor" onAction="#handleSelecionarAgricultor"/>
-        <Button text="Gestor de Produção" onAction="#handleSelecionarGestor"/>
-        <Button text="Analista de Dados" onAction="#handleSelecionarAnalista"/>
-    </VBox>
-</AnchorPane>
+    <top>
+        <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
+            <Button onAction="#voltarLogin"
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                        <Image url="Icons/back.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="30" alignment="CENTER" style="-fx-padding: 60;">
+            <Label text="Selecione o Tipo de Utilizador"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+
+            <VBox spacing="15" alignment="CENTER">
+                <Button text="Agricultor"
+                        onAction="#handleSelecionarAgricultor"
+                        style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10 30;">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+
+                <Button text="Gestor de Produção"
+                        onAction="#handleSelecionarGestor"
+                        style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-padding: 10 30;">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+
+                <Button text="Analista de Dados"
+                        onAction="#handleSelecionarAnalista"
+                        style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: #9C27B0; -fx-text-fill: white; -fx-padding: 10 30;">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

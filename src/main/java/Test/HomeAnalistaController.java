@@ -1,3 +1,4 @@
+// HomeAnalistaController.java
 package Test;
 
 import javafx.event.ActionEvent;
@@ -12,14 +13,13 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
+
 @Component
-public class HomeAgricultorController {
+public class HomeAnalistaController {
+
     @FXML private Button logoutButton;
-    @FXML private Button cronogramasButton;
-    @FXML private Button propostasButton;
-    @FXML private Button terrenosButton;
+    @FXML private Button relatoriosButton;
     @FXML private Button dadosButton;
 
     @FXML
@@ -28,14 +28,13 @@ public class HomeAgricultorController {
     }
 
     private void setupButtonStyles() {
-        String baseStyle = "-fx-font-size: 18px; -fx-background-color: #4CAF50; -fx-text-fill: white; "
-                + "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
-        String hoverStyle = "-fx-font-size: 18px; -fx-background-color: #45a049; -fx-text-fill: white; "
-                + "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
+        String baseStyle = "-fx-font-size: 18px; -fx-background-color: #4CAF50; -fx-text-fill: white; " +
+                "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
+        String hoverStyle = "-fx-font-size: 18px; -fx-background-color: #45a049; -fx-text-fill: white; " +
+                "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
 
         Button[] buttons = {
-                cronogramasButton, propostasButton,
-                terrenosButton, dadosButton, logoutButton
+                logoutButton, relatoriosButton, dadosButton
         };
 
         for (Button button : buttons) {
@@ -46,23 +45,13 @@ public class HomeAgricultorController {
     }
 
     @FXML
-    private void abrirCronogramas(ActionEvent event) {
-        loadScene(event, "/acoes_cronogramas.fxml", "Ações de Cronogramas");
-    }
-
-    @FXML
-    private void abrirPropostas(ActionEvent event) {
-        loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
-    }
-
-    @FXML
-    private void abrirTerrenos(ActionEvent event) {
-        loadScene(event, "/terreno.fxml", "Gestão de Terrenos");
+    private void abrirRelatorios(ActionEvent event) {
+        showAlert("Função", "Abrir relatórios de dados (a implementar).");
     }
 
     @FXML
     private void abrirDados(ActionEvent event) {
-        loadScene(event, "/dados.fxml", "Registro de Dados");
+        showAlert("Função", "Visualizar dados registados (a implementar).");
     }
 
     @FXML
@@ -72,26 +61,23 @@ public class HomeAgricultorController {
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            URL resource = getClass().getResource(fxmlPath);
-            Objects.requireNonNull(resource, "❌ FXML não encontrado: " + fxmlPath);
-
-            FXMLLoader loader = new FXMLLoader(resource);
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
-
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle(title);
             stage.show();
-        } catch (Exception e) {
-            showAlert("Erro", "Não foi possível carregar o ecrã: " + title);
+        } catch (IOException e) {
+            showAlert("Erro", "Falha ao carregar o ecrã: " + title);
             e.printStackTrace();
         }
     }
 
+
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

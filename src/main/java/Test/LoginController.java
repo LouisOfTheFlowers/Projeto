@@ -1,6 +1,7 @@
 package Test;
 
-import jakarta.persistence.*;
+import Models.trabalhoprojeto.User;
+import Services.UserService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,11 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import Models.trabalhoprojeto.Trabalhador;
-import Models.trabalhoprojeto.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -27,8 +26,8 @@ public class LoginController {
     @FXML private Button loginButton;
     @FXML private ProgressIndicator loadingIndicator;
 
-    @PersistenceContext
-    private EntityManager em;
+    @Autowired
+    private UserService userService;
 
     @FXML
     public void initialize() {
@@ -54,56 +53,46 @@ public class LoginController {
         loginButton.setDisable(true);
 
         new Thread(() -> {
-            String role = authenticate(username, password);
+            try {
+                String role = authenticate(username, password);
 
-            Platform.runLater(() -> {
-                loadingIndicator.setVisible(false);
-                loginButton.setDisable(false);
+                Platform.runLater(() -> {
+                    loadingIndicator.setVisible(false);
+                    loginButton.setDisable(false);
 
-                if (role != null) {
-                    loginButton.setStyle("-fx-background-color: #90ee90;");
+                    if (role != null) {
+                        loginButton.setStyle("-fx-background-color: #90ee90;");
 
-                    switch (role.toLowerCase()) {
-                        case "agricultor" -> loadScene(event, "/homepage_agricultor.fxml", "Agricultor");
-                        case "gestor" -> loadScene(event, "/homepage_gestor.fxml", "Gestor de Produção");
-                        case "analista" -> loadScene(event, "/homepage_analista.fxml", "Analista de Dados");
-                        default -> showAlert("Login Falhou", "Tipo de utilizador desconhecido.");
+                        switch (role.toLowerCase()) {
+                            case "agricultor" -> loadScene(event, "/homepage_agricultor.fxml", "Agricultor");
+                            case "gestor"     -> loadScene(event, "/homepage_gestor.fxml", "Gestor de Produção");
+                            case "analista"   -> loadScene(event, "/homepage_analista.fxml", "Analista de Dados");
+                            default           -> showAlert("Login Falhou", "Tipo de utilizador desconhecido.");
+                        }
+                    } else {
+                        loginButton.setStyle("-fx-background-color: #ff6b6b;");
+                        showAlert("Login Falhou", "Credenciais inválidas.");
                     }
-                } else {
-                    loginButton.setStyle("-fx-background-color: #ff6b6b;");
-                    showAlert("Login Falhou", "Credenciais inválidas.");
-                }
-            });
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    loadingIndicator.setVisible(false);
+                    loginButton.setDisable(false);
+                    showAlert("Erro", "Ocorreu um erro durante o login.");
+                });
+            }
         }).start();
     }
 
     private String authenticate(String username, String password) {
         try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
-            query.setParameter("username", username);
-
-            User user = query.getSingleResult();
-
-            if (user != null && user.getPassword().equals(password)) {
-                Trabalhador trabalhador = user.getTrabalhador();
-
-                if (trabalhador != null) {
-                    if (trabalhador.getAgricultores() != null && !trabalhador.getAgricultores().isEmpty()) {
-                        return "Agricultor";
-                    }
-                    if (trabalhador.getGestoresProducao() != null && !trabalhador.getGestoresProducao().isEmpty()) {
-                        return "Gestor";
-                    }
-                    if (trabalhador.getAnalistaDados() != null && !trabalhador.getAnalistaDados().isEmpty()) {
-                        return "Analista";
-                    }
-                }
-            }
-        } catch (NoResultException ignored) {
+            return userService.autenticarComRole(username, password);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Erro na autenticação: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
     @FXML
@@ -119,9 +108,6 @@ public class LoginController {
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
             URL resource = getClass().getResource(fxmlPath);
-            System.out.println("🔎 Tentando carregar: " + fxmlPath);
-            System.out.println("➡️  URL encontrado: " + resource);
-
             Objects.requireNonNull(resource, "❌ FXML não encontrado: " + fxmlPath);
 
             FXMLLoader loader = new FXMLLoader(resource);
