@@ -42,9 +42,9 @@
                     <RowConstraints prefHeight="120"/>
                 </rowConstraints>
 
-                <Button fx:id="produzirButton"
-                        text="Produção"
-                        onAction="#abrirProducao"
+                <Button fx:id="propostaButton"
+                        text="Proposta de Plantio"
+                        onAction="#abrirPropostaPlantio"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <cursor>
@@ -52,9 +52,9 @@
                     </cursor>
                 </Button>
 
-                <Button fx:id="gerirProdutosButton"
-                        text="Gerir Produtos"
-                        onAction="#abrirGestaoProdutos"
+                <Button fx:id="analiseButton"
+                        text="Análise de Solo"
+                        onAction="#abrirAnaliseSolo"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <cursor>
@@ -62,9 +62,9 @@
                     </cursor>
                 </Button>
 
-                <Button fx:id="verRelatoriosButton"
-                        text="Relatórios"
-                        onAction="#abrirRelatorios"
+                <Button fx:id="cronogramaButton"
+                        text="Cronograma"
+                        onAction="#abrirCronograma"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <cursor>
@@ -72,15 +72,16 @@
                     </cursor>
                 </Button>
 
-                <Button fx:id="gestaoTerrenosButton"
-                        text="Gestão de Terrenos"
-                        onAction="#abrirTerrenos"
+                <Button fx:id="relatoriosButton"
+                        text="Relatório"
+                        onAction="#abrirRelatorio"
                         style="-fx-font-size: 18px; -fx-font-weight: bold;"
                         GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
+
             </GridPane>
         </VBox>
     </center>

@@ -2,38 +2,29 @@ package Test;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+
 @Component
-public class PropostaPlantioController {
+public class ConsultarAnalisesController {
+
     @FXML private Button backButton;
-    @FXML private Button registrarPropostaButton;
-    @FXML private Button consultarPropostasButton;
 
     @FXML
     private void goBack(ActionEvent event) {
-
-        loadScene(event, "/homepage_agricultor.fxml", "Área do Agricultor");
+        loadScene(event, "/analise_solo.fxml", "Análise de Solo");
     }
 
     @FXML
-    private void abrirRegistrarProposta(ActionEvent event) {
-        loadScene(event, "/registar_proposta_plantio.fxml", "Registrar Proposta de Plantio");
-    }
-
-    @FXML
-    private void abrirConsultarPropostas(ActionEvent event) {
-        loadScene(event, "/ConsultarPropostas.fxml", "Consultar Propostas");
+    private void verAnalise(ActionEvent event) {
+        loadScene(event, "/ver_analise.fxml", "Análise de Solo");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
@@ -43,7 +34,6 @@ public class PropostaPlantioController {
 
             FXMLLoader loader = new FXMLLoader(resource);
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
-
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -51,16 +41,16 @@ public class PropostaPlantioController {
             stage.setTitle(title);
             stage.show();
         } catch (Exception e) {
-
             e.printStackTrace();
+            showAlert("Erro", "Não foi possível carregar a página.");
         }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private void showAlert(String title, String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 }

@@ -26,9 +26,9 @@ public class RegistarDadosController {
     @FXML
     private void goBack(ActionEvent event) {
         try {
-            URL url = getClass().getResource("/dados.fxml");
+            URL url = getClass().getResource("/dados_agricultor.fxml");
             if (url == null) {
-                throw new IOException("Arquivo dados.fxml não encontrado");
+                throw new IOException("Arquivo dados_agricultor.fxml não encontrado");
             }
 
             Parent root = FXMLLoader.load(url);

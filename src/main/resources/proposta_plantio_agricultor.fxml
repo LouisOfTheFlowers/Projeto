@@ -7,7 +7,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.PropostaPlantioController"
+      fx:controller="Test.PropostaPlantioAgricultorController"
       spacing="20" alignment="TOP_CENTER"
       style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
 

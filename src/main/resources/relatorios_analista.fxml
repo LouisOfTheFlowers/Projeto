@@ -8,7 +8,7 @@
 <?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Test.RelatoriosController"
+      fx:controller="Test.RelatoriosAnalistaController"
       spacing="20" alignment="CENTER"
       style="-fx-background-color: #fcfbe9; -fx-padding: 40;">
 

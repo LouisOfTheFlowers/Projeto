@@ -45,7 +45,7 @@ public class HomeAnalistaController {
 
     @FXML
     private void abrirRelatorios(ActionEvent event) {
-        loadScene(event, "/relatorios.fxml", "Relatórios de Dados");
+        loadScene(event, "/relatorios_analista.fxml", "Relatórios de Dados");
     }
 
     @FXML

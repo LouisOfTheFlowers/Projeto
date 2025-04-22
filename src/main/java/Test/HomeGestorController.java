@@ -16,10 +16,10 @@ import java.util.Objects;
 public class HomeGestorController {
 
     @FXML private Button logoutButton;
-    @FXML private Button produzirButton;
-    @FXML private Button gerirProdutosButton;
-    @FXML private Button verRelatoriosButton;
-    @FXML private Button gestaoTerrenosButton;
+    @FXML private Button propostaButton;
+    @FXML private Button analiseButton;
+    @FXML private Button relatoriosButton;
+    @FXML private Button cronogramaButton;
 
     @FXML
     public void initialize() {
@@ -33,8 +33,8 @@ public class HomeGestorController {
                 + "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
 
         Button[] buttons = {
-                produzirButton, gerirProdutosButton,
-                verRelatoriosButton, gestaoTerrenosButton, logoutButton
+                propostaButton, analiseButton,
+                relatoriosButton, cronogramaButton, logoutButton
         };
 
         for (Button button : buttons) {
@@ -45,24 +45,25 @@ public class HomeGestorController {
     }
 
     @FXML
-    private void abrirProducao(ActionEvent event) {
-        loadScene(event, "/producao.fxml", "Produção");
+    private void abrirPropostaPlantio(ActionEvent event) {
+        loadScene(event, "/proposta_plantio_gestor.fxml", "Proposta de Plantio");
     }
 
     @FXML
-    private void abrirGestaoProdutos(ActionEvent event) {
-        loadScene(event, "/gestao_produtos.fxml", "Gestão de Produtos");
+    private void abrirAnaliseSolo(ActionEvent event) {
+        loadScene(event, "/analise_solo.fxml", "Análise de Solo");
     }
 
     @FXML
-    private void abrirRelatorios(ActionEvent event) {
-        loadScene(event, "/relatorios.fxml", "Relatórios");
+    private void abrirCronograma(ActionEvent event) {
+        loadScene(event, "/cronograma_gestor.fxml", "Cronograma");
     }
 
     @FXML
-    private void abrirTerrenos(ActionEvent event) {
-        loadScene(event, "/terreno.fxml", "Gestão de Terrenos");
+    private void abrirRelatorio(ActionEvent event) {
+        loadScene(event, "/relatorio_gestor.fxml", "Relatório");
     }
+
 
     @FXML
     private void logout(ActionEvent event) {

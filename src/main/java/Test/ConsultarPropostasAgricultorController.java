@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 @Component
-public class ConsultarPropostasController {
+public class ConsultarPropostasAgricultorController {
     @FXML private Button backButton;
     private Stage currentStage;
 
@@ -23,8 +23,8 @@ public class ConsultarPropostasController {
     private void goBack(ActionEvent event) {
         try {
             // Carrega a cena anterior
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/proposta_plantio.fxml"));
-           loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/proposta_plantio_agricultor.fxml"));
+           loadScene(event, "/proposta_plantio_agricultor.fxml", "Propostas de Plantio");
             Parent root = loader.load();
 
 

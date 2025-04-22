@@ -10,7 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 @Component
@@ -39,7 +38,7 @@ public class RegistarPropostaPlantioController {
     @FXML
     private void goBack(ActionEvent event) {
         // Alterado para voltar para a página intermediária de propostas
-        loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
+        loadScene(event, "/proposta_plantio_agricultor.fxml", "Propostas de Plantio");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {

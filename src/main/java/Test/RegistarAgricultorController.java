@@ -84,12 +84,37 @@ public class RegistarAgricultorController {
         boolean sucesso = userService.registarAgricultor(user, trabalhador, agricultor);
 
         if (sucesso) {
-            showAlert("Sucesso", "Registo de Agricultor concluído.");
-            limparCampos();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso");
+            alert.setHeaderText(null);
+            alert.setContentText("Agricultor registado com sucesso!");
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    redirectToLogin();
+                }
+            });
         } else {
-            showAlert("Erro", "Falha ao registar agricultor.");
+            showAlert("Erro", "Falha ao registar gestor.");
+        }
+
+    }
+
+    private void redirectToLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) nomeField.getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível redirecionar para a página de login.");
         }
     }
+
 
     private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
