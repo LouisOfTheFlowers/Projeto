@@ -6,9 +6,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "\"Terreno\"")
+@Table(name = "\"terreno\"")
 public class Terreno {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_terreno", nullable = false)
     private Integer id;
 

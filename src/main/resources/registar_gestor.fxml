@@ -12,6 +12,7 @@
             fx:controller="Test.RegistarGestorController"
             style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
 
+    <!-- Botão Voltar -->
     <top>
         <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
             <Button onAction="#voltarTipoUtilizador"
@@ -28,11 +29,13 @@
         </HBox>
     </top>
 
+    <!-- Formulário de Registo -->
     <center>
         <VBox alignment="CENTER" spacing="15" style="-fx-padding: 40;">
             <Label text="Registar Gestor de Produção"
                    style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
+            <!-- Campos de Endereço -->
             <TextField fx:id="nomeField" promptText="Nome" prefWidth="300"/>
             <TextField fx:id="ruaField" promptText="Rua" prefWidth="300"/>
             <TextField fx:id="portaField" promptText="Número da Porta" prefWidth="300"/>
@@ -40,8 +43,10 @@
 
             <Separator prefWidth="300"/>
 
+            <!-- Campos de Conta -->
             <TextField fx:id="usernameField" promptText="Username" prefWidth="300"/>
             <TextField fx:id="emailField" promptText="Email" prefWidth="300"/>
+            <TextField fx:id="telefoneField" promptText="Telefone" prefWidth="300"/> <!-- Campo novo -->
             <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300"/>
             <PasswordField fx:id="confirmPasswordField" promptText="Confirmar Password" prefWidth="300"/>
 

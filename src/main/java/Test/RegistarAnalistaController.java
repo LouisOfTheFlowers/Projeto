@@ -27,6 +27,7 @@ public class RegistarAnalistaController {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private TextField emailField;
+    @FXML private TextField telefoneField;
 
     @Autowired
     private UserService userService;
@@ -44,6 +45,7 @@ public class RegistarAnalistaController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String email = emailField.getText();
+        String telefone = telefoneField.getText();
 
         if (nome.isEmpty() || rua.isEmpty() || porta.isEmpty() || codigoPostal.isEmpty() ||
                 username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
@@ -80,8 +82,15 @@ public class RegistarAnalistaController {
         user.setPassword(password);
         user.setEmail(email);
         user.setTrabalhador(trabalhador);
+        Email email1 = new Email();
+        email1.setIdTrabalhador(trabalhador);
+        email1.setEndereço(email);
 
-        boolean sucesso = userService.registarAnalista(user, trabalhador, analista);
+        Telefone telefone1 = new Telefone();
+        telefone1.setIdTrabalhador(trabalhador);
+        telefone1.setNum(telefone);
+
+        boolean sucesso = userService.registarAnalista(user, trabalhador, analista, email1, telefone1);
 
         if (sucesso) {
             showAlert("Sucesso", "Analista registado com sucesso!");

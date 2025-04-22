@@ -98,5 +98,10 @@ public class Agricultor {
     public void setTerrenos(Set<Terreno> terrenos) {
         this.terrenos = terrenos;
     }
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 
 }

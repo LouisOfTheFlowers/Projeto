@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.Objects;
 @Component
@@ -28,12 +28,12 @@ public class PropostaPlantioController {
 
     @FXML
     private void abrirRegistrarProposta(ActionEvent event) {
-        loadScene(event, "/registar_proposta_plantio.fxml", "Registrar Proposta de Plantio");
+        loadScene(event, "/INregistar_proposta_plantio.fxml", "Registrar Proposta de Plantio");
     }
 
     @FXML
     private void abrirConsultarPropostas(ActionEvent event) {
-        loadScene(event, "/ConsultarPropostas.fxml", "Consultar Propostas");
+        loadScene(event, "/consultar_propostas.fxml", "Consultar Propostas");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {

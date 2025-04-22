@@ -26,6 +26,7 @@ public class RegistarGestorController {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private TextField emailField;
+    @FXML private TextField telefoneField;
 
     @Autowired
     private UserService userService;
@@ -43,6 +44,7 @@ public class RegistarGestorController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String email = emailField.getText();
+        String telefone = telefoneField.getText();
 
         if (nome.isEmpty() || rua.isEmpty() || porta.isEmpty() || codigoPostal.isEmpty() ||
                 username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
@@ -85,7 +87,15 @@ public class RegistarGestorController {
         user.setEmail(email);
         user.setTrabalhador(trabalhador);
 
-        boolean sucesso = userService.registarGestor(user, trabalhador, gestor);
+        Email email1 = new Email();
+        email1.setIdTrabalhador(trabalhador);
+        email1.setEndereço(email);
+
+        Telefone telefone1 = new Telefone();
+        telefone1.setIdTrabalhador(trabalhador);
+        telefone1.setNum(telefone);
+
+        boolean sucesso = userService.registarGestor(user, trabalhador, gestor, email1, telefone1);
 
         if (sucesso) {
             showAlert("Sucesso", "Gestor registado com sucesso!");

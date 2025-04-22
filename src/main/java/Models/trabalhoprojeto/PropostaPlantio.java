@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "\"Proposta_Plantio\"")
 public class PropostaPlantio {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Proposta_Plantio_id_gen")
+    @SequenceGenerator(name = "Proposta_Plantio_id_gen", sequenceName = "Proposta_Plantio_id_proposta_seq", allocationSize = 1)
     @Column(name = "id_proposta", nullable = false)
     private Integer id;
 
@@ -16,11 +18,16 @@ public class PropostaPlantio {
     private String alturaDoAno;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_agricultor", nullable = false)
-    private Agricultor idAgricultor;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_gestor", nullable = false)
     private GestorProducao idGestor;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_terreno", nullable = false)
+    private Terreno idTerreno;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_agricultor", nullable = false)
+    private Agricultor idAgricultor;
 
     public Integer getId() {
         return id;
@@ -46,20 +53,28 @@ public class PropostaPlantio {
         this.alturaDoAno = alturaDoAno;
     }
 
-    public Agricultor getIdAgricultor() {
-        return idAgricultor;
-    }
-
-    public void setIdAgricultor(Agricultor idAgricultor) {
-        this.idAgricultor = idAgricultor;
-    }
-
     public GestorProducao getIdGestor() {
         return idGestor;
     }
 
     public void setIdGestor(GestorProducao idGestor) {
         this.idGestor = idGestor;
+    }
+
+    public Terreno getIdTerreno() {
+        return idTerreno;
+    }
+
+    public void setIdTerreno(Terreno idTerreno) {
+        this.idTerreno = idTerreno;
+    }
+
+    public Agricultor getIdAgricultor() {
+        return idAgricultor;
+    }
+
+    public void setIdAgricultor(Agricultor idAgricultor) {
+        this.idAgricultor = idAgricultor;
     }
 
 }

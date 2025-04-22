@@ -8,42 +8,39 @@
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.TerrenoController"
-      spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Botão voltar fixo à esquerda -->
-    <HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+    <!-- Botão Voltar -->
+    <HBox alignment="CENTER_LEFT">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="← Voltar">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
             <graphic>
-                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="18" fitWidth="18" preserveRatio="true">
                     <Image url="@Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
     </HBox>
 
-    <!-- Título centralizado na linha abaixo -->
-    <Label text="Gestão de Terrenos"
-           style="-fx-font-size: 24px; -fx-font-weight: bold;"
+    <!-- Título -->
+    <Label text="🌱 Gestão de Terrenos"
+           style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"
            alignment="CENTER"/>
 
-    <!-- Container principal alinhado à esquerda -->
-    <VBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 20 20 0 20;">
-        <!-- Texto "Ações em Terrenos" alinhado à esquerda -->
-        <Label text="Ações em Terrenos:"
-               style="-fx-font-size: 16px; -fx-padding: 0 0 10 0;"/>
+    <!-- Ações -->
+    <VBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20;">
+        <Label text="Ações disponíveis:"
+               style="-fx-font-size: 16px; -fx-text-fill: #444;"/>
 
-        <!-- Botões alinhados à esquerda -->
-        <VBox spacing="15" alignment="TOP_LEFT">
-            <!-- Botão para registrar terreno -->
+        <VBox spacing="12">
             <Button fx:id="registrarTerrenoButton"
-                    text="Registrar Novo Terreno"
+                    text="➕ Registar Novo Terreno"
                     onAction="#abrirRegistrarTerreno"
-                    style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 30;">
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10 25;">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
