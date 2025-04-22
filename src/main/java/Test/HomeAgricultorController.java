@@ -34,7 +34,7 @@ public class HomeAgricultorController {
 
         Button[] buttons = {
                 cronogramasButton, propostasButton,
-                terrenosButton, dadosButton, logoutButton
+                terrenosButton, logoutButton
         };
 
         for (Button button : buttons) {
@@ -57,11 +57,6 @@ public class HomeAgricultorController {
     @FXML
     private void abrirTerrenos(ActionEvent event) {
         loadScene(event, "/terreno.fxml", "Gestão de Terrenos");
-    }
-
-    @FXML
-    private void abrirDados(ActionEvent event) {
-        loadScene(event, "/dados_agricultor.fxml", "Registro de Dados");
     }
 
     @FXML

@@ -7,6 +7,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -14,7 +16,7 @@ public class UserService {
     private EntityManager em;
 
     @Transactional
-    public boolean registarAgricultor(User user, Trabalhador trabalhador, Agricultor agricultor) {
+    public boolean registarAgricultor(User user, Trabalhador trabalhador, Agricultor agricultor, Email email, Telefone telefone) {
         try {
             em.persist(trabalhador);
             agricultor.setIdTrabalhador(trabalhador);
@@ -23,6 +25,13 @@ public class UserService {
 
             user.setTrabalhador(trabalhador);
             em.persist(user);
+            email.setIdTrabalhador(trabalhador);
+            email.setEndereço(user.getEmail());
+            em.persist(email);
+
+
+            telefone.setIdTrabalhador(trabalhador);
+            em.persist(telefone);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,7 +40,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean registarGestor(User user, Trabalhador trabalhador, GestorProducao gestor) {
+    public boolean registarGestor(User user, Trabalhador trabalhador, GestorProducao gestor, Email email, Telefone telefone) {
         try {
             em.persist(trabalhador);
             gestor.setIdTrabalhador(trabalhador);
@@ -40,6 +49,12 @@ public class UserService {
 
             user.setTrabalhador(trabalhador);
             em.persist(user);
+            email.setIdTrabalhador(trabalhador);
+            email.setEndereço(user.getEmail());
+            em.persist(email);
+
+            telefone.setIdTrabalhador(trabalhador);
+            em.persist(telefone);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,7 +63,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean registarAnalista(User user, Trabalhador trabalhador, AnalistaDado analista) {
+    public boolean registarAnalista(User user, Trabalhador trabalhador, AnalistaDado analista, Email email, Telefone telefone) {
         try {
             em.persist(trabalhador);
             analista.setIdTrabalhador(trabalhador);
@@ -57,6 +72,12 @@ public class UserService {
 
             user.setTrabalhador(trabalhador);
             em.persist(user);
+            email.setIdTrabalhador(trabalhador);
+            email.setEndereço(user.getEmail());
+            em.persist(email);
+
+            telefone.setIdTrabalhador(trabalhador);
+            em.persist(telefone);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,4 +107,15 @@ public class UserService {
         }
         return null;
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Agricultor> findAllAgricultores() {
+        return em.createQuery("SELECT a FROM Agricultor a").getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<GestorProducao> findAllGestores() {
+        return em.createQuery("SELECT g FROM GestorProducao g").getResultList();
+    }
+
 }

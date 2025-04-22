@@ -10,7 +10,7 @@
 <?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.ConsultarPropostasAgricultorController" spacing="20" alignment="TOP_CENTER"
+      fx:controller="Test.ConsultarPropostasGestorController" spacing="20" alignment="TOP_CENTER"
       style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
 
     <!-- Cabeçalho com botão de voltar -->
@@ -26,7 +26,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Propostas Submetidas:" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="Propostas Submetidas para Análise:" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
     </HBox>
 
     <!-- Lista de Propostas -->

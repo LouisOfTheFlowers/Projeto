@@ -21,7 +21,7 @@ public class VerPropostaController {
 
     @FXML
     private void goBack(ActionEvent event) {
-        loadScene(event, "/consultar_propostas.fxml", "Propostas Submetidas");
+        loadScene(event, "/ConsultarPropostas.fxml", "Propostas Submetidas");
     }
 
     @FXML

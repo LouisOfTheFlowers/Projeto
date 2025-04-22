@@ -27,12 +27,12 @@ public class PropostaPlantioAgricultorController {
 
     @FXML
     private void abrirRegistrarProposta(ActionEvent event) {
-        loadScene(event, "/registar_proposta_plantio.fxml", "Registrar Proposta de Plantio");
+        loadScene(event, "/INregistar_proposta_plantio.fxml", "Registrar Proposta de Plantio");
     }
 
     @FXML
     private void abrirConsultarPropostas(ActionEvent event) {
-        loadScene(event, "/ConsultarPropostas.fxml", "Consultar Propostas");
+        loadScene(event, "/Consultar_Propostas.fxml", "Consultar Propostas");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {

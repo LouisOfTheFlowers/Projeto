@@ -27,7 +27,7 @@ public class PropostaPlantioGestorController {
 
     @FXML
     private void abrirConsultarPropostas(ActionEvent event) {
-        loadScene(event, "/consultar_propostas.fxml", "Consultar Propostas");
+        loadScene(event, "/ConsultarPropostas.fxml", "Consultar Propostas");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
