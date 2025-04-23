@@ -3,15 +3,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Test.DadosAnalistaController"
+      fx:controller="Test.VerRelatoriosAnalistaController"
       spacing="20" alignment="CENTER"
       style="-fx-background-color: #fcfbe9; -fx-padding: 40;">
 
+    <!-- Cabeçalho com botão de voltar -->
     <HBox alignment="CENTER_LEFT" spacing="20">
         <Button fx:id="backButton" onAction="#goBack"
                 style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
@@ -24,19 +25,22 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label fx:id="tituloLabel" text="Detalhes da Proposta"
+        <Label fx:id="tituloLabel" text="Relatórios Criados"
                style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
     </HBox>
 
-    <Label text="Visualização de Dados"
+    <!-- Título principal -->
+    <Label text="Visualização de Relatórios"
            style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-    <TableView fx:id="tabelaDados" prefWidth="800" prefHeight="400">
-        <!-- Exemplo de colunas (devem ser adaptadas aos teus dados reais) -->
+    <!-- Tabela com os dados dos relatórios -->
+    <TableView fx:id="tabelaDados" prefWidth="900" prefHeight="400">
         <columns>
-            <TableColumn text="ID"/>
-            <TableColumn text="Tipo"/>
-            <TableColumn text="Valor"/>
+            <TableColumn fx:id="tituloColuna" text="Título" prefWidth="180"/>
+            <TableColumn fx:id="temaColuna" text="Tema" prefWidth="180"/>
+            <TableColumn fx:id="tipoColuna" text="Tipo" prefWidth="160"/>
+            <TableColumn fx:id="descricaoColuna" text="Descrição" prefWidth="250"/>
+            <TableColumn fx:id="dataColuna" text="Data" prefWidth="130"/>
         </columns>
     </TableView>
 </VBox>

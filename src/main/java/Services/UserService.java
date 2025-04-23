@@ -117,5 +117,8 @@ public class UserService {
     public List<GestorProducao> findAllGestores() {
         return em.createQuery("SELECT g FROM GestorProducao g").getResultList();
     }
+    public List<AnalistaDado> findAllAnalistas() {
+        return em.createQuery("SELECT a FROM AnalistaDado a").getResultList();
+    }
 
 }

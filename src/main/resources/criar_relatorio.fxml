@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.CriarRelatorioController"
+      alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: #f4fff4;">
+    <HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+        <Button fx:id="backButton" onAction="#goBack"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+            <cursor><Cursor fx:constant="HAND"/></cursor>
+            <graphic><ImageView fitHeight="20" fitWidth="20" preserveRatio="true"><Image url="@Icons/back.png"/></ImageView></graphic>
+        </Button>
+    </HBox>
+
+    <Label text="📊 Criar Relatório"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+
+    <TextField fx:id="tituloField" promptText="Título" prefWidth="300"/>
+    <TextField fx:id="temaField" promptText="Tema" prefWidth="300"/>
+    <TextField fx:id="tipoField" promptText="Tipo de Relatório" prefWidth="300"/>
+    <TextArea fx:id="descricaoArea" promptText="Descrição" prefWidth="300" prefHeight="120"/>
+
+    <ComboBox fx:id="analistaComboBox" promptText="Selecionar Analista" prefWidth="300"/>
+
+    <Button text="Guardar"
+            onAction="#handleGuardar"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"
+            prefWidth="200"/>
+</VBox>

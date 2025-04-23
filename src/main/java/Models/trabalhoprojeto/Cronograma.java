@@ -23,7 +23,7 @@ public class Cronograma {
     @Column(name = "tipo_horticolas", length = 50)
     private String tipoHorticolas;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_gestor", nullable = false)
     private GestorProducao idGestor;
 
