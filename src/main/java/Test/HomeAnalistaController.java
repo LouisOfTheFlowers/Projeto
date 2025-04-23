@@ -1,4 +1,3 @@
-// HomeAnalistaController.java
 package Test;
 
 import javafx.event.ActionEvent;
@@ -21,6 +20,7 @@ public class HomeAnalistaController {
     @FXML private Button logoutButton;
     @FXML private Button relatoriosButton;
     @FXML private Button dadosButton;
+    @FXML private Button cronogramasButton; // Adicionado
 
     @FXML
     public void initialize() {
@@ -34,24 +34,31 @@ public class HomeAnalistaController {
                 "-fx-border-radius: 5; -fx-padding: 10 20; -fx-font-weight: bold;";
 
         Button[] buttons = {
-                logoutButton, relatoriosButton, dadosButton
+                logoutButton, relatoriosButton, dadosButton, cronogramasButton
         };
 
         for (Button button : buttons) {
-            button.setStyle(baseStyle);
-            button.setOnMouseEntered(e -> button.setStyle(hoverStyle));
-            button.setOnMouseExited(e -> button.setStyle(baseStyle));
+            if (button != null) {
+                button.setStyle(baseStyle);
+                button.setOnMouseEntered(e -> button.setStyle(hoverStyle));
+                button.setOnMouseExited(e -> button.setStyle(baseStyle));
+            }
         }
     }
 
     @FXML
     private void abrirRelatorios(ActionEvent event) {
-        showAlert("Função", "Abrir relatórios de dados (a implementar).");
+        loadScene(event, "/dados_analista.fxml", "Visualização de Dados");
     }
 
     @FXML
-    private void abrirDados(ActionEvent event) {
-        showAlert("Função", "Visualizar dados registados (a implementar).");
+    private void abrirCriarRelatorio(ActionEvent event) {
+        loadScene(event, "/criar_relatorio.fxml", "Criar Relatório");
+    }
+
+    @FXML
+    private void abrirCronogramas(ActionEvent event) {
+        loadScene(event, "/cronogramas_analista.fxml", "Cronogramas");
     }
 
     @FXML
@@ -74,7 +81,6 @@ public class HomeAnalistaController {
             e.printStackTrace();
         }
     }
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

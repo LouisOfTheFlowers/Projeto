@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 @Component
-public class DadosController {
+public class DadosAgricultorController {
     @FXML private Button backButton;
     @FXML private Button registrarDadosButton;
 

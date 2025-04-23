@@ -1,6 +1,7 @@
 package Test;
 
 import Models.trabalhoprojeto.*;
+import Services.TrabalhadorService;
 import Services.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -28,10 +29,12 @@ public class RegistarAgricultorController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
-    @FXML private TextField emailField; // Novo campo para email
+    @FXML private TextField emailField;
+    @FXML private TextField telefoneField;
 
     @Autowired
     private UserService userService;
+    private TrabalhadorService trabalhador;
 
     @PersistenceContext
     private EntityManager em;
@@ -42,6 +45,7 @@ public class RegistarAgricultorController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String email = emailField.getText().trim();
+        String telefone = telefoneField.getText();
 
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || !password.equals(confirmPassword)) {
             showAlert("Erro", "Verifique os dados do utilizador (campos obrigatórios ou passwords não coincidem).");
@@ -81,15 +85,49 @@ public class RegistarAgricultorController {
         user.setEmail(email); // Usa o email inserido pelo utilizador
         user.setTrabalhador(trabalhador);
 
-        boolean sucesso = userService.registarAgricultor(user, trabalhador, agricultor);
+        Email email1 = new Email();
+        email1.setIdTrabalhador(trabalhador);
+        email1.setEndereço(email);
+
+        Telefone telefone1 = new Telefone();
+        telefone1.setIdTrabalhador(trabalhador);
+        telefone1.setNum(telefone);
+
+
+        boolean sucesso = userService.registarAgricultor(user, trabalhador, agricultor, email1, telefone1);
 
         if (sucesso) {
-            showAlert("Sucesso", "Registo de Agricultor concluído.");
-            limparCampos();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso");
+            alert.setHeaderText(null);
+            alert.setContentText("Agricultor registado com sucesso!");
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    redirectToLogin();
+                }
+            });
         } else {
-            showAlert("Erro", "Falha ao registar agricultor.");
+            showAlert("Erro", "Falha ao registar gestor.");
+        }
+
+    }
+
+    private void redirectToLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) nomeField.getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível redirecionar para a página de login.");
         }
     }
+
 
     private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

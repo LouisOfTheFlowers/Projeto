@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "\"Email\"")
 public class Email {
     @Id
-    @Column(name = "id_email", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_email")
     private Integer id;
 
     @Column(name = "\"endereço\"", length = 50)

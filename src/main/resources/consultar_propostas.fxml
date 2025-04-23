@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.ConsultarPropostasAgricultorController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      style="-fx-padding: 30; -fx-background-color: #f4fdf4; -fx-font-family: 'Segoe UI', sans-serif;">
+
+    <!-- Botão Voltar -->
+    <HBox alignment="TOP_LEFT" style="-fx-padding: 10;">
+        <Button fx:id="backButton" onAction="#goBack"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;"
+                text="Voltar">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <Image url="Icons/back.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- Título -->
+    <Label text="📋 Propostas de Plantio"
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+
+    <!-- Lista de Propostas -->
+    <ListView fx:id="propostasListView"
+              prefHeight="450"
+              prefWidth="700"
+              style="-fx-font-size: 14px; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;"/>
+</VBox>

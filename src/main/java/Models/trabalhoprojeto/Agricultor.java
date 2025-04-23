@@ -99,4 +99,8 @@ public class Agricultor {
         this.terrenos = terrenos;
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

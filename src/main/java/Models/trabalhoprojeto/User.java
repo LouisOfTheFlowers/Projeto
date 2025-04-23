@@ -27,6 +27,7 @@ public class User {
     @JoinColumn(name = "trabalhador_id")
     private Trabalhador trabalhador;
 
+
     public Integer getId() {
         return id;
     }

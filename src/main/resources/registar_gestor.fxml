@@ -40,8 +40,9 @@
 
             <Separator prefWidth="300"/>
 
-            <TextField fx:id="usernameField" promptText="Username" prefWidth="300"/>
             <TextField fx:id="emailField" promptText="Email" prefWidth="300"/>
+            <TextField fx:id="telefoneField" promptText="Telefone" prefWidth="300"/>
+            <TextField fx:id="usernameField" promptText="Username" prefWidth="300"/>
             <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300"/>
             <PasswordField fx:id="confirmPasswordField" promptText="Confirmar Password" prefWidth="300"/>
 

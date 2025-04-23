@@ -26,6 +26,7 @@ public class RegistarGestorController {
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
     @FXML private TextField emailField;
+    @FXML private TextField telefoneField;
 
     @Autowired
     private UserService userService;
@@ -43,6 +44,7 @@ public class RegistarGestorController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
         String email = emailField.getText();
+        String telefone = telefoneField.getText();
 
         if (nome.isEmpty() || rua.isEmpty() || porta.isEmpty() || codigoPostal.isEmpty() ||
                 username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
@@ -85,15 +87,48 @@ public class RegistarGestorController {
         user.setEmail(email);
         user.setTrabalhador(trabalhador);
 
-        boolean sucesso = userService.registarGestor(user, trabalhador, gestor);
+        Email email1 = new Email();
+        email1.setIdTrabalhador(trabalhador);
+        email1.setEndereço(email);
+
+        Telefone telefone1 = new Telefone();
+        telefone1.setIdTrabalhador(trabalhador);
+        telefone1.setNum(telefone);
+
+        boolean sucesso = userService.registarGestor(user, trabalhador, gestor, email1, telefone1);
 
         if (sucesso) {
-            showAlert("Sucesso", "Gestor registado com sucesso!");
-            clearForm();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Sucesso");
+            alert.setHeaderText(null);
+            alert.setContentText("Gestor registado com sucesso!");
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    redirectToLogin();
+                }
+            });
         } else {
             showAlert("Erro", "Falha ao registar gestor.");
         }
+
     }
+
+    private void redirectToLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) nomeField.getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível redirecionar para a página de login.");
+        }
+    }
+
 
     private boolean isValidEmail(String email) {
         return Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$").matcher(email).matches();

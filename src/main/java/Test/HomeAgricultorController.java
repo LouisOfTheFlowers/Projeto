@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 @Component
@@ -35,7 +34,7 @@ public class HomeAgricultorController {
 
         Button[] buttons = {
                 cronogramasButton, propostasButton,
-                terrenosButton, dadosButton, logoutButton
+                terrenosButton, logoutButton
         };
 
         for (Button button : buttons) {
@@ -52,17 +51,12 @@ public class HomeAgricultorController {
 
     @FXML
     private void abrirPropostas(ActionEvent event) {
-        loadScene(event, "/proposta_plantio.fxml", "Propostas de Plantio");
+        loadScene(event, "/proposta_plantio_agricultor.fxml", "Propostas de Plantio");
     }
 
     @FXML
     private void abrirTerrenos(ActionEvent event) {
         loadScene(event, "/terreno.fxml", "Gestão de Terrenos");
-    }
-
-    @FXML
-    private void abrirDados(ActionEvent event) {
-        loadScene(event, "/dados.fxml", "Registro de Dados");
     }
 
     @FXML

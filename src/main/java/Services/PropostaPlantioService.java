@@ -3,6 +3,7 @@ package Services;
 import Models.trabalhoprojeto.Agricultor;
 import Models.trabalhoprojeto.GestorProducao;
 import Models.trabalhoprojeto.PropostaPlantio;
+import Models.trabalhoprojeto.Terreno;
 import Repositorios.PropostaPlantioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -34,15 +35,18 @@ public class PropostaPlantioService {
         propostaPlantioRepository.deleteById(id);
     }
 
-    public void updatePropostaPlantio(Integer id, String horticolas, String alturaDoAno, Agricultor idAgricultor, GestorProducao idGestor) {
-        Optional<PropostaPlantio> optionalPropostaPlantio = propostaPlantioRepository.findById(id);
-        if (optionalPropostaPlantio.isPresent()) {
-            PropostaPlantio propostaPlantio = optionalPropostaPlantio.get();
-            propostaPlantio.setHorticolas(horticolas);
-            propostaPlantio.setAlturaDoAno(alturaDoAno);
-            propostaPlantio.setIdAgricultor(idAgricultor);
-            propostaPlantio.setIdGestor(idGestor);
-            propostaPlantioRepository.save(propostaPlantio);
+    public void updatePropostaPlantio(Integer id, String horticolas, String alturaDoAno,
+                                      GestorProducao gestor, Terreno terreno, Agricultor agricultor) {
+        Optional<PropostaPlantio> optional = propostaPlantioRepository.findById(id);
+        if (optional.isPresent()) {
+            PropostaPlantio proposta = optional.get();
+            proposta.setHorticolas(horticolas);
+            proposta.setAlturaDoAno(alturaDoAno);
+            proposta.setIdGestor(gestor);
+            proposta.setIdTerreno(terreno);
+            proposta.setIdAgricultor(agricultor);
+            propostaPlantioRepository.save(proposta);
         }
     }
+
 }
