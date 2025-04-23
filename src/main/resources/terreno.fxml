@@ -14,7 +14,7 @@
     <!-- Botão Voltar -->
     <HBox alignment="CENTER_LEFT">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="← Voltar">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
