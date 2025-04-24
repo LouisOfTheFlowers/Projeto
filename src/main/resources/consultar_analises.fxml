@@ -34,7 +34,7 @@
                 <Region HBox.hgrow="ALWAYS"/>
                 <Label text="Em análise" style="-fx-text-fill: #666;"/>
             </HBox>
-            <Button text="Ver Análise" fx:id="verAnalise1" onAction="#verAnalise"
+            <Button text="Ver Análise"
                     style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;">
                 <cursor><Cursor fx:constant="HAND"/></cursor>
             </Button>
@@ -48,7 +48,7 @@
                 <Region HBox.hgrow="ALWAYS"/>
                 <Label text="Concluída" style="-fx-text-fill: #666;"/>
             </HBox>
-            <Button text="Ver Análise" fx:id="verAnalise2" onAction="#verAnalise"
+            <Button text="Ver Análise"
                     style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;">
                 <cursor><Cursor fx:constant="HAND"/></cursor>
             </Button>

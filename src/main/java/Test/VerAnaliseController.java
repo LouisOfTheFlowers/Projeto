@@ -1,10 +1,10 @@
 package Test;
 
+import Models.trabalhoprojeto.AnaliseSolo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import org.springframework.stereotype.Component;
@@ -16,6 +16,28 @@ import java.util.Objects;
 public class VerAnaliseController {
 
     @FXML private Button backButton;
+    @FXML private Label dataLabel;
+    @FXML private Label tipoAnaliseLabel;
+    @FXML private Label metodologiaLabel;
+    @FXML private Label resultadoFinalLabel;
+    @FXML private Label gestorLabel;
+
+    private AnaliseSolo analise;
+
+    public void setAnalise(AnaliseSolo analise) {
+        this.analise = analise;
+        preencherDados();
+    }
+
+    private void preencherDados() {
+        if (analise != null) {
+            dataLabel.setText("Data da Análise: " + analise.getData());
+            tipoAnaliseLabel.setText("Tipo de Análise: " + analise.getTipoAnalise());
+            metodologiaLabel.setText("Metodologia: " + analise.getMetodologia());
+            resultadoFinalLabel.setText("Resultado Final: " + analise.getResultadoFinal());
+            gestorLabel.setText("Gestor Responsável: " + analise.getIdGestor().getNome());
+        }
+    }
 
     @FXML
     private void goBack(ActionEvent event) {
