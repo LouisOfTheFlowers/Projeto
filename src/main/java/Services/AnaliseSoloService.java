@@ -3,9 +3,11 @@ package Services;
 import Repositorios.AnaliseSoloRepository;
 import Models.trabalhoprojeto.AnaliseSolo;
 import Models.trabalhoprojeto.GestorProducao;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,9 +20,17 @@ public class AnaliseSoloService {
     @Autowired
     private AnaliseSoloRepository analiseSoloRepository;
 
-    public List<AnaliseSolo> findAll() {
-        return analiseSoloRepository.findAll();
+    @Transactional // ✅ Isto mantém a sessão aberta enquanto percorres a lista
+    public List<AnaliseSolo> findAllEager() {
+        List<AnaliseSolo> analises = analiseSoloRepository.findAll();
+
+        for (AnaliseSolo analise : analises) {
+            Hibernate.initialize(analise.getIdGestor()); // agora isto funciona!
+        }
+
+        return analises;
     }
+
 
     public Optional<AnaliseSolo> findById(Integer id) {
         return analiseSoloRepository.findById(id);

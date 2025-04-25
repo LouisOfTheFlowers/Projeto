@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.Cursor?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.CriarCronogramaController"
+      spacing="20" alignment="TOP_CENTER"
+      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
+
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Button fx:id="backButton" onAction="#goBack" text="Voltar"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;">
+            <cursor><Cursor fx:constant="HAND"/></cursor>
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="Icons/back.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label text="Criar Cronograma" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+    </HBox>
+
+    <VBox spacing="10" alignment="TOP_LEFT">
+        <!-- Campos de exemplo -->
+        <Label text="Nome do Cronograma:" />
+        <TextField fx:id="nomeField" />
+
+        <Label text="Descrição:" />
+        <TextArea fx:id="descricaoArea" prefRowCount="4" />
+
+        <Button text="Guardar" onAction="#guardarCronograma"
+                style="-fx-background-color: #2e8b57; -fx-text-fill: white;"/>
+    </VBox>
+</VBox>

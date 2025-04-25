@@ -25,7 +25,7 @@ public class AnaliseSoloController {
 
     @FXML
     private void abrirNovaAnalise(ActionEvent event) {
-        loadScene(event, "/nova_analise_solo.fxml", "Nova Análise de Solo");
+        loadScene(event, "/registar_analise_solo.fxml", "Registar Análise de Solo");
     }
 
     @FXML

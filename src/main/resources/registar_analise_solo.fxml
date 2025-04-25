@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Test.RegistarAnaliseSoloController"
+            style="-fx-background-color: #f9fdf9; -fx-font-family: 'Segoe UI', sans-serif;">
+
+    <top>
+        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 15;">
+            <Button fx:id="voltarButton" text="Voltar"
+                    onAction="#goBack"
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                        <Image url="Icons/back.png"/>
+                    </ImageView>
+                </graphic>
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Button>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20"
+              style="-fx-padding: 40;">
+            <Label text="🌱 Nova Análise de Solo"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+
+            <DatePicker fx:id="dataPicker" promptText="Data da Análise" style="-fx-font-size: 14px;" prefWidth="300"/>
+            <TextField fx:id="tipoField" promptText="Tipo de Análise" style="-fx-font-size: 14px;" prefWidth="300"/>
+            <TextField fx:id="metodologiaField" promptText="Metodologia" style="-fx-font-size: 14px;" prefWidth="300"/>
+            <TextField fx:id="resultadoField" promptText="Resultado da Análise" style="-fx-font-size: 14px;" prefWidth="300"/>
+
+            <ComboBox fx:id="gestorComboBox" promptText="Selecionar Gestor"
+                      style="-fx-font-size: 14px;" prefWidth="300"/>
+
+            <Button fx:id="registarButton" text="Registar Análise"
+                    onAction="#registarAnalise"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 6px;"
+                    prefWidth="200"/>
+        </VBox>
+    </center>
+</BorderPane>
