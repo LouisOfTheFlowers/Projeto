@@ -28,21 +28,40 @@ public class VerCronogramasController {
 
     @FXML
     private void initialize() {
-        List<Cronograma> lista = cronogramaService.findAll();
-        cronogramasContainer.getChildren().clear();
+        System.out.println("🔧 Método initialize() chamado");
 
-        for (Cronograma c : lista) {
-            String texto = "📅 " + c.getDtInicioPreparoTerreno()
-                    + " | Hortícolas: " + c.getTipoHorticolas()
-                    + "\nPreparo: " + c.getProcessoDePreparo()
-                    + "\nPlantio: " + c.getProcessoDePlantio()
-                    + "\nGestor: " + c.getIdGestor().getNome();
+        try {
+            List<Cronograma> lista = cronogramaService.findAll();
+            System.out.println("✅ Total de cronogramas encontrados: " + lista.size());
 
-            Label label = new Label(texto);
-            label.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);");
-            cronogramasContainer.getChildren().add(label);
+            cronogramasContainer.getChildren().clear();
+
+            for (Cronograma c : lista) {
+                if (c != null) {
+                    String texto = "📅 Início: " + c.getDtInicioPreparoTerreno()
+                            + "\nHortícolas: " + c.getTipoHorticolas()
+                            + "\nPreparo: " + c.getProcessoDePreparo()
+                            + "\nPlantio: " + c.getProcessoDePlantio()
+                            + "\nGestor: " + (c.getIdGestor() != null ? c.getIdGestor().getNome() : "Desconhecido");
+
+                    Label label = new Label(texto);
+                    label.setWrapText(true);
+                    label.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5; " +
+                            "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);");
+
+                    cronogramasContainer.getChildren().add(label);
+                } else {
+                    System.out.println("⚠️ Cronograma nulo encontrado na lista.");
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("❌ Erro ao carregar cronogramas: " + e.getMessage());
+            e.printStackTrace();
         }
     }
+
+
 
     @FXML
     private void goBack(ActionEvent event) {

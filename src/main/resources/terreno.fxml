@@ -2,8 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -14,13 +13,14 @@
     <!-- Botão Voltar -->
     <HBox alignment="CENTER_LEFT">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
+                text="Voltar"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
             <graphic>
                 <ImageView fitHeight="18" fitWidth="18" preserveRatio="true">
-                    <Image url="@Icons/back.png"/>
+                    <Image url="Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
@@ -28,10 +28,10 @@
 
     <!-- Título -->
     <Label text="🌱 Gestão de Terrenos"
-           style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"
-           alignment="CENTER"/>
+           alignment="CENTER"
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-    <!-- Ações -->
+    <!-- Ações disponíveis -->
     <VBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20;">
         <Label text="Ações disponíveis:"
                style="-fx-font-size: 16px; -fx-text-fill: #444;"/>
@@ -40,7 +40,9 @@
             <Button fx:id="registrarTerrenoButton"
                     text="➕ Registar Novo Terreno"
                     onAction="#abrirRegistrarTerreno"
-                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10 25;">
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white;
+                           -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px;
+                           -fx-padding: 10 25;">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>

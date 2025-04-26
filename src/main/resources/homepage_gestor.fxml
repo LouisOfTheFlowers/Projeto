@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
@@ -8,33 +10,35 @@
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Test.HomeGestorController"
-            style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
+            style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
+    <!-- Topo com botão de logout -->
     <top>
         <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
             <Button fx:id="logoutButton" onAction="#logout"
-                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Logout">
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Logout">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <graphic>
-                    <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@Icons/back.png"/>
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                        <Image url="Icons/back.png"/>
                     </ImageView>
                 </graphic>
             </Button>
         </HBox>
     </top>
 
+    <!-- Conteúdo principal -->
     <center>
         <VBox spacing="30" alignment="CENTER" style="-fx-padding: 0 40 40 40;">
-            <Label text="Bem-vindo, Gestor de Produção"
-                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2e8b57; -fx-padding-bottom: 20px;"/>
+            <Label text="🎯 Bem-vindo, Gestor de Produção"
+                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-            <GridPane hgap="20" vgap="30" alignment="CENTER">
+            <GridPane hgap="30" vgap="30" alignment="CENTER">
                 <columnConstraints>
-                    <ColumnConstraints halignment="CENTER" prefWidth="250"/>
-                    <ColumnConstraints halignment="CENTER" prefWidth="250"/>
+                    <ColumnConstraints halignment="CENTER" prefWidth="260"/>
+                    <ColumnConstraints halignment="CENTER" prefWidth="260"/>
                 </columnConstraints>
 
                 <rowConstraints>
@@ -43,9 +47,9 @@
                 </rowConstraints>
 
                 <Button fx:id="propostaButton"
-                        text="Proposta de Plantio"
+                        text="🌱 Propostas de Plantio"
                         onAction="#abrirPropostaPlantio"
-                        style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 12 20;"
                         GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
@@ -53,9 +57,9 @@
                 </Button>
 
                 <Button fx:id="analiseButton"
-                        text="Análise de Solo"
+                        text="🧪 Análise de Solo"
                         onAction="#abrirAnaliseSolo"
-                        style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 12 20;"
                         GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
@@ -63,9 +67,9 @@
                 </Button>
 
                 <Button fx:id="cronogramaButton"
-                        text="Cronograma"
+                        text="📆 Cronograma"
                         onAction="#abrirCronograma"
-                        style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 12 20;"
                         GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
@@ -73,17 +77,15 @@
                 </Button>
 
                 <Button fx:id="relatoriosButton"
-                        text="Relatório"
+                        text="📑 Relatórios"
                         onAction="#abrirRelatorio"
-                        style="-fx-font-size: 18px; -fx-font-weight: bold;"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 12 20;"
                         GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-
             </GridPane>
         </VBox>
     </center>
 </BorderPane>
-

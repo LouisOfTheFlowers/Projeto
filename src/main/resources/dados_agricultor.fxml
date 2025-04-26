@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.DadosAgricultorController"
-      spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Botão voltar fixo à esquerda -->
-    <HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+    <!-- Cabeçalho com botão de voltar -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
             <graphic>
-                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                     <Image url="@Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
     </HBox>
 
-    <!-- Título centralizado na linha abaixo -->
-    <Label text="Gestão de Dados"
-           style="-fx-font-size: 24px; -fx-font-weight: bold;"
-           alignment="CENTER"/>
+    <!-- Título -->
+    <Label text="📂 Gestão de Dados"
+           style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-    <!-- Container principal alinhado à esquerda -->
-    <VBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 20 20 0 20;">
-        <!-- Texto "Ações em Registar Dados" alinhado à esquerda -->
-        <Label text="Ações em Gestão de Dados:"
-               style="-fx-font-size: 16px; -fx-padding: 0 0 10 0;"/>
+    <!-- Ações disponíveis -->
+    <VBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 20 0 0 10;">
+        <Label text="Ações disponíveis:"
+               style="-fx-font-size: 16px; -fx-text-fill: #444;"/>
 
-        <!-- Botões alinhados à esquerda -->
-        <VBox spacing="15" alignment="TOP_LEFT">
-            <!-- Botão para registrar dados -->
-            <Button fx:id="registrarDadosButton"
-                    text="Registar Dados"
-                    onAction="#abrirRegistrarDados"
-                    style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 30;">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </Button>
-        </VBox>
+        <Button fx:id="registrarDadosButton"
+                text="➕ Registar Dados"
+                onAction="#abrirRegistrarDados"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-padding: 10 30;">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
     </VBox>
 </VBox>

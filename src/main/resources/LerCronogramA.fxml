@@ -1,68 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns="http://javfx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.LerCronogramaController" spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.LerCronogramaController"
+      spacing="20" alignment="TOP_CENTER"
+      style="-fx-background-color: #fcfbe9; -fx-padding: 30;">
 
     <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 20 0;">
+    <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Back">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;"
+                text="Voltar">
+            <cursor><Cursor fx:constant="HAND"/></cursor>
             <graphic>
-                <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-                    <Image url="Icons/back.png"/>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="@Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Cronogramas Disponíveis:" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="Cronogramas Disponíveis"
+               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
     </HBox>
 
-    <!-- Lista de Cronogramas -->
-    <VBox fx:id="cronogramasContainer" spacing="15" alignment="TOP_CENTER">
-        <!-- Exemplo de item de cronograma - você vai gerar esses dinamicamente no controller -->
-        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Cronograma 1" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label text="27/07/2025" style="-fx-text-fill: #666;"/>
-            </HBox>
-            <Button text="Ver Cronograma" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;"
-                    onAction="#lerCronograma" fx:id="verCronograma1"/>
-        </VBox>
-
-        <!-- Segundo item de exemplo -->
-        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Cronograma 2" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label text="27/07/2025" style="-fx-text-fill: #666;"/>
-            </HBox>
-            <Button text="Ler Cronograma" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;"
-                    onAction="#lerCronograma" fx:id="verCronograma2"/>
-        </VBox>
-
-        <!-- Terceiro item de exemplo -->
-        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Cronograma 3" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label text="27/07/2025" style="-fx-text-fill: #666;"/>
-            </HBox>
-            <Button text="Ler Cronograma" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;"
-                    onAction="#lerCronograma" fx:id="verCronograma3"/>
-        </VBox>
-    </VBox>
+    <!-- Container onde os cronogramas serão adicionados dinamicamente -->
+    <VBox fx:id="cronogramasContainer"
+          spacing="15"
+          alignment="TOP_CENTER"
+          style="-fx-padding: 10 0 0 0;"/>
 </VBox>

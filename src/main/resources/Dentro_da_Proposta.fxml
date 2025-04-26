@@ -1,70 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.DentroDaPropostaController" spacing="20"
-      style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+      fx:controller="Test.DentroDaPropostaController" spacing="25"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
     <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="20">
+    <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
             <graphic>
-                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                     <Image url="Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
-        <Label fx:id="tituloLabel" text="Detalhes da Proposta"
-               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label fx:id="tituloLabel" text="📄 Detalhes da Proposta"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
     <!-- Corpo da proposta -->
-    <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 20;
-                 -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);"
-          spacing="15">
+    <VBox spacing="20" style="-fx-background-color: white; -fx-background-radius: 8; -fx-padding: 25;
+                               -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
 
-        <!-- Informações da proposta -->
-        <HBox spacing="10" alignment="CENTER_LEFT">
+        <!-- Informações -->
+        <GridPane hgap="10" vgap="12">
             <Label text="Título:" style="-fx-font-weight: bold;"/>
-            <Label fx:id="tituloPropostaLabe" style="-fx-font-size: 14px;"/>
-        </HBox>
+            <Label fx:id="tituloPropostaLabe" GridPane.columnIndex="1"/>
 
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Data:" style="-fx-font-weight: bold;"/>
-            <Label fx:id="dataPropostaLabe" style="-fx-font-size: 14px;"/>
-        </HBox>
+            <Label text="Data:" style="-fx-font-weight: bold;" GridPane.rowIndex="1"/>
+            <Label fx:id="dataPropostaLabe" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Estado:" style="-fx-font-weight: bold;"/>
-            <Label fx:id="estadoPropostaLabe" style="-fx-font-size: 14px;"/>
-        </HBox>
+            <Label text="Estado:" style="-fx-font-weight: bold;" GridPane.rowIndex="2"/>
+            <Label fx:id="estadoPropostaLabe" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Proponente:" style="-fx-font-weight: bold;"/>
-            <Label fx:id="proponentePropostaLabe" style="-fx-font-size: 14px;"/>
-        </HBox>
+            <Label text="Proponente:" style="-fx-font-weight: bold;" GridPane.rowIndex="3"/>
+            <Label fx:id="proponentePropostaLabe" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        </GridPane>
 
         <Separator/>
 
-        <!-- Detalhes da proposta -->
         <Label text="Descrição:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-
         <TextArea fx:id="descricaoPropostaText" wrapText="true" editable="false"
-                  style="-fx-font-size: 14px; -fx-background-color: transparent; -fx-border-color: lightgray;"
+                  style="-fx-font-size: 14px; -fx-border-color: #ccc; -fx-border-radius: 5;"
                   prefHeight="100"/>
 
-        <!-- Plantas propostas -->
         <Label text="Plantas Propostas:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
 
-        <TableView fx:id="plantasTable" prefHeight="200">
+        <TableView fx:id="plantasTable" prefHeight="220">
             <columns>
                 <TableColumn fx:id="nomePlantaColumn" text="Nome" prefWidth="150"/>
                 <TableColumn fx:id="quantidadeColumn" text="Quantidade" prefWidth="100"/>

@@ -1,32 +1,73 @@
 package Test;
 
 import Models.trabalhoprojeto.Cronograma;
+import Services.CronogramaService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
+
 @Component
 public class LerCronogramaController {
 
+    @Autowired
+    private CronogramaService cronogramaService;
+
     @FXML
-    private void lerCronograma(ActionEvent event) {
+    private VBox cronogramasContainer;
+
+    @FXML
+    private void initialize() {
+        List<Cronograma> lista = cronogramaService.findAll();
+        cronogramasContainer.getChildren().clear();
+
+        for (Cronograma c : lista) {
+            VBox card = new VBox(10);
+            card.setStyle("-fx-background-color: white; -fx-background-radius: 8; -fx-padding: 15;" +
+                    "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 4, 0, 0, 1);");
+
+            Label titulo = new Label("📅 Início: " + c.getDtInicioPreparoTerreno());
+            titulo.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
+
+            Label detalhes = new Label("Hortícolas: " + c.getTipoHorticolas() +
+                    "\nPreparo: " + c.getProcessoDePreparo() +
+                    "\nPlantio: " + c.getProcessoDePlantio() +
+                    "\nGestor: " + c.getIdGestor().getNome());
+            detalhes.setWrapText(true);
+
+            Button verBtn = new Button("Ler Cronograma");
+            verBtn.setStyle("-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 5 15;");
+            verBtn.setCursor(javafx.scene.Cursor.HAND);
+
+            verBtn.setOnAction(e -> abrirDetalhesCronograma(c, e));
+
+            card.getChildren().addAll(titulo, detalhes, verBtn);
+            cronogramasContainer.getChildren().add(card);
+        }
+    }
+
+    private void abrirDetalhesCronograma(Cronograma cronograma, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dentro_do_cronograma.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
             Parent root = loader.load();
 
-            // Obtém a janela atual (em vez de criar uma nova)
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Test.DentroDoCronogramaController controller = loader.getController();
+            controller.initData(cronograma);
 
-            // Substitui a cena atual
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root, 1440, 600));
             currentStage.setTitle("Detalhes do Cronograma");
 
@@ -36,17 +77,8 @@ public class LerCronogramaController {
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     @FXML
     private void goBack(ActionEvent event) {
-        // Alterado para voltar para acoes_cronogramas em vez da homepage
         loadScene(event, "/acoes_cronogramas.fxml", "Ações de Cronograma");
     }
 
@@ -57,7 +89,6 @@ public class LerCronogramaController {
 
             FXMLLoader loader = new FXMLLoader(resource);
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
-
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -65,8 +96,16 @@ public class LerCronogramaController {
             stage.setTitle(title);
             stage.show();
         } catch (Exception e) {
-
+            showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a página.");
             e.printStackTrace();
         }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

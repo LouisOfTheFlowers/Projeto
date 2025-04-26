@@ -2,34 +2,53 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.CriarRelatorioController"
-      alignment="CENTER" spacing="20" style="-fx-padding: 40; -fx-background-color: #f4fff4;">
-    <HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+      alignment="TOP_CENTER" spacing="25"
+      style="-fx-padding: 40; -fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
+
+    <!-- Botão Voltar -->
+    <HBox alignment="TOP_LEFT">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
             <cursor><Cursor fx:constant="HAND"/></cursor>
-            <graphic><ImageView fitHeight="20" fitWidth="20" preserveRatio="true"><Image url="@Icons/back.png"/></ImageView></graphic>
+            <graphic>
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                    <Image url="Icons/back.png"/>
+                </ImageView>
+            </graphic>
         </Button>
     </HBox>
 
+    <!-- Título -->
     <Label text="📊 Criar Relatório"
-           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-    <TextField fx:id="tituloField" promptText="Título" prefWidth="300"/>
-    <TextField fx:id="temaField" promptText="Tema" prefWidth="300"/>
-    <TextField fx:id="tipoField" promptText="Tipo de Relatório" prefWidth="300"/>
-    <TextArea fx:id="descricaoArea" promptText="Descrição" prefWidth="300" prefHeight="120"/>
+    <!-- Formulário -->
+    <VBox spacing="15" alignment="CENTER">
+        <TextField fx:id="tituloField" promptText="Título do Relatório"
+                   prefWidth="320" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="temaField" promptText="Tema"
+                   prefWidth="320" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="tipoField" promptText="Tipo de Relatório"
+                   prefWidth="320" style="-fx-font-size: 14px;"/>
+        <TextArea fx:id="descricaoArea" promptText="Descrição"
+                  prefWidth="320" prefHeight="120"
+                  style="-fx-font-size: 14px; -fx-border-color: lightgray; -fx-border-radius: 5;"/>
+        <ComboBox fx:id="analistaComboBox" promptText="Selecionar Analista"
+                  prefWidth="320" style="-fx-font-size: 14px;"/>
+    </VBox>
 
-    <ComboBox fx:id="analistaComboBox" promptText="Selecionar Analista" prefWidth="300"/>
-
-    <Button text="Guardar"
+    <!-- Botão Guardar -->
+    <Button text="💾 Guardar Relatório"
             onAction="#handleGuardar"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"
-            prefWidth="200"/>
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 8px; -fx-padding: 10 30;"
+            prefWidth="220">
+        <cursor><Cursor fx:constant="HAND"/></cursor>
+    </Button>
 </VBox>

@@ -8,45 +8,59 @@
 <?import javafx.scene.image.ImageView?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Test.RegistarAnaliseSoloController"
-            style="-fx-background-color: #f9fdf9; -fx-font-family: 'Segoe UI', sans-serif;">
+            style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
+    <!-- Botão voltar -->
     <top>
-        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 15;">
+        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 20;">
             <Button fx:id="voltarButton" text="Voltar"
                     onAction="#goBack"
                     style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
                 <graphic>
                     <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                         <Image url="Icons/back.png"/>
                     </ImageView>
                 </graphic>
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
             </Button>
         </HBox>
     </top>
 
+    <!-- Formulário de registo -->
     <center>
-        <VBox alignment="CENTER" spacing="20"
-              style="-fx-padding: 40;">
+        <VBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 0 40 40 40;">
             <Label text="🌱 Nova Análise de Solo"
                    style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-            <DatePicker fx:id="dataPicker" promptText="Data da Análise" style="-fx-font-size: 14px;" prefWidth="300"/>
-            <TextField fx:id="tipoField" promptText="Tipo de Análise" style="-fx-font-size: 14px;" prefWidth="300"/>
-            <TextField fx:id="metodologiaField" promptText="Metodologia" style="-fx-font-size: 14px;" prefWidth="300"/>
-            <TextField fx:id="resultadoField" promptText="Resultado da Análise" style="-fx-font-size: 14px;" prefWidth="300"/>
+            <VBox spacing="15" alignment="CENTER">
+                <DatePicker fx:id="dataPicker" promptText="Data da Análise"
+                            style="-fx-font-size: 14px;" prefWidth="300"/>
 
-            <ComboBox fx:id="gestorComboBox" promptText="Selecionar Gestor"
-                      style="-fx-font-size: 14px;" prefWidth="300"/>
+                <TextField fx:id="tipoField" promptText="Tipo de Análise"
+                           style="-fx-font-size: 14px;" prefWidth="300"/>
 
-            <Button fx:id="registarButton" text="Registar Análise"
+                <TextField fx:id="metodologiaField" promptText="Metodologia"
+                           style="-fx-font-size: 14px;" prefWidth="300"/>
+
+                <TextField fx:id="resultadoField" promptText="Resultado da Análise"
+                           style="-fx-font-size: 14px;" prefWidth="300"/>
+
+                <ComboBox fx:id="gestorComboBox" promptText="Selecionar Gestor"
+                          style="-fx-font-size: 14px;" prefWidth="300"/>
+            </VBox>
+
+            <Button fx:id="registarButton" text="➕ Registar Análise"
                     onAction="#registarAnalise"
-                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 6px;"
-                    prefWidth="200"/>
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px;"
+                    prefWidth="220">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Button>
         </VBox>
     </center>
 </BorderPane>
