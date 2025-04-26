@@ -2,17 +2,13 @@ package Test;
 
 import Models.trabalhoprojeto.Cronograma;
 import Services.CronogramaService;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
-import javafx.stage.Stage;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.Parent;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,41 +18,50 @@ import java.util.List;
 @Component
 public class CronogramasAnalistaController {
 
-    @FXML private TableView<Cronograma> tabelaCronogramas;
-    @FXML private TableColumn<Cronograma, Integer> idColumn;
-    @FXML private TableColumn<Cronograma, String> preparoColumn;
-    @FXML private TableColumn<Cronograma, String> plantioColumn;
-    @FXML private TableColumn<Cronograma, String> horticolasColumn;
-    @FXML private TableColumn<Cronograma, String> gestorColumn;
-    @FXML private TableColumn<Cronograma, String> dataInicioColumn;
+    @FXML
+    private VBox cronogramasContainer;
 
     @Autowired
     private CronogramaService cronogramaService;
 
     @FXML
     public void initialize() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        preparoColumn.setCellValueFactory(new PropertyValueFactory<>("processoDePreparo"));
-        plantioColumn.setCellValueFactory(new PropertyValueFactory<>("processoDePlantio"));
-        horticolasColumn.setCellValueFactory(new PropertyValueFactory<>("tipoHorticolas"));
-        gestorColumn.setCellValueFactory(cellData -> {
-            var gestor = cellData.getValue().getIdGestor();
-            return new SimpleStringProperty(gestor != null ? gestor.getNome() : "Desconhecido");
-        });
-        dataInicioColumn.setCellValueFactory(cellData -> new SimpleStringProperty(
-                cellData.getValue().getDtInicioPreparoTerreno() != null
-                        ? cellData.getValue().getDtInicioPreparoTerreno().toString()
-                        : ""
-        ));
+        carregarCronogramas();
+    }
 
+    private void carregarCronogramas() {
         List<Cronograma> lista = cronogramaService.findAll();
-        tabelaCronogramas.setItems(FXCollections.observableArrayList(lista));
+
+        for (Cronograma cronograma : lista) {
+            VBox card = criarCartaoCronograma(cronograma);
+            cronogramasContainer.getChildren().add(card);
+        }
+    }
+
+    private VBox criarCartaoCronograma(Cronograma cronograma) {
+        VBox card = new VBox(6);
+        card.setStyle("-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 8;"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);");
+
+        Label titulo = new Label("📅 Cronograma #" + cronograma.getId());
+        titulo.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        Label dataInicio = new Label("Início Preparo: " +
+                (cronograma.getDtInicioPreparoTerreno() != null ? cronograma.getDtInicioPreparoTerreno().toString() : "N/A"));
+        Label preparo = new Label("Preparo do Terreno: " + cronograma.getProcessoDePreparo());
+        Label plantio = new Label("Processo de Plantio: " + cronograma.getProcessoDePlantio());
+        Label horticolas = new Label("Hortícolas: " + cronograma.getTipoHorticolas());
+        Label gestor = new Label("Gestor Responsável: " +
+                (cronograma.getIdGestor() != null ? cronograma.getIdGestor().getNome() : "Desconhecido"));
+
+        card.getChildren().addAll(titulo, dataInicio, preparo, plantio, horticolas, gestor);
+        return card;
     }
 
     @FXML
     private void goBack(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/homepage_analista.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/antes_cronograma_analista.fxml"));
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
             Parent root = loader.load();
 

@@ -16,6 +16,7 @@ import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -108,17 +109,34 @@ public class INRegistarPropostaPlantioController {
         proposta.setIdGestor(gestor);
 
         propostaPlantioService.save(proposta);
-        showAlert("Sucesso", "Proposta de Plantio registada com sucesso!");
-        clearForm();
+        showAlertComRedirect("Sucesso", "Proposta de Plantio registada com sucesso!");
     }
 
-    private void clearForm() {
-        horticolasField.clear();
-        alturaDoAnoField.clear();
-        terrenoComboBox.setValue(null);
-        agricultorComboBox.setValue(null);
-        gestorComboBox.setValue(null);
+    private void showAlertComRedirect(String titulo, String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+
+        alert.setOnHidden(event -> {
+            // Redirecionar para a página anterior após o utilizador clicar em "OK"
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/proposta_plantio_agricultor.fxml"));
+                loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+                Parent root = loader.load();
+
+                Stage stage = (Stage) registarButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 1440, 600));
+                stage.setTitle("Propostas de Plantio");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        alert.showAndWait();
     }
+
 
     private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

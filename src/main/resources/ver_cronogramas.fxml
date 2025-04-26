@@ -7,14 +7,16 @@
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.VerCronogramasController"
-      spacing="30" alignment="TOP_CENTER"
-      style="-fx-background-color: #f0f8f0; -fx-padding: 40; -fx-font-family: 'Segoe UI', sans-serif;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Cabeçalho com botão voltar -->
+    <!-- Cabeçalho -->
     <HBox alignment="CENTER_LEFT" spacing="20">
-        <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
-            <cursor><Cursor fx:constant="HAND"/></cursor>
+        <Button fx:id="backButton" onAction="#goBack" text="Voltar"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                     <Image url="Icons/back.png"/>
@@ -22,13 +24,15 @@
             </graphic>
         </Button>
         <Label text="📅 Cronogramas Registados"
-               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;" />
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
-    <!-- Container onde serão inseridos os cronogramas dinamicamente -->
-    <ScrollPane fitToWidth="true" style="-fx-background-color:transparent;" prefHeight="600">
-        <VBox fx:id="cronogramasContainer"
-              spacing="20" alignment="TOP_CENTER"
-              style="-fx-padding: 10;"/>
+    <!-- Container dos cronogramas -->
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" prefHeight="600">
+        <VBox alignment="TOP_LEFT"
+              spacing="15"
+              style="-fx-padding: 10; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 1); -fx-min-width: 700;">
+            <VBox fx:id="cronogramasContainer" spacing="15"/>
+        </VBox>
     </ScrollPane>
 </VBox>

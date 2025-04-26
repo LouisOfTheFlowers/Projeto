@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.VerRelatoriosAnalistaController"
-      spacing="30" alignment="TOP_CENTER"
-      style="-fx-background-color: #f0f8f0; -fx-padding: 40; -fx-font-family: 'Segoe UI', sans-serif;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="15">
-        <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
+    <!-- Cabeçalho -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Button fx:id="backButton" onAction="#goBack" text="Voltar"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
@@ -29,19 +28,7 @@
                style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
-    <!-- Título Secundário -->
-    <Label text="Visualização de Relatórios"
-           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
-
-    <!-- Tabela com os dados dos relatórios -->
-    <TableView fx:id="tabelaDados" prefWidth="1000" prefHeight="450"
-               style="-fx-background-color: white; -fx-border-radius: 6px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
-        <columns>
-            <TableColumn fx:id="tituloColuna" text="Título" prefWidth="200"/>
-            <TableColumn fx:id="temaColuna" text="Tema" prefWidth="200"/>
-            <TableColumn fx:id="tipoColuna" text="Tipo" prefWidth="160"/>
-            <TableColumn fx:id="descricaoColuna" text="Descrição" prefWidth="280"/>
-            <TableColumn fx:id="dataColuna" text="Data" prefWidth="150"/>
-        </columns>
-    </TableView>
+    <!-- Container dos relatórios -->
+    <VBox fx:id="relatoriosContainer" spacing="15" alignment="TOP_LEFT"
+          style="-fx-padding: 10; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 1); -fx-min-width: 700;"/>
 </VBox>

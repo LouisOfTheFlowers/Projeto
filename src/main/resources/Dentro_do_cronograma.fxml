@@ -7,53 +7,52 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.DentroDoCronogramaController"
-      spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
     <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="20">
+    <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
+            <cursor><Cursor fx:constant="HAND"/></cursor>
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                     <Image url="Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
-        <Label fx:id="tituloLabel" text="Detalhes do Cronograma"
-               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label fx:id="tituloLabel" text="📘 Detalhes do Cronograma"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
     <!-- Bloco com os dados do cronograma -->
-    <VBox spacing="10"
-          style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 20;
-                 -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+    <VBox spacing="12"
+          style="-fx-background-color: white; -fx-background-radius: 8; -fx-padding: 25;
+                 -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 4, 0, 0, 1);"
+          alignment="TOP_LEFT" prefWidth="600">
 
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Hortícolas:" style="-fx-font-weight: bold;"/>
+            <Label text="🌿 Hortícolas:" style="-fx-font-weight: bold;"/>
             <Label fx:id="nomeCronogramaLabel"/>
         </HBox>
 
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Data de Início:" style="-fx-font-weight: bold;"/>
+            <Label text="📅 Data de Início:" style="-fx-font-weight: bold;"/>
             <Label fx:id="dataCronogramaLabel"/>
         </HBox>
 
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Preparo:" style="-fx-font-weight: bold;"/>
+            <Label text="🛠️ Preparo:" style="-fx-font-weight: bold;"/>
             <Label fx:id="preparoLabel"/>
         </HBox>
 
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Plantio:" style="-fx-font-weight: bold;"/>
+            <Label text="🌱 Plantio:" style="-fx-font-weight: bold;"/>
             <Label fx:id="plantioLabel"/>
         </HBox>
 
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Gestor Responsável:" style="-fx-font-weight: bold;"/>
+            <Label text="👨‍💼 Gestor Responsável:" style="-fx-font-weight: bold;"/>
             <Label fx:id="gestorLabel"/>
         </HBox>
     </VBox>

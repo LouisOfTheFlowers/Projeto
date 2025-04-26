@@ -19,7 +19,7 @@
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <graphic>
-                    <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                         <Image url="Icons/back.png"/>
                     </ImageView>
                 </graphic>
@@ -29,39 +29,40 @@
 
     <!-- Conteúdo principal -->
     <center>
-        <VBox spacing="30" alignment="CENTER" style="-fx-padding: 40;">
+        <VBox spacing="30" alignment="CENTER" style="-fx-padding: 0 40 40 40;">
             <Label text="📊 Bem-vindo, Analista de Dados"
-                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-            <Button fx:id="relatoriosButton"
-                    text="➕ Criar Novo Relatório"
-                    onAction="#abrirCriarRelatorio"
-                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 8px;"
-                    prefWidth="280" prefHeight="50">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </Button>
+            <GridPane hgap="30" vgap="30" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints halignment="CENTER" prefWidth="260"/>
+                    <ColumnConstraints halignment="CENTER" prefWidth="260"/>
+                </columnConstraints>
 
-            <Button fx:id="dadosButton"
-                    text="📄 Mostrar Relatórios"
-                    onAction="#abrirRelatorios"
-                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 8px;"
-                    prefWidth="280" prefHeight="50">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </Button>
+                <rowConstraints>
+                    <RowConstraints prefHeight="120"/>
+                </rowConstraints>
 
-            <Button fx:id="cronogramasButton"
-                    text="📆 Ver Cronogramas"
-                    onAction="#abrirCronogramas"
-                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 8px;"
-                    prefWidth="280" prefHeight="50">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </Button>
+                <Button fx:id="relatoriosButton"
+                        text="📑 Relatórios"
+                        onAction="#abrirRelatorios"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 12 20;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+
+                <Button fx:id="cronogramasButton"
+                        text="📆 Cronogramas"
+                        onAction="#abrirCronogramas"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 12 20;"
+                        GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </GridPane>
         </VBox>
     </center>
 </BorderPane>

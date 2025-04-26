@@ -3,33 +3,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.LerCronogramaController"
-      spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #fcfbe9; -fx-padding: 30;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
     <!-- Cabeçalho com botão de voltar -->
     <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;"
-                text="Voltar">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
             <cursor><Cursor fx:constant="HAND"/></cursor>
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                    <Image url="@Icons/back.png"/>
+                    <Image url="Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Cronogramas Disponíveis"
-               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="📘 Cronogramas Disponíveis"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
     <!-- Container onde os cronogramas serão adicionados dinamicamente -->
     <VBox fx:id="cronogramasContainer"
-          spacing="15"
+          spacing="18"
           alignment="TOP_CENTER"
-          style="-fx-padding: 10 0 0 0;"/>
+          style="-fx-padding: 20 10 0 10;"/>
 </VBox>

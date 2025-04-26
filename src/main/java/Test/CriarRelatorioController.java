@@ -93,7 +93,7 @@ public class CriarRelatorioController {
     @FXML
     private void goBack(ActionEvent event) {
 
-        loadScene(event, "/homepage_analista.fxml", "Área do Analista");
+        loadScene(event, "/antes_relatorio_analista.fxml", "Ações Relatorios");
     }
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {

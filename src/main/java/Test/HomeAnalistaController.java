@@ -48,17 +48,13 @@ public class HomeAnalistaController {
 
     @FXML
     private void abrirRelatorios(ActionEvent event) {
-        loadScene(event, "/dados_analista.fxml", "Visualização de Dados");
+        loadScene(event, "/antes_relatorio_analista.fxml", "Ações Relatorios");
     }
 
-    @FXML
-    private void abrirCriarRelatorio(ActionEvent event) {
-        loadScene(event, "/criar_relatorio.fxml", "Criar Relatório");
-    }
 
     @FXML
     private void abrirCronogramas(ActionEvent event) {
-        loadScene(event, "/cronogramas_analista.fxml", "Cronogramas");
+        loadScene(event, "/antes_cronograma_analista.fxml", "Ações Cronogramas");
     }
 
     @FXML

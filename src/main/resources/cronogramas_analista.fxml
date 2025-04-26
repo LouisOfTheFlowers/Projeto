@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
@@ -31,20 +30,7 @@
     <Label text="📅 Lista de Cronogramas"
            style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-    <!-- Tabela de Cronogramas -->
-    <TableView fx:id="tabelaCronogramas" prefWidth="1000" prefHeight="450"
-               style="-fx-background-color: white; -fx-border-radius: 6px; -fx-background-radius: 6px;">
-        <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-        </columnResizePolicy>
-
-        <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="80"/>
-            <TableColumn fx:id="dataInicioColumn" text="Início Preparo" prefWidth="150"/>
-            <TableColumn fx:id="preparoColumn" text="Preparo do Terreno" prefWidth="200"/>
-            <TableColumn fx:id="plantioColumn" text="Processo de Plantio" prefWidth="200"/>
-            <TableColumn fx:id="horticolasColumn" text="Hortícolas" prefWidth="150"/>
-            <TableColumn fx:id="gestorColumn" text="Gestor Responsável" prefWidth="200"/>
-        </columns>
-    </TableView>
+    <!-- Container dos cronogramas -->
+    <VBox fx:id="cronogramasContainer" spacing="15" alignment="TOP_LEFT"
+          style="-fx-padding: 10; -fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 1); -fx-min-width: 700;"/>
 </VBox>

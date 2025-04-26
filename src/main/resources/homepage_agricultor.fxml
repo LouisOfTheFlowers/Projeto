@@ -69,12 +69,13 @@
                     </cursor>
                 </Button>
 
-                <!-- Botão Terrenos -->
+                <!-- Botão Terrenos centralizado -->
                 <Button fx:id="terrenosButton"
                         text="🗺️ Gestão de Terrenos"
                         onAction="#abrirTerrenos"
                         style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10px; -fx-padding: 15 30;"
-                        GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        GridPane.columnIndex="0" GridPane.rowIndex="1"
+                        GridPane.columnSpan="2">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
                     </cursor>

@@ -3,29 +3,33 @@ package Test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
-public class RelatoriosAnalistaController {
+public class AntesCronogramaAnalistaController {
 
     @FXML
-    private void exportarRelatorio(ActionEvent event) {
-        showAlert("Registar relatório", "Funcionalidade de exportação ainda não implementada.");
-    }
+    private Button backButton;
 
     @FXML
     private void goBack(ActionEvent event) {
-        carregarPagina(event, "/antes_relatorio_analista.fxml", "Ações Relatorios");
+        carregarPagina(event, "/homepage_analista.fxml", "Homepage Analista");
     }
 
     private void carregarPagina(ActionEvent event, String fxml, String titulo) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean); // <- obrigatório
+            Parent root = loader.load();
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1440, 600));
             stage.setTitle(titulo);
@@ -42,5 +46,10 @@ public class RelatoriosAnalistaController {
         alert.setHeaderText(null);
         alert.setContentText(mensagem);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void abrirCronogramas(ActionEvent event) {
+        carregarPagina(event, "/cronogramas_analista.fxml", "Cronogramas");
     }
 }
