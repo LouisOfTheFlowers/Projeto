@@ -37,5 +37,6 @@
         <Label fx:id="metodologiaLabel" style="-fx-font-size: 16px;"/>
         <Label fx:id="resultadoFinalLabel" style="-fx-font-size: 16px;"/>
         <Label fx:id="gestorLabel" style="-fx-font-size: 16px;"/>
+        <Label fx:id="terrenoLabel" style="-fx-font-size: 16px;"/> <!-- Novo campo -->
     </VBox>
 </VBox>

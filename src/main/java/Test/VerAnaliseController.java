@@ -21,6 +21,7 @@ public class VerAnaliseController {
     @FXML private Label metodologiaLabel;
     @FXML private Label resultadoFinalLabel;
     @FXML private Label gestorLabel;
+    @FXML private Label terrenoLabel; // Novo campo
 
     private AnaliseSolo analise;
 
@@ -36,6 +37,8 @@ public class VerAnaliseController {
             metodologiaLabel.setText("Metodologia: " + analise.getMetodologia());
             resultadoFinalLabel.setText("Resultado Final: " + analise.getResultadoFinal());
             gestorLabel.setText("Gestor Responsável: " + analise.getIdGestor().getNome());
+            terrenoLabel.setText("Terreno Associado: " +
+                    (analise.getIdTerreno() != null ? "#" + analise.getIdTerreno().getId() : "Desconhecido"));
         }
     }
 
