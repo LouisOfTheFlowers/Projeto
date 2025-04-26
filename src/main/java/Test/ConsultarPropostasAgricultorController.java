@@ -30,17 +30,23 @@ public class ConsultarPropostasAgricultorController {
     private PropostaPlantioService propostaPlantioService;
 
     @FXML
-    private void intialize() {
+    private void initialize() {
         try {
             List<PropostaPlantio> propostas = propostaPlantioService.findAll();
+            propostasListView.getItems().clear();
+
             for (PropostaPlantio proposta : propostas) {
+                String estado = proposta.getEstado() == null ? "Em Análise" : proposta.getEstado();
+
                 String texto = String.format(
-                        "ID: %d | Hortícolas: %s | Época: %s | Terreno: %d",
+                        "ID: %d | Hortícolas: %s | Época: %s | Terreno: %d | Estado: %s",
                         proposta.getId(),
                         proposta.getHorticolas(),
                         proposta.getAlturaDoAno(),
-                        proposta.getIdTerreno() != null ? proposta.getIdTerreno().getId() : null
+                        proposta.getIdTerreno() != null ? proposta.getIdTerreno().getId() : null,
+                        estado
                 );
+
                 propostasListView.getItems().add(texto);
             }
         } catch (Exception e) {
@@ -48,6 +54,7 @@ public class ConsultarPropostasAgricultorController {
             showAlert("Erro", "Não foi possível carregar as propostas.");
         }
     }
+
 
 
     @FXML

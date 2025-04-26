@@ -3,17 +3,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.geometry.Insets?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.ConsultarAnalisesController"
-      spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
     <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 20 0;">
+    <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                text="Voltar"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
             <cursor><Cursor fx:constant="HAND"/></cursor>
             <graphic>
                 <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true">
@@ -21,37 +22,12 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Análises de Solo Submetidas" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="🧪 Análises de Solo Submetidas"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
-    <!-- Lista de Análises -->
-    <VBox fx:id="analisesContainer" spacing="15" alignment="TOP_CENTER">
-        <!-- Exemplo de análise 1 -->
-        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15;
-                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Análise 1" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label text="Em análise" style="-fx-text-fill: #666;"/>
-            </HBox>
-            <Button text="Ver Análise"
-                    style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;">
-                <cursor><Cursor fx:constant="HAND"/></cursor>
-            </Button>
-        </VBox>
-
-        <!-- Exemplo de análise 2 -->
-        <VBox style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15;
-                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Análise 2" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label text="Concluída" style="-fx-text-fill: #666;"/>
-            </HBox>
-            <Button text="Ver Análise"
-                    style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;">
-                <cursor><Cursor fx:constant="HAND"/></cursor>
-            </Button>
-        </VBox>
-    </VBox>
+    <!-- Lista de Análises dinamicamente carregadas -->
+    <VBox fx:id="analisesContainer"
+          spacing="20" alignment="TOP_CENTER"
+          style="-fx-padding: 10;"/>
 </VBox>

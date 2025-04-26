@@ -2,45 +2,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="Test.VerRelatoriosAnalistaController"
-      spacing="20" alignment="CENTER"
-      style="-fx-background-color: #fcfbe9; -fx-padding: 40;">
+      spacing="30" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 40; -fx-font-family: 'Segoe UI', sans-serif;">
 
     <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="20">
+    <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
             <cursor>
                 <Cursor fx:constant="HAND"/>
             </cursor>
             <graphic>
-                <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                     <Image url="Icons/back.png"/>
                 </ImageView>
             </graphic>
         </Button>
-        <Label fx:id="tituloLabel" text="Relatórios Criados"
-               style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label fx:id="tituloLabel" text="📊 Relatórios Criados"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
-    <!-- Título principal -->
+    <!-- Título Secundário -->
     <Label text="Visualização de Relatórios"
-           style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #444;"/>
 
     <!-- Tabela com os dados dos relatórios -->
-    <TableView fx:id="tabelaDados" prefWidth="900" prefHeight="400">
+    <TableView fx:id="tabelaDados" prefWidth="1000" prefHeight="450"
+               style="-fx-background-color: white; -fx-border-radius: 6px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
         <columns>
-            <TableColumn fx:id="tituloColuna" text="Título" prefWidth="180"/>
-            <TableColumn fx:id="temaColuna" text="Tema" prefWidth="180"/>
+            <TableColumn fx:id="tituloColuna" text="Título" prefWidth="200"/>
+            <TableColumn fx:id="temaColuna" text="Tema" prefWidth="200"/>
             <TableColumn fx:id="tipoColuna" text="Tipo" prefWidth="160"/>
-            <TableColumn fx:id="descricaoColuna" text="Descrição" prefWidth="250"/>
-            <TableColumn fx:id="dataColuna" text="Data" prefWidth="130"/>
+            <TableColumn fx:id="descricaoColuna" text="Descrição" prefWidth="280"/>
+            <TableColumn fx:id="dataColuna" text="Data" prefWidth="150"/>
         </columns>
     </TableView>
 </VBox>

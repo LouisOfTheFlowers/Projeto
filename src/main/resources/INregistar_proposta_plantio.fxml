@@ -9,18 +9,18 @@
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Test.INRegistarPropostaPlantioController"
-            style="-fx-background-color: #f9fdf9; -fx-font-family: 'Segoe UI', sans-serif;">
+            style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
     <!-- Topo com botão voltar -->
     <top>
-        <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
+        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 20;">
             <Button fx:id="backButton" onAction="#goBack"
                     style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <graphic>
-                    <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" preserveRatio="true">
                         <Image url="Icons/back.png"/>
                     </ImageView>
                 </graphic>
@@ -34,26 +34,30 @@
             <Label text="🌱 Registar Proposta de Plantio"
                    style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-            <TextField fx:id="horticolasField" promptText="Hortícolas a plantar"
-                       prefWidth="280" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="horticolasField" promptText="Hortícolas a Plantar"
+                       prefWidth="320" style="-fx-font-size: 14px;"/>
 
-            <TextField fx:id="alturaDoAnoField" promptText="Altura do Ano"
-                       prefWidth="280" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="alturaDoAnoField" promptText="Altura do Ano (ex: Primavera)"
+                       prefWidth="320" style="-fx-font-size: 14px;"/>
 
             <ComboBox fx:id="terrenoComboBox" promptText="Selecionar Terreno"
-                      prefWidth="280" style="-fx-font-size: 14px;"/>
+                      prefWidth="320" style="-fx-font-size: 14px;"/>
 
             <ComboBox fx:id="agricultorComboBox" promptText="Selecionar Agricultor"
-                      prefWidth="280" style="-fx-font-size: 14px;"/>
+                      prefWidth="320" style="-fx-font-size: 14px;"/>
 
             <ComboBox fx:id="gestorComboBox" promptText="Selecionar Gestor de Produção"
-                      prefWidth="280" style="-fx-font-size: 14px;"/>
+                      prefWidth="320" style="-fx-font-size: 14px;"/>
 
             <Button fx:id="registarButton"
-                    text="Registar"
+                    text="✅ Registar Proposta"
                     onAction="#handleRegistar"
-                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 6px;"
-                    prefWidth="200"/>
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10 30;"
+                    prefWidth="250">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Button>
         </VBox>
     </center>
 </BorderPane>

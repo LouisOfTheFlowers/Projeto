@@ -10,17 +10,19 @@
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Test.RegistarAgricultorController"
-            style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
+            style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
+    <!-- Topo com botão de voltar -->
     <top>
-        <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
+        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 20;">
             <Button onAction="#voltarTipoUtilizador"
-                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Voltar">
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;"
+                    text="Voltar">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <graphic>
-                    <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                         <Image url="Icons/back.png"/>
                     </ImageView>
                 </graphic>
@@ -28,28 +30,33 @@
         </HBox>
     </top>
 
+    <!-- Conteúdo principal -->
     <center>
-        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30;">
+        <VBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 0 40 40 40;">
             <Label text="📋 Registo de Agricultor"
-                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
-            <!-- Dados pessoais -->
-            <TextField fx:id="nomeField" promptText="Nome Completo" prefWidth="300"/>
-            <TextField fx:id="ruaField" promptText="Rua" prefWidth="300"/>
-            <TextField fx:id="portaField" promptText="Número da Porta" prefWidth="300"/>
-            <TextField fx:id="codigoPostalField" promptText="Código Postal" prefWidth="300"/>
+            <VBox spacing="15" alignment="CENTER">
+                <!-- Dados Pessoais -->
+                <TextField fx:id="nomeField" promptText="Nome Completo" prefWidth="300" style="-fx-font-size: 14px;"/>
+                <TextField fx:id="ruaField" promptText="Rua" prefWidth="300" style="-fx-font-size: 14px;"/>
+                <TextField fx:id="portaField" promptText="Número da Porta" prefWidth="300" style="-fx-font-size: 14px;"/>
+                <TextField fx:id="codigoPostalField" promptText="Código Postal" prefWidth="300" style="-fx-font-size: 14px;"/>
 
-            <Separator prefWidth="300"/>
+                <Separator prefWidth="300"/>
 
-            <TextField fx:id="emailField" promptText="Email" prefWidth="300"/>
-            <TextField fx:id="telefoneField" promptText="Telefone" prefWidth="300"/>
-            <TextField fx:id="usernameField" promptText="Username" prefWidth="300"/>
-            <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300"/>
-            <PasswordField fx:id="confirmPasswordField" promptText="Confirmar Password" prefWidth="300"/>
+                <!-- Dados de Acesso -->
+                <TextField fx:id="emailField" promptText="Email" prefWidth="300" style="-fx-font-size: 14px;"/>
+                <TextField fx:id="telefoneField" promptText="Telefone" prefWidth="300" style="-fx-font-size: 14px;"/>
+                <TextField fx:id="usernameField" promptText="Username" prefWidth="300" style="-fx-font-size: 14px;"/>
+                <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300" style="-fx-font-size: 14px;"/>
+                <PasswordField fx:id="confirmPasswordField" promptText="Confirmar Password" prefWidth="300" style="-fx-font-size: 14px;"/>
+            </VBox>
 
+            <!-- Botão Registar -->
             <Button text="✅ Registar"
                     onAction="#handleRegistar"
-                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px;"
                     prefWidth="220" prefHeight="45">
                 <cursor>
                     <Cursor fx:constant="HAND"/>

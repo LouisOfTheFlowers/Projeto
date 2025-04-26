@@ -1,43 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.LoginController"
-      spacing="20" alignment="CENTER" style="-fx-background-color: #fcfbe9;" prefWidth="1440" prefHeight="900">
+      spacing="20" alignment="CENTER" prefWidth="1440" prefHeight="900"
+      style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <HBox spacing="0" alignment="CENTER" style="-fx-padding: 0px;" VBox.vgrow="ALWAYS">
+    <HBox spacing="0" alignment="CENTER" style="-fx-padding: 0;" VBox.vgrow="ALWAYS">
 
-        <!-- Left Side: Image -->
+        <!-- Imagem lateral -->
         <StackPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-            <ImageView fx:id="loginImage" fitWidth="720" fitHeight="900" preserveRatio="true"/>
+            <ImageView fx:id="loginImage" fitWidth="720" fitHeight="900" preserveRatio="true">
+                <Image url="@Icons/login_image.png"/> <!-- coloca aqui a imagem que pretendes -->
+            </ImageView>
         </StackPane>
 
-        <!-- Right Side: Login Form -->
-        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="15"
-              style="-fx-padding: 20px; -fx-background-color: #fcfbe9;" prefWidth="720">
+        <!-- Formulário de login -->
+        <VBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="20"
+              style="-fx-padding: 40px;" prefWidth="720">
 
-            <Label text="Bem-vindo, Utilizador!" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
-            <Label text="Por favor, faça login para continuar." style="-fx-font-size: 16px;"/>
+            <Label text="🌿 Bem-vindo ao Sistema!" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+            <Label text="Entre com as suas credenciais para continuar." style="-fx-font-size: 16px; -fx-text-fill: #555;"/>
 
-            <TextField fx:id="usernameField" promptText="Username"
-                       prefWidth="250" prefHeight="40" maxWidth="300" style="-fx-font-size: 14px;"/>
-            <PasswordField fx:id="passwordField" promptText="Password"
-                           prefWidth="250" prefHeight="40" maxWidth="300" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="usernameField" promptText="👤 Username"
+                       prefWidth="300" prefHeight="40"
+                       style="-fx-font-size: 14px;"/>
+
+            <PasswordField fx:id="passwordField" promptText="🔒 Password"
+                           prefWidth="300" prefHeight="40"
+                           style="-fx-font-size: 14px;"/>
 
             <Button fx:id="loginButton" text="Login" onAction="#handleLogin"
-                    prefWidth="150" prefHeight="40" style="-fx-font-size: 14px; -fx-background-color: #d3d3d3;"/>
+                    prefWidth="300" prefHeight="45"
+                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;">
+                <cursor><Cursor fx:constant="HAND"/></cursor>
+            </Button>
 
-            <ProgressIndicator fx:id="loadingIndicator"
-                               visible="false"
-                               maxWidth="30" maxHeight="30"/>
+            <ProgressIndicator fx:id="loadingIndicator" visible="false" maxWidth="30" maxHeight="30"/>
 
-            <Hyperlink text="Esqueceu-se da palavra-passe?" onAction="#handleForgotPassword"
-                       style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;"/>
-            <Hyperlink text="Registar-se" onAction="#handleRegistarLink"
-                       style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;"/>
+            <VBox spacing="8" alignment="CENTER">
+                <Hyperlink text="Esqueceu-se da palavra-passe?" onAction="#handleForgotPassword"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;"/>
+                <Hyperlink text="Ainda não tem conta? Registe-se" onAction="#handleRegistarLink"
+                           style="-fx-font-size: 14px; -fx-text-fill: #2b1bdb;"/>
+            </VBox>
         </VBox>
     </HBox>
 </VBox>

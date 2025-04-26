@@ -4,15 +4,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.Cursor?>
+
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Test.HomeAnalistaController"
-            style="-fx-background-color: #fcfbe9; -fx-font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;">
+            style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
+    <!-- Topo com botão de logout -->
     <top>
         <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
             <Button fx:id="logoutButton" onAction="#logout"
-                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;" text="Logout">
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Logout">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
@@ -25,43 +27,41 @@
         </HBox>
     </top>
 
+    <!-- Conteúdo principal -->
     <center>
         <VBox spacing="30" alignment="CENTER" style="-fx-padding: 40;">
-
-            <Label text="Bem-vindo, Analista de Dados"
+            <Label text="📊 Bem-vindo, Analista de Dados"
                    style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
             <Button fx:id="relatoriosButton"
-                    text="Criar Novo Relatório"
+                    text="➕ Criar Novo Relatório"
                     onAction="#abrirCriarRelatorio"
-                    style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
-                    prefWidth="300" prefHeight="50">
+                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 8px;"
+                    prefWidth="280" prefHeight="50">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
             </Button>
 
             <Button fx:id="dadosButton"
-                    text="Mostrar Relatórios"
+                    text="📄 Mostrar Relatórios"
                     onAction="#abrirRelatorios"
-                    style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
-                    prefWidth="300" prefHeight="50">
+                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 8px;"
+                    prefWidth="280" prefHeight="50">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
             </Button>
 
             <Button fx:id="cronogramasButton"
-                    text="Ver Cronogramas"
+                    text="📆 Ver Cronogramas"
                     onAction="#abrirCronogramas"
-                    style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white;"
-                    prefWidth="300" prefHeight="50">
+                    style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 30; -fx-background-radius: 8px;"
+                    prefWidth="280" prefHeight="50">
                 <cursor>
                     <Cursor fx:constant="HAND"/>
                 </cursor>
             </Button>
-
-        </VBox> <!-- ← ESTA TAG É OBRIGATÓRIA -->
-
+        </VBox>
     </center>
 </BorderPane>

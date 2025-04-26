@@ -2,22 +2,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.PropostaPlantioAgricultorController"
-      spacing="25" alignment="TOP_CENTER"
+      spacing="30" alignment="TOP_CENTER"
       style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Botão Voltar -->
-    <HBox alignment="CENTER_LEFT">
+    <!-- Cabeçalho com botão de voltar -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
         <Button fx:id="backButton" onAction="#goBack"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;" text="Voltar">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
+                text="Voltar"
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
+            <cursor><Cursor fx:constant="HAND"/></cursor>
             <graphic>
                 <ImageView fitHeight="18" fitWidth="18" preserveRatio="true">
                     <Image url="@Icons/back.png"/>
@@ -27,34 +25,28 @@
     </HBox>
 
     <!-- Título -->
-    <Label text="🌿 Propostas de Plantio"
+    <Label text="🌾 Gestão de Propostas de Plantio"
            style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
     <!-- Secção de Ações -->
-    <VBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20;">
+    <VBox alignment="TOP_LEFT" spacing="20" style="-fx-padding: 20 10;">
         <Label text="Ações disponíveis:"
-               style="-fx-font-size: 16px; -fx-text-fill: #444;"/>
+               style="-fx-font-size: 17px; -fx-text-fill: #444;"/>
 
         <!-- Botões de ação -->
-        <VBox spacing="12">
-            <!-- Botão para registrar proposta -->
+        <VBox spacing="12" alignment="TOP_LEFT">
             <Button fx:id="registrarPropostaButton"
                     text="➕ Registar Nova Proposta"
                     onAction="#abrirRegistrarProposta"
                     style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10 25;">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
+                <cursor><Cursor fx:constant="HAND"/></cursor>
             </Button>
 
-            <!-- Botão para consultar propostas -->
             <Button fx:id="consultarPropostasButton"
-                    text="📄 Consultar Propostas"
+                    text="📄 Consultar Propostas Submetidas"
                     onAction="#abrirConsultarPropostas"
-                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10 25;">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
+                    style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 10 25;">
+                <cursor><Cursor fx:constant="HAND"/></cursor>
             </Button>
         </VBox>
     </VBox>

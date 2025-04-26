@@ -8,12 +8,13 @@
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Test.CriarCronogramaController"
-      spacing="20" alignment="TOP_CENTER"
-      style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <HBox alignment="CENTER_LEFT" spacing="20">
+    <!-- Topo com botão de voltar -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
         <Button fx:id="backButton" onAction="#goBack" text="Voltar"
-                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57;">
+                style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
             <cursor><Cursor fx:constant="HAND"/></cursor>
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
@@ -21,27 +22,35 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Criar Cronograma" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+        <Label text="🗓️ Criar Cronograma"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
-    <VBox spacing="10" alignment="TOP_LEFT">
+    <!-- Formulário de criação -->
+    <VBox spacing="15" alignment="CENTER">
+        <Label text="Data de Início do Preparo do Terreno:" style="-fx-font-size: 14px;"/>
+        <DatePicker fx:id="dataPreparoPicker" prefWidth="300"/>
 
-        <Label text="Data de Início do Preparo do Terreno:"/>
-        <DatePicker fx:id="dataPreparoPicker"/>
+        <Label text="Processo de Preparo:" style="-fx-font-size: 14px;"/>
+        <TextArea fx:id="preparoArea" prefWidth="300" prefRowCount="3" wrapText="true"
+                  style="-fx-font-size: 13px; -fx-border-color: lightgray; -fx-border-radius: 5;"/>
 
-        <Label text="Processo de Preparo:"/>
-        <TextArea fx:id="preparoArea" prefRowCount="3"/>
+        <Label text="Processo de Plantio:" style="-fx-font-size: 14px;"/>
+        <TextArea fx:id="plantioArea" prefWidth="300" prefRowCount="3" wrapText="true"
+                  style="-fx-font-size: 13px; -fx-border-color: lightgray; -fx-border-radius: 5;"/>
 
-        <Label text="Processo de Plantio:"/>
-        <TextArea fx:id="plantioArea" prefRowCount="3"/>
+        <Label text="Tipo de Hortícolas:" style="-fx-font-size: 14px;"/>
+        <TextField fx:id="horticolasField" prefWidth="300" style="-fx-font-size: 13px;"/>
 
-        <Label text="Tipo de Hortícolas:"/>
-        <TextField fx:id="horticolasField"/>
-
-        <Label text="Gestor Responsável:"/>
-        <ComboBox fx:id="gestorCombo"/>
-
-        <Button text="Guardar" onAction="#guardarCronograma"
-                style="-fx-background-color: #2e8b57; -fx-text-fill: white;"/>
+        <Label text="Gestor Responsável:" style="-fx-font-size: 14px;"/>
+        <ComboBox fx:id="gestorCombo" prefWidth="300" style="-fx-font-size: 13px;"/>
     </VBox>
+
+    <!-- Botão de guardar -->
+    <Button text="✅ Guardar Cronograma"
+            onAction="#guardarCronograma"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 6px;"
+            prefWidth="220" prefHeight="40">
+        <cursor><Cursor fx:constant="HAND"/></cursor>
+    </Button>
 </VBox>

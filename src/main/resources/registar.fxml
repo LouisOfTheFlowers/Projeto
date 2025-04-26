@@ -1,21 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.RegistarController"
-      alignment="CENTER" spacing="15" style="-fx-padding: 40px; -fx-background-color: #fcfbe9;" prefWidth="600">
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Test.RegistarController"
+            style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <Label text="Criar Conta" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
-    <TextField fx:id="usernameField" promptText="Username" prefWidth="300" />
-    <PasswordField fx:id="passwordField" promptText="Password" prefWidth="300" />
-    <PasswordField fx:id="confirmPasswordField" promptText="Confirmar Password" prefWidth="300" />
-    <ComboBox fx:id="roleComboBox" promptText="Tipo de Trabalhador" prefWidth="300" />
-    <Button fx:id="registarButton" text="Registar" onAction="#handleRegistar" prefWidth="150" />
-    <Button text="Voltar" onAction="#voltarLogin" style="-fx-background-color: transparent; -fx-text-fill: #2b1bdb;" />
-</VBox>
+    <!-- Topo opcional (podes adicionar botão de voltar se quiseres) -->
+    <top>
+        <HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 20;">
+            <Button text="Voltar"
+                    onAction="#voltarLogin"
+                    style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                        <Image url="Icons/back.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <!-- Conteúdo principal -->
+    <center>
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30;">
+            <Label text="Criar Conta"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
+
+            <VBox spacing="15" alignment="CENTER">
+                <TextField fx:id="usernameField"
+                           promptText="Username"
+                           prefWidth="300"
+                           style="-fx-font-size: 14px;"/>
+
+                <PasswordField fx:id="passwordField"
+                               promptText="Password"
+                               prefWidth="300"
+                               style="-fx-font-size: 14px;"/>
+
+                <PasswordField fx:id="confirmPasswordField"
+                               promptText="Confirmar Password"
+                               prefWidth="300"
+                               style="-fx-font-size: 14px;"/>
+
+                <ComboBox fx:id="roleComboBox"
+                          promptText="Tipo de Trabalhador"
+                          prefWidth="300"
+                          style="-fx-font-size: 14px;"/>
+            </VBox>
+
+            <Button fx:id="registarButton"
+                    text="Registar"
+                    onAction="#handleRegistar"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 6px;"
+                    prefWidth="200" prefHeight="40"/>
+
+        </VBox>
+    </center>
+</BorderPane>

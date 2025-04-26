@@ -28,11 +28,17 @@ public class AcoesCronogramaController {
     @FXML
     private void abrirLerCronograma(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/LerCronogramA.fxml"));
-            loadScene(event, "/LerCronogramA.fxml", "Ler Cronograma");
-        } catch (IOException e) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/LerCronogramA.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean); // ✅ necessário para @Autowired funcionar
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Cronogramas Disponíveis");
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Erro", "Não foi possível abrir os cronogramas");
+            showAlert("Erro", "Não foi possível abrir os cronogramas.");
         }
     }
 

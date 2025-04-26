@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.Cursor?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Test.RegistarTerrenoController"
+            fx:controller="Test.AcoesCronogramaController"
             style="-fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Botão voltar no canto superior esquerdo -->
+    <!-- Topo com botão de voltar -->
     <top>
         <HBox alignment="TOP_LEFT" style="-fx-padding: 20;">
             <Button fx:id="backButton" onAction="#goBack"
@@ -22,7 +19,7 @@
                     <Cursor fx:constant="HAND"/>
                 </cursor>
                 <graphic>
-                    <ImageView fx:id="backIcon" fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                         <Image url="Icons/back.png"/>
                     </ImageView>
                 </graphic>
@@ -30,36 +27,29 @@
         </HBox>
     </top>
 
-    <!-- Conteúdo principal centralizado -->
+    <!-- Conteúdo principal -->
     <center>
-        <VBox spacing="25" alignment="TOP_CENTER" style="-fx-padding: 0 40 40 40;">
-            <Label text="📍 Registo de Terreno"
+        <VBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 0 40 40 40;">
+
+            <Label text="📅 Ações em Cronogramas"
                    style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
 
             <VBox spacing="15" alignment="CENTER">
-                <TextField fx:id="areaField"
-                           promptText="Área do Terreno"
-                           prefWidth="300"
-                           style="-fx-font-size: 14px;"/>
+                <Button fx:id="lerCronogramaButton"
+                        text="📄 Ler Cronogramas"
+                        onAction="#abrirLerCronograma"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;
+                               -fx-font-size: 15px; -fx-padding: 10 40; -fx-background-radius: 8;">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
 
-                <TextField fx:id="coordenadasField"
-                           promptText="Coordenadas (ex: 40.123,-8.456)"
-                           prefWidth="300"
-                           style="-fx-font-size: 14px;"/>
-
-                <ComboBox fx:id="agricultorComboBox"
-                          promptText="Selecionar Agricultor"
-                          prefWidth="300"
-                          style="-fx-font-size: 14px;"/>
+                <!-- Caso queiras adicionar outro botão no futuro:
+                <Button text="➕ Criar Cronograma" style="..."/>
+                -->
             </VBox>
 
-            <Button text="➕ Registar"
-                    onAction="#registarTerreno"
-                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-padding: 10 40; -fx-background-radius: 8px;">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-            </Button>
         </VBox>
     </center>
 </BorderPane>
