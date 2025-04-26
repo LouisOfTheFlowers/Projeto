@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -24,12 +25,21 @@
     </HBox>
 
     <VBox spacing="10" alignment="TOP_LEFT">
-        <!-- Campos de exemplo -->
-        <Label text="Nome do Cronograma:" />
-        <TextField fx:id="nomeField" />
 
-        <Label text="Descrição:" />
-        <TextArea fx:id="descricaoArea" prefRowCount="4" />
+        <Label text="Data de Início do Preparo do Terreno:"/>
+        <DatePicker fx:id="dataPreparoPicker"/>
+
+        <Label text="Processo de Preparo:"/>
+        <TextArea fx:id="preparoArea" prefRowCount="3"/>
+
+        <Label text="Processo de Plantio:"/>
+        <TextArea fx:id="plantioArea" prefRowCount="3"/>
+
+        <Label text="Tipo de Hortícolas:"/>
+        <TextField fx:id="horticolasField"/>
+
+        <Label text="Gestor Responsável:"/>
+        <ComboBox fx:id="gestorCombo"/>
 
         <Button text="Guardar" onAction="#guardarCronograma"
                 style="-fx-background-color: #2e8b57; -fx-text-fill: white;"/>

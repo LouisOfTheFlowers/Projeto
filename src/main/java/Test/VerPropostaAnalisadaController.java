@@ -1,19 +1,21 @@
-// --- VerPropostaController.java ---
 package Test;
 
 import Models.trabalhoprojeto.PropostaPlantio;
-import Services.PropostaPlantioService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
-import javafx.scene.control.*;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VerPropostaController {
+public class VerPropostaAnalisadaController {
 
     @FXML private Label estadoLabel;
     @FXML private Label nomeCulturaLabel;
@@ -21,9 +23,6 @@ public class VerPropostaController {
     @FXML private Label areaLabel;
     @FXML private Label descricaoLabel;
     @FXML private Button backButton;
-
-    @Autowired
-    private PropostaPlantioService propostaService;
 
     private PropostaPlantio propostaAtual;
 
@@ -37,35 +36,15 @@ public class VerPropostaController {
     }
 
     @FXML
-    private void aprovarProposta(ActionEvent event) {
-        if (propostaAtual != null) {
-            propostaAtual.setEstado("Aprovada");
-            propostaService.save(propostaAtual);
-            estadoLabel.setText("Estado: Aprovada");
-            showAlertAndGoBack("Proposta Aprovada", "A proposta foi aprovada com sucesso.", event);
-        }
-    }
-
-    @FXML
-    private void recusarProposta(ActionEvent event) {
-        if (propostaAtual != null) {
-            propostaAtual.setEstado("Recusada");
-            propostaService.save(propostaAtual);
-            estadoLabel.setText("Estado: Recusada");
-            showAlertAndGoBack("Proposta Recusada", "A proposta foi recusada.", event);
-        }
-    }
-
-    @FXML
     private void goBack(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsultarPropostas.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/propostas_analisadas.fxml"));
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root, 1440, 600));
-            stage.setTitle("Propostas Submetidas");
+            stage.setTitle("Propostas Analisadas");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,17 +52,8 @@ public class VerPropostaController {
         }
     }
 
-    private void showAlertAndGoBack(String title, String msg, ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
-        goBack(event);
-    }
-
     private void showAlert(String title, String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(msg);

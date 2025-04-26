@@ -3,10 +3,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.ConsultarPropostasGestorController"
+      fx:controller="Test.PropostasAnalisadasController"
       spacing="20" alignment="TOP_CENTER"
       style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
 
@@ -21,11 +20,9 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Propostas de Plantio Submetidas" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="Propostas Analisadas" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
     </HBox>
 
-    <!-- Container das propostas -->
-    <VBox fx:id="propostasContainer" spacing="15" alignment="TOP_CENTER">
-        <!-- Os cartões das propostas serão adicionados dinamicamente aqui -->
-    </VBox>
+    <!-- Lista de Propostas -->
+    <VBox fx:id="propostasAnalisadasContainer" spacing="15" alignment="TOP_CENTER"/>
 </VBox>

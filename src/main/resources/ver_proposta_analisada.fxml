@@ -6,7 +6,7 @@
 <?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.ConsultarPropostasGestorController"
+      fx:controller="Test.VerPropostaAnalisadaController"
       spacing="20" alignment="TOP_CENTER"
       style="-fx-background-color: #fcfbe9; -fx-padding: 20;">
 
@@ -21,11 +21,17 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="Propostas de Plantio Submetidas" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <Label text="Detalhes da Proposta Analisada" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
     </HBox>
 
-    <!-- Container das propostas -->
-    <VBox fx:id="propostasContainer" spacing="15" alignment="TOP_CENTER">
-        <!-- Os cartões das propostas serão adicionados dinamicamente aqui -->
+    <!-- Dados da proposta -->
+    <VBox spacing="10" alignment="TOP_LEFT"
+          style="-fx-padding: 20; -fx-background-color: white; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+        <Label fx:id="nomeCulturaLabel" text="Nome da Cultura:"/>
+        <Label fx:id="dataPropostaLabel" text="Altura do Ano:"/>
+        <Label fx:id="areaLabel" text="Terreno ID:"/>
+        <Label fx:id="descricaoLabel" text="Gestor ID:"/>
+        <Label fx:id="estadoLabel" text="Estado:"/>
     </VBox>
+
 </VBox>

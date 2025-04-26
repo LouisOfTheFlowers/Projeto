@@ -30,6 +30,12 @@ public class PropostaPlantioGestorController {
         loadScene(event, "/ConsultarPropostas.fxml", "Consultar Propostas");
     }
 
+    @FXML
+    private void abrirPropostasAnalisadas(ActionEvent event) {
+        loadScene(event, "/propostas_analisadas.fxml", "Propostas Analisadas");
+    }
+
+
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
             URL resource = getClass().getResource(fxmlPath);

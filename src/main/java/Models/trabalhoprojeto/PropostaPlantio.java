@@ -29,6 +29,9 @@ public class PropostaPlantio {
     @JoinColumn(name = "id_terreno", nullable = false)
     private Terreno idTerreno;
 
+    @Column(name = "estado")
+    private String estado;
+
     public Integer getId() {
         return id;
     }
@@ -75,6 +78,14 @@ public class PropostaPlantio {
 
     public void setIdTerreno(Terreno idTerreno) {
         this.idTerreno = idTerreno;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }
