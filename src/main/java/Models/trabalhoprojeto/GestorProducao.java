@@ -110,4 +110,9 @@ public class GestorProducao {
         this.propostasPlantio = propostasPlantio;
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 }

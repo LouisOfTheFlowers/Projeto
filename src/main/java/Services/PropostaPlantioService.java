@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @ComponentScan(basePackages = {"Models.trabalhoprojeto", "Repositorios"})
@@ -49,4 +50,18 @@ public class PropostaPlantioService {
         }
     }
 
+    public List<PropostaPlantio> findSubmetidas() {
+        return propostaPlantioRepository.findAll()
+                .stream()
+                .filter(p -> p.getEstado() == null || p.getEstado().equalsIgnoreCase("Em Análise"))
+                .collect(Collectors.toList());
+    }
+
+    public List<PropostaPlantio> findAnalisadas() {
+        return propostaPlantioRepository.findAll()
+                .stream()
+                .filter(p -> p.getEstado() != null &&
+                        (p.getEstado().equalsIgnoreCase("Aprovada") || p.getEstado().equalsIgnoreCase("Recusada")))
+                .collect(Collectors.toList());
+    }
 }

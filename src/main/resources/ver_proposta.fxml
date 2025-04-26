@@ -25,12 +25,13 @@
     </HBox>
 
     <!-- Dados da proposta -->
-    <VBox spacing="10" alignment="TOP_LEFT" style="-fx-padding: 20; -fx-background-color: white; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
-        <Label text="Nome da Cultura: Milho"/>
-        <Label text="Data Proposta: 2025-04-22"/>
-        <Label text="Área (hectares): 2.5"/>
-        <Label text="Descrição: Plantio de milho de ciclo curto, com previsão de colheita em 90 dias."/>
-        <Label text="Estado: Em Análise" fx:id="estadoLabel"/>
+    <VBox spacing="10" alignment="TOP_LEFT"
+          style="-fx-padding: 20; -fx-background-color: white; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);">
+        <Label fx:id="nomeCulturaLabel" text="Nome da Cultura:"/>
+        <Label fx:id="dataPropostaLabel" text="Altura do Ano:"/>
+        <Label fx:id="areaLabel" text="Terreno ID:"/>
+        <Label fx:id="descricaoLabel" text="Gestor ID:"/>
+        <Label fx:id="estadoLabel" text="Estado: Em Análise"/>
     </VBox>
 
     <!-- Botões de ação -->

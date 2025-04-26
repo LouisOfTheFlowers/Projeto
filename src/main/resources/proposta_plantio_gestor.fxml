@@ -27,8 +27,12 @@
         <Label text="Ações em Propostas Plantio:"
                style="-fx-font-size: 16px; -fx-padding: 0 0 10 0;"/>
         <VBox spacing="15" alignment="TOP_LEFT">
-            <Button fx:id="consultarPropostasButton" text="Consultar Propostas" onAction="#abrirConsultarPropostas"
+            <Button fx:id="consultarPropostasButton" text="Consultar Propostas Submetidas" onAction="#abrirConsultarPropostas"
                     style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 30;">
+                <cursor><Cursor fx:constant="HAND"/></cursor>
+            </Button>
+            <Button text="Consultar Propostas Analisadas" onAction="#abrirPropostasAnalisadas"
+                    style="-fx-background-color: #4682b4; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10 30;">
                 <cursor><Cursor fx:constant="HAND"/></cursor>
             </Button>
         </VBox>
