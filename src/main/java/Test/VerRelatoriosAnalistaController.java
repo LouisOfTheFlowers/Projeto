@@ -2,14 +2,13 @@ package Test;
 
 import Models.trabalhoprojeto.Relatorio;
 import Services.RelatorioService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,49 +20,46 @@ import java.util.List;
 public class VerRelatoriosAnalistaController {
 
     @FXML
-    private TableView<Relatorio> tabelaDados;
-
-    @FXML
-    private TableColumn<Relatorio, String> tituloColuna;
-
-    @FXML
-    private TableColumn<Relatorio, String> temaColuna;
-
-    @FXML
-    private TableColumn<Relatorio, String> tipoColuna;
-
-    @FXML
-    private TableColumn<Relatorio, String> descricaoColuna;
-
-    @FXML
-    private TableColumn<Relatorio, String> dataColuna;
+    private VBox relatoriosContainer;
 
     @Autowired
     private RelatorioService relatorioService;
 
     @FXML
     public void initialize() {
-        configurarTabela();
         carregarRelatorios();
-    }
-
-    private void configurarTabela() {
-        tituloColuna.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        temaColuna.setCellValueFactory(new PropertyValueFactory<>("tema"));
-        tipoColuna.setCellValueFactory(new PropertyValueFactory<>("tipoRelatorio"));
-        descricaoColuna.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        dataColuna.setCellValueFactory(new PropertyValueFactory<>("data"));
     }
 
     private void carregarRelatorios() {
         List<Relatorio> lista = relatorioService.findAll();
-        ObservableList<Relatorio> observableList = FXCollections.observableArrayList(lista);
-        tabelaDados.setItems(observableList);
+
+        for (Relatorio relatorio : lista) {
+            VBox card = criarCartaoRelatorio(relatorio);
+            relatoriosContainer.getChildren().add(card);
+        }
+    }
+
+    private VBox criarCartaoRelatorio(Relatorio relatorio) {
+        VBox card = new VBox(6);
+        card.setStyle("-fx-background-color: white; -fx-padding: 12; -fx-background-radius: 8;"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);");
+
+        Label titulo = new Label("📄 " + relatorio.getTitulo());
+        titulo.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+
+        Label tema = new Label("Tema: " + relatorio.getTema());
+        Label tipo = new Label("Tipo: " + relatorio.getTipoRelatorio());
+        Label data = new Label("Data: " + relatorio.getData());
+        Text descricao = new Text("Descrição: " + relatorio.getDescricao());
+        descricao.setWrappingWidth(700); // ajusta conforme necessário
+
+        card.getChildren().addAll(titulo, tema, tipo, data, descricao);
+        return card;
     }
 
     @FXML
     private void goBack(ActionEvent event) {
-        loadScene(event, "/homepage_analista.fxml", "Homepage Analista");
+        loadScene(event, "/antes_relatorio_analista.fxml", "Homepage Analista");
     }
 
     private void loadScene(ActionEvent event, String fxml, String titulo) {
