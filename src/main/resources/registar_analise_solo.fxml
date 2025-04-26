@@ -51,6 +51,9 @@
 
                 <ComboBox fx:id="gestorComboBox" promptText="Selecionar Gestor"
                           style="-fx-font-size: 14px;" prefWidth="300"/>
+
+                <ComboBox fx:id="terrenoComboBox" promptText="Selecionar Terreno"
+                          style="-fx-font-size: 14px;" prefWidth="300"/>
             </VBox>
 
             <Button fx:id="registarButton" text="➕ Registar Análise"

@@ -2,8 +2,10 @@ package Test;
 
 import Models.trabalhoprojeto.AnaliseSolo;
 import Models.trabalhoprojeto.GestorProducao;
+import Models.trabalhoprojeto.Terreno;
 import Services.AnaliseSoloService;
 import Services.GestorProducaoService;
+import Services.TerrenoService;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -28,15 +29,15 @@ public class RegistarAnaliseSoloController {
     @FXML private TextField metodologiaField;
     @FXML private TextField resultadoField;
     @FXML private ComboBox<GestorProducao> gestorComboBox;
+    @FXML private ComboBox<Terreno> terrenoComboBox;
 
-    @Autowired
-    private GestorProducaoService gestorProducaoService;
-
-    @Autowired
-    private AnaliseSoloService analiseSoloService;
+    @Autowired private GestorProducaoService gestorProducaoService;
+    @Autowired private TerrenoService terrenoService;
+    @Autowired private AnaliseSoloService analiseSoloService;
 
     @FXML
     public void initialize() {
+        // Gestores
         List<GestorProducao> gestores = gestorProducaoService.findAll();
         gestorComboBox.setItems(FXCollections.observableArrayList(gestores));
         gestorComboBox.setCellFactory(lv -> new ListCell<>() {
@@ -53,6 +54,24 @@ public class RegistarAnaliseSoloController {
                 setText(empty || item == null ? null : item.getNome());
             }
         });
+
+        // Terrenos
+        List<Terreno> terrenos = terrenoService.findAll();
+        terrenoComboBox.setItems(FXCollections.observableArrayList(terrenos));
+        terrenoComboBox.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(Terreno item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : "Terreno #" + item.getId());
+            }
+        });
+        terrenoComboBox.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(Terreno item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : "Terreno #" + item.getId());
+            }
+        });
     }
 
     @FXML
@@ -64,24 +83,16 @@ public class RegistarAnaliseSoloController {
             novaAnalise.setMetodologia(metodologiaField.getText());
             novaAnalise.setResultadoFinal(resultadoField.getText());
             novaAnalise.setIdGestor(gestorComboBox.getValue());
+            novaAnalise.setIdTerreno(terrenoComboBox.getValue());
 
             analiseSoloService.save(novaAnalise);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Sucesso");
-            alert.setHeaderText(null);
-            alert.setContentText("Análise de solo registada com sucesso!");
-            alert.showAndWait();
-
+            showAlert("Sucesso", "Análise de solo registada com sucesso!");
             goBack(event);
 
         } catch (Exception e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("Erro ao registar a análise de solo.");
-            alert.showAndWait();
+            showAlert("Erro", "Erro ao registar a análise de solo.");
         }
     }
 
@@ -98,14 +109,9 @@ public class RegistarAnaliseSoloController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText(null);
-            alert.setContentText("Erro ao voltar para a página anterior.");
-            alert.showAndWait();
+            showAlert("Erro", "Erro ao voltar para a página anterior.");
         }
     }
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -121,5 +127,6 @@ public class RegistarAnaliseSoloController {
         metodologiaField.clear();
         resultadoField.clear();
         gestorComboBox.setValue(null);
+        terrenoComboBox.setValue(null);
     }
 }

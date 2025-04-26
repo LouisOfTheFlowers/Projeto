@@ -30,6 +30,10 @@ public class AnaliseSolo {
     @JoinColumn(name = "id_gestor", nullable = false)
     private GestorProducao idGestor;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_terreno", nullable = false)
+    private Terreno idTerreno;
+
     @OneToMany(mappedBy = "idAnaliseSolo")
     private Set<AmostraSolo> amostrasSolo = new LinkedHashSet<>();
 
@@ -80,6 +84,10 @@ public class AnaliseSolo {
     public void setIdGestor(GestorProducao idGestor) {
         this.idGestor = idGestor;
     }
+
+    public Terreno getIdTerreno() { return idTerreno; }
+
+    public void setIdTerreno(Terreno idTerreno) { this.idTerreno = idTerreno; }
 
     public Set<AmostraSolo> getAmostrasSolo() {
         return amostrasSolo;

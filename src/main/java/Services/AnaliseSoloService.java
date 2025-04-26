@@ -1,5 +1,6 @@
 package Services;
 
+import Models.trabalhoprojeto.Terreno;
 import Repositorios.AnaliseSoloRepository;
 import Models.trabalhoprojeto.AnaliseSolo;
 import Models.trabalhoprojeto.GestorProducao;
@@ -20,12 +21,13 @@ public class AnaliseSoloService {
     @Autowired
     private AnaliseSoloRepository analiseSoloRepository;
 
-    @Transactional // ✅ Isto mantém a sessão aberta enquanto percorres a lista
+    @Transactional
     public List<AnaliseSolo> findAllEager() {
         List<AnaliseSolo> analises = analiseSoloRepository.findAll();
 
         for (AnaliseSolo analise : analises) {
-            Hibernate.initialize(analise.getIdGestor()); // agora isto funciona!
+            Hibernate.initialize(analise.getIdGestor());
+            Hibernate.initialize(analise.getIdTerreno());
         }
 
         return analises;
@@ -44,7 +46,8 @@ public class AnaliseSoloService {
         analiseSoloRepository.deleteById(id);
     }
 
-    public void updateAnaliseSolo(Integer id, LocalDate data, String resultadoFinal, String tipoAnalise, String metodologia, GestorProducao idGestor) {
+    public void updateAnaliseSolo(Integer id, LocalDate data, String resultadoFinal, String tipoAnalise,
+                                  String metodologia, GestorProducao idGestor, Terreno idTerreno) {
         Optional<AnaliseSolo> optionalAnaliseSolo = analiseSoloRepository.findById(id);
         if (optionalAnaliseSolo.isPresent()) {
             AnaliseSolo analiseSolo = optionalAnaliseSolo.get();
@@ -53,7 +56,9 @@ public class AnaliseSoloService {
             analiseSolo.setTipoAnalise(tipoAnalise);
             analiseSolo.setMetodologia(metodologia);
             analiseSolo.setIdGestor(idGestor);
+            analiseSolo.setIdTerreno(idTerreno);
             analiseSoloRepository.save(analiseSolo);
         }
     }
+
 }
