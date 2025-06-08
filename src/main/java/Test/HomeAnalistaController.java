@@ -20,7 +20,7 @@ public class HomeAnalistaController {
     @FXML private Button logoutButton;
     @FXML private Button relatoriosButton;
     @FXML private Button dadosButton;
-    @FXML private Button cronogramasButton; // Adicionado
+    @FXML private Button cronogramasButton;
 
     @FXML
     public void initialize() {
@@ -48,9 +48,8 @@ public class HomeAnalistaController {
 
     @FXML
     private void abrirRelatorios(ActionEvent event) {
-        loadScene(event, "/antes_relatorio_analista.fxml", "Ações Relatorios");
+        loadScene(event, "/antes_relatorio_analista.fxml", "Ações Relatórios");
     }
-
 
     @FXML
     private void abrirCronogramas(ActionEvent event) {
@@ -69,9 +68,22 @@ public class HomeAnalistaController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar o estado da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
-            stage.show();
+
+            // Restaurar o estado da janela
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
         } catch (IOException e) {
             showAlert("Erro", "Falha ao carregar o ecrã: " + title);
             e.printStackTrace();

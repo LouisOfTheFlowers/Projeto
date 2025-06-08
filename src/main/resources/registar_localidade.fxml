@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Test.RegistarLocalidadeController" style="-fx-background-color: #f5fcf5;">
+
+    <!-- Botão de Voltar -->
+    <Button text="← Voltar" onAction="#voltarParaPaginaAnterior" layoutX="20" layoutY="20"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-padding: 5 10;"/>
+
+    <!-- Formulário Central -->
+    <VBox spacing="15" alignment="CENTER" layoutX="0" layoutY="80" prefWidth="1440">
+        <Label text="Registar Nova Localidade" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+        <VBox spacing="10" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+
+            <Label text="Código Postal:"/>
+            <TextField fx:id="codigoPostalField" promptText="Introduza o código postal"/>
+
+            <Label text="Nome da Localidade:"/>
+            <TextField fx:id="localidadeField" promptText="Introduza o nome da localidade"/>
+
+            <Label text="Distrito:"/>
+            <TextField fx:id="distritoField" promptText="Introduza o distrito"/>
+
+            <Button text="Registar" onAction="#handleRegistarLocalidade"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-padding: 10 20;"/>
+        </VBox>
+    </VBox>
+</AnchorPane>

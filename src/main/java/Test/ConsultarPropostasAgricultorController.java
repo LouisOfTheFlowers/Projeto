@@ -3,9 +3,8 @@ package Test;
 import Models.trabalhoprojeto.PropostaPlantio;
 import Services.PropostaPlantioService;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -21,10 +20,7 @@ import java.util.List;
 public class ConsultarPropostasAgricultorController {
 
     @FXML
-    private ListView<String> propostasListView;
-
-    @FXML
-    private Button backButton;
+    private VBox propostasContainer;
 
     @Autowired
     private PropostaPlantioService propostaPlantioService;
@@ -33,29 +29,36 @@ public class ConsultarPropostasAgricultorController {
     private void initialize() {
         try {
             List<PropostaPlantio> propostas = propostaPlantioService.findAll();
-            propostasListView.getItems().clear();
+            propostasContainer.getChildren().clear();
 
             for (PropostaPlantio proposta : propostas) {
                 String estado = proposta.getEstado() == null ? "Em Análise" : proposta.getEstado();
 
                 String texto = String.format(
-                        "ID: %d | Hortícolas: %s | Época: %s | Terreno: %d | Estado: %s",
+                        "🌱 ID: %d\nHortícolas: %s\nÉpoca: %s\nTerreno: %s\nEstado: %s",
                         proposta.getId(),
                         proposta.getHorticolas(),
                         proposta.getAlturaDoAno(),
-                        proposta.getIdTerreno() != null ? proposta.getIdTerreno().getId() : null,
+                        proposta.getIdTerreno() != null ? proposta.getIdTerreno().getId() : "N/A",
                         estado
                 );
 
-                propostasListView.getItems().add(texto);
+                Label label = new Label(texto);
+                label.setWrapText(true);
+                label.setMaxWidth(700);
+                label.setStyle("-fx-background-color: white; " +
+                        "-fx-padding: 20; " +
+                        "-fx-background-radius: 10; " +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 1); " +
+                        "-fx-font-size: 16px; " +
+                        "-fx-text-fill: #333333;");
+
+                propostasContainer.getChildren().add(label);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Erro", "Não foi possível carregar as propostas.");
         }
     }
-
-
 
     @FXML
     private void goBack(ActionEvent event) {
@@ -66,20 +69,25 @@ public class ConsultarPropostasAgricultorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guarda o estado atual da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Gestão de Propostas");
+
+            // Restaura o estado da janela
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
-            showAlert("Erro", "Não foi possível voltar ao ecrã anterior.");
             e.printStackTrace();
         }
-    }
-
-    private void showAlert(String titulo, String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
     }
 }

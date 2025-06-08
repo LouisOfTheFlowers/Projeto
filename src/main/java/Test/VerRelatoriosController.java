@@ -28,7 +28,7 @@ public class VerRelatoriosController {
 
     @FXML
     private void initialize() {
-        List<Relatorio> relatorios = relatorioService.findAll(); // ou método equivalente no teu service
+        List<Relatorio> relatorios = relatorioService.findAll();
         relatoriosContainer.getChildren().clear();
 
         for (Relatorio r : relatorios) {
@@ -38,7 +38,9 @@ public class VerRelatoriosController {
                     + "Descrição: " + r.getDescricao();
 
             Label label = new Label(info);
-            label.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);");
+            label.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 5; "
+                    + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);");
+            label.setWrapText(true);
             relatoriosContainer.getChildren().add(label);
         }
     }
@@ -47,15 +49,26 @@ public class VerRelatoriosController {
     private void goBack(ActionEvent event) {
         try {
             URL resource = getClass().getResource("/relatorio_gestor.fxml");
-            FXMLLoader loader = new FXMLLoader(resource);
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(resource));
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
-            stage.setTitle("Relatórios");
-            stage.show();
 
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
+            stage.setTitle("Relatórios");
+
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

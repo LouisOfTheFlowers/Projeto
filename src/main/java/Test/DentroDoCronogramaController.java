@@ -49,9 +49,22 @@ public class DentroDoCronogramaController {
             Parent root = loader.load();
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar o estado atual da janela
+            boolean maximized = currentStage.isMaximized();
+            double width = currentStage.getWidth();
+            double height = currentStage.getHeight();
+
+            currentStage.setScene(new Scene(root));
             currentStage.setTitle("Ler Cronogramas");
-            currentStage.show();
+
+            // Restaurar o estado da janela
+            currentStage.setMaximized(maximized);
+            if (!maximized) {
+                currentStage.setWidth(width);
+                currentStage.setHeight(height);
+            }
+
         } catch (IOException e) {
             showAlert("Erro de Navegação", "Não foi possível voltar para a página anterior.");
             e.printStackTrace();

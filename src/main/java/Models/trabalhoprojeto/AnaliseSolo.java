@@ -34,8 +34,6 @@ public class AnaliseSolo {
     @JoinColumn(name = "id_terreno", nullable = false)
     private Terreno idTerreno;
 
-    @OneToMany(mappedBy = "idAnaliseSolo")
-    private Set<AmostraSolo> amostrasSolo = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -88,13 +86,5 @@ public class AnaliseSolo {
     public Terreno getIdTerreno() { return idTerreno; }
 
     public void setIdTerreno(Terreno idTerreno) { this.idTerreno = idTerreno; }
-
-    public Set<AmostraSolo> getAmostrasSolo() {
-        return amostrasSolo;
-    }
-
-    public void setAmostrasSolo(Set<AmostraSolo> amostrasSolo) {
-        this.amostrasSolo = amostrasSolo;
-    }
 
 }

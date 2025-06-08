@@ -60,9 +60,19 @@ public class RegistarAnalistaController {
 
         Localidade localidade = localidadeService.findById(codigoPostal).orElse(null);
         if (localidade == null) {
-            showAlert("Erro", "Código postal inválido. Adicione primeiro a localidade.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Código postal inválido. Deseja adicionar uma nova localidade?");
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    abrirRegistarLocalidade();
+                }
+            });
             return;
         }
+
 
         Trabalhador trabalhador = new Trabalhador();
         trabalhador.setNome(nome);
@@ -105,7 +115,26 @@ public class RegistarAnalistaController {
         } else {
             showAlert("Erro", "Falha ao registar gestor.");
         }
+    }
 
+    private void abrirRegistarLocalidade() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registar_localidade.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            // Passar o nome da página atual para o controller da localidade
+            RegistarLocalidadeController controller = loader.getController();
+            controller.setPaginaAnterior("/registar_analista.fxml"); // <- aqui!
+
+            Stage stage = (Stage) nomeField.getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Registar Localidade");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível abrir a página de registo de localidade.");
+        }
     }
 
     private void redirectToLogin() {
@@ -115,15 +144,28 @@ public class RegistarAnalistaController {
             Parent root = loader.load();
 
             Stage stage = (Stage) nomeField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Captura o estado atual
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Login");
+
+            // Restaura o estado anterior
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Erro", "Não foi possível redirecionar para a página de login.");
         }
     }
-
 
     private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -143,6 +185,7 @@ public class RegistarAnalistaController {
         confirmPasswordField.clear();
         emailField.clear();
     }
+
     @FXML
     private void voltarLogin(ActionEvent event) {
         try {
@@ -151,8 +194,22 @@ public class RegistarAnalistaController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Captura o estado atual
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Selecionar Tipo de Utilizador");
+
+            // Restaura o estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

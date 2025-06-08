@@ -51,6 +51,7 @@ public class ConsultarPropostasGestorController {
 
             Label titulo = new Label("Proposta #" + proposta.getId());
             titulo.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
+
             Label estado = new Label(proposta.getEstado() == null ? "Em Análise" : proposta.getEstado());
             estado.setStyle("-fx-text-fill: #666;");
             Region spacer = new Region();
@@ -58,11 +59,20 @@ public class ConsultarPropostasGestorController {
 
             header.getChildren().addAll(titulo, spacer, estado);
 
+            String detalhes = String.format(
+                    "Hortícolas: %s\nÉpoca: %s\nTerreno: %s",
+                    proposta.getHorticolas(),
+                    proposta.getAlturaDoAno(),
+                    proposta.getIdTerreno() != null ? proposta.getIdTerreno().getId() : "N/A"
+            );
+            Label detalhesLabel = new Label(detalhes);
+            detalhesLabel.setStyle("-fx-text-fill: #333; -fx-font-size: 14px;");
+
             Button verBtn = new Button("Ver Proposta");
             verBtn.setStyle("-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-padding: 5 15; -fx-background-radius: 3;");
             verBtn.setOnAction(e -> abrirDetalhesProposta(proposta, e));
 
-            card.getChildren().addAll(header, verBtn);
+            card.getChildren().addAll(header, detalhesLabel, verBtn);
             propostasContainer.getChildren().add(card);
         }
     }
@@ -74,11 +84,25 @@ public class ConsultarPropostasGestorController {
             Parent root = loader.load();
 
             VerPropostaController controller = loader.getController();
-            controller.setProposta(proposta); // método certo
+            controller.setProposta(proposta);
 
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar estado da janela antes
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Detalhes da Proposta");
+
+            // Restaurar estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
             showAlert("Erro", "Não foi possível abrir os detalhes da proposta.");
@@ -93,8 +117,22 @@ public class ConsultarPropostasGestorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar estado da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Área do Gestor de Produção");
+
+            // Restaurar estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

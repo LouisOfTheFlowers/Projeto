@@ -25,7 +25,6 @@ public class RegistarAgricultorController {
     @FXML private TextField ruaField;
     @FXML private TextField portaField;
     @FXML private TextField codigoPostalField;
-
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private PasswordField confirmPasswordField;
@@ -66,7 +65,16 @@ public class RegistarAgricultorController {
         String codPostal = codigoPostalField.getText();
         Localidade localidade = em.find(Localidade.class, codPostal);
         if (localidade == null) {
-            showAlert("Erro", "Código postal não encontrado na base de dados.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Código postal inválido. Deseja adicionar uma nova localidade?");
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    abrirRegistarLocalidade();
+                }
+            });
             return;
         }
 
@@ -82,7 +90,7 @@ public class RegistarAgricultorController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setEmail(email); // Usa o email inserido pelo utilizador
+        user.setEmail(email);
         user.setTrabalhador(trabalhador);
 
         Email email1 = new Email();
@@ -92,7 +100,6 @@ public class RegistarAgricultorController {
         Telefone telefone1 = new Telefone();
         telefone1.setIdTrabalhador(trabalhador);
         telefone1.setNum(telefone);
-
 
         boolean sucesso = userService.registarAgricultor(user, trabalhador, agricultor, email1, telefone1);
 
@@ -109,7 +116,26 @@ public class RegistarAgricultorController {
         } else {
             showAlert("Erro", "Falha ao registar gestor.");
         }
+    }
 
+    private void abrirRegistarLocalidade() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registar_localidade.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            // Passar o nome da página atual para o controller da localidade
+            RegistarLocalidadeController controller = loader.getController();
+            controller.setPaginaAnterior("/registar_agricultor.fxml"); // <- aqui!
+
+            Stage stage = (Stage) nomeField.getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Registar Localidade");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível abrir a página de registo de localidade.");
+        }
     }
 
     private void redirectToLogin() {
@@ -119,15 +145,28 @@ public class RegistarAgricultorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) nomeField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Salvar estado atual
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Login");
+
+            // Restaurar estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Erro", "Não foi possível redirecionar para a página de login.");
         }
     }
-
 
     private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -156,8 +195,22 @@ public class RegistarAgricultorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Salvar estado atual
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Selecionar Tipo de Utilizador");
+
+            // Restaurar estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

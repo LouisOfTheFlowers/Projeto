@@ -24,6 +24,16 @@ public class AntesRelatorioAnalistaController {
         carregarPagina(event, "/homepage_analista.fxml", "Homepage Analista");
     }
 
+    @FXML
+    private void abrirCriarRelatorio(ActionEvent event) {
+        carregarPagina(event, "/criar_relatorio.fxml", "Criar Relatório");
+    }
+
+    @FXML
+    private void abrirRelatorios(ActionEvent event) {
+        carregarPagina(event, "/dados_analista.fxml", "Relatórios Criados");
+    }
+
     private void carregarPagina(ActionEvent event, String fxml, String titulo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
@@ -31,8 +41,23 @@ public class AntesRelatorioAnalistaController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guarda o estado atual
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            // Muda a cena
+            stage.setScene(new Scene(root));
             stage.setTitle(titulo);
+
+            // Restaura o estado anterior
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             showAlert("Erro", "Não foi possível carregar a página.");
@@ -46,15 +71,5 @@ public class AntesRelatorioAnalistaController {
         alert.setHeaderText(null);
         alert.setContentText(mensagem);
         alert.showAndWait();
-    }
-
-    @FXML
-    private void abrirCriarRelatorio(ActionEvent event) {
-        carregarPagina(event, "/criar_relatorio.fxml", "Criar Relatório");
-    }
-
-    @FXML
-    private void abrirRelatorios(ActionEvent event) {
-        carregarPagina(event, "/dados_analista.fxml", "Relatorios Criados");
     }
 }

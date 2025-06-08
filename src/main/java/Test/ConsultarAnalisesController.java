@@ -9,7 +9,6 @@ import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,6 @@ public class ConsultarAnalisesController {
 
             verBtn.setOnAction(e -> abrirDetalhesAnalise(analise, e));
 
-
             card.getChildren().addAll(header, verBtn);
             analisesContainer.getChildren().add(card);
         }
@@ -78,15 +76,29 @@ public class ConsultarAnalisesController {
             controller.setAnalise(analise);
 
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guarda o estado atual da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            // Muda a cena
+            stage.setScene(new Scene(root));
             stage.setTitle("Análise de Solo");
 
+            // Restaura o estado anterior
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
+            stage.show();
         } catch (Exception ex) {
             ex.printStackTrace();
             showAlert("Erro", "Não foi possível abrir os detalhes da análise.");
         }
     }
-
 
     @FXML
     private void goBack(ActionEvent event) {
@@ -100,8 +112,23 @@ public class ConsultarAnalisesController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guarda o estado da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            // Muda a cena
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaura o estado anterior
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

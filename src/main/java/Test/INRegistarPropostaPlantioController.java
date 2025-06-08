@@ -50,7 +50,6 @@ public class INRegistarPropostaPlantioController {
             public String toString(Terreno terreno) {
                 return terreno == null ? "" : "Terreno #" + terreno.getId();
             }
-
             @Override
             public Terreno fromString(String s) {
                 return null;
@@ -65,7 +64,6 @@ public class INRegistarPropostaPlantioController {
             public String toString(Agricultor agricultor) {
                 return agricultor == null ? "" : agricultor.getNome();
             }
-
             @Override
             public Agricultor fromString(String s) {
                 return null;
@@ -80,7 +78,6 @@ public class INRegistarPropostaPlantioController {
             public String toString(GestorProducao gestor) {
                 return gestor == null ? "" : gestor.getNome();
             }
-
             @Override
             public GestorProducao fromString(String s) {
                 return null;
@@ -126,8 +123,22 @@ public class INRegistarPropostaPlantioController {
                 Parent root = loader.load();
 
                 Stage stage = (Stage) registarButton.getScene().getWindow();
-                stage.setScene(new Scene(root, 1440, 600));
+
+                // Guardar o estado atual da janela
+                boolean maximized = stage.isMaximized();
+                double width = stage.getWidth();
+                double height = stage.getHeight();
+
+                stage.setScene(new Scene(root));
                 stage.setTitle("Propostas de Plantio");
+
+                // Restaurar estado
+                stage.setMaximized(maximized);
+                if (!maximized) {
+                    stage.setWidth(width);
+                    stage.setHeight(height);
+                }
+
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -137,7 +148,6 @@ public class INRegistarPropostaPlantioController {
         alert.showAndWait();
     }
 
-
     private void showAlert(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -145,10 +155,12 @@ public class INRegistarPropostaPlantioController {
         alert.setContentText(mensagem);
         alert.showAndWait();
     }
+
     @FXML
     private void goBack(ActionEvent event) {
         loadScene(event, "/proposta_plantio_agricultor.fxml", "Propostas de Plantio");
     }
+
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
         try {
             URL resource = getClass().getResource(fxmlPath);
@@ -160,11 +172,24 @@ public class INRegistarPropostaPlantioController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar o estado atual da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaurar o estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
-
             e.printStackTrace();
         }
     }

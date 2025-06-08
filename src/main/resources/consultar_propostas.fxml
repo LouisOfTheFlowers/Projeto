@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.Cursor?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.ConsultarPropostasAgricultorController"
-      alignment="TOP_CENTER"
-      spacing="25"
-      style="-fx-padding: 30; -fx-background-color: #f0f8f0; -fx-font-family: 'Segoe UI', sans-serif;">
+      fx:controller="Test.ConsultarPropostasGestorController"
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Cabeçalho com botão voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="15">
-        <Button fx:id="backButton" onAction="#goBack"
-                text="Voltar"
+    <!-- Cabeçalho -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Button fx:id="backButton" onAction="#goBack" text="Voltar"
                 style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
             <cursor><Cursor fx:constant="HAND"/></cursor>
             <graphic>
@@ -25,13 +22,18 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Label text="📋 Propostas de Plantio"
+        <Label text="📄 Propostas de Plantio Submetidas"
                style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
-    <!-- Lista de Propostas -->
-    <ListView fx:id="propostasListView"
-              prefHeight="500"
-              prefWidth="800"
-              style="-fx-font-size: 15px; -fx-background-radius: 10; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-padding: 10;"/>
+    <!-- SCROLLPANE ENVOLVENDO AS PROPOSTAS -->
+    <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-border-color: transparent;">
+        <VBox fx:id="propostasContainer" spacing="15" alignment="TOP_LEFT"
+              style="-fx-padding: 10;
+                     -fx-background-color: white;
+                     -fx-background-radius: 10;
+                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 1);
+                     -fx-min-width: 700;"/>
+    </ScrollPane>
+
 </VBox>

@@ -39,9 +39,22 @@ public class ForgotPasswordController {
 
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar o estado da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Login");
-            stage.show();
+
+            // Restaurar o estado da janela
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
         } catch (IOException e) {
             showAlert("Erro", "Não foi possível voltar ao ecrã de login.");
             e.printStackTrace();

@@ -68,8 +68,23 @@ public class LerCronogramaController {
             controller.initData(cronograma);
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar estado da janela
+            boolean maximized = currentStage.isMaximized();
+            double width = currentStage.getWidth();
+            double height = currentStage.getHeight();
+
+            currentStage.setScene(new Scene(root));
             currentStage.setTitle("Detalhes do Cronograma");
+
+            // Restaurar o estado
+            currentStage.setMaximized(maximized);
+            if (!maximized) {
+                currentStage.setWidth(width);
+                currentStage.setHeight(height);
+            }
+
+            currentStage.show();
 
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível abrir os detalhes do cronograma");
@@ -92,9 +107,24 @@ public class LerCronogramaController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar estado da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaurar o estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
+
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar a página.");
             e.printStackTrace();
