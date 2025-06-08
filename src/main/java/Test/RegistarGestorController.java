@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
+import java.util.Objects;
 
 @Component
 public class RegistarGestorController {
@@ -64,7 +65,16 @@ public class RegistarGestorController {
 
         Localidade localidade = localidadeService.findById(codigoPostal).orElse(null);
         if (localidade == null) {
-            showAlert("Erro", "Código postal inválido. Adicione primeiro a localidade.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Código postal inválido. Deseja adicionar uma nova localidade?");
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    abrirRegistarLocalidade();
+                }
+            });
             return;
         }
 
@@ -110,7 +120,26 @@ public class RegistarGestorController {
         } else {
             showAlert("Erro", "Falha ao registar gestor.");
         }
+    }
 
+    private void abrirRegistarLocalidade() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/registar_localidade.fxml"));
+            loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
+            Parent root = loader.load();
+
+            // Passar o nome da página atual para o controller da localidade
+            RegistarLocalidadeController controller = loader.getController();
+            controller.setPaginaAnterior("/registar_gestor.fxml"); // <- aqui!
+
+            Stage stage = (Stage) nomeField.getScene().getWindow();
+            stage.setScene(new Scene(root, 1440, 600));
+            stage.setTitle("Registar Localidade");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Erro", "Não foi possível abrir a página de registo de localidade.");
+        }
     }
 
     private void redirectToLogin() {
@@ -120,15 +149,26 @@ public class RegistarGestorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) nomeField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Login");
+
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Erro", "Não foi possível redirecionar para a página de login.");
         }
     }
-
 
     private boolean isValidEmail(String email) {
         return Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$").matcher(email).matches();
@@ -161,8 +201,20 @@ public class RegistarGestorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Selecionar Tipo de Utilizador");
+
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

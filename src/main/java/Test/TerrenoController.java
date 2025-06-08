@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+
 @Component
 public class TerrenoController {
     @FXML private Button backButton;
@@ -21,7 +22,6 @@ public class TerrenoController {
 
     @FXML
     private void goBack(ActionEvent event) {
-
         loadScene(event, "/homepage_agricultor.fxml", "Área do Agricultor");
     }
 
@@ -41,12 +41,25 @@ public class TerrenoController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaurar maximizado ou tamanho manual
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
-
             e.printStackTrace();
+            showAlert("Erro", "Não foi possível carregar a página.");
         }
     }
 

@@ -16,6 +16,7 @@ import java.util.Objects;
 
 @Component
 public class RelatorioGestorController {
+
     @FXML private Button backButton;
 
     @FXML
@@ -38,11 +39,25 @@ public class RelatorioGestorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaura o estado anterior (maximized ou dimensões)
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert("Erro", "Não foi possível carregar o ecrã: " + title);
         }
     }
 

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.Cursor?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Test.ConsultarPropostasGestorController"
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Test.ConsultarPropostasAgricultorController"
       spacing="25" alignment="TOP_CENTER"
       style="-fx-background-color: #f0f8f0; -fx-padding: 30; -fx-font-family: 'Segoe UI', sans-serif;">
 
-    <!-- Cabeçalho com botão de voltar -->
-    <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 0 0 10 0;">
-        <Button fx:id="backButton" onAction="#goBack"
-                text="Voltar"
+    <!-- Cabeçalho -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Button fx:id="backButton" onAction="#goBack" text="Voltar"
                 style="-fx-background-color: transparent; -fx-text-fill: #2e8b57; -fx-font-size: 14px;">
-            <cursor><Cursor fx:constant="HAND"/></cursor>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
             <graphic>
                 <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
                     <Image url="Icons/back.png"/>
@@ -25,9 +27,13 @@
                style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e8b57;"/>
     </HBox>
 
-    <!-- Container de propostas -->
-    <VBox fx:id="propostasContainer" spacing="20" alignment="TOP_CENTER"
-          style="-fx-padding: 10 0 0 0;">
-        <!-- Os cartões de propostas serão adicionados dinamicamente aqui -->
-    </VBox>
+    <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-border-color: transparent;">
+        <VBox fx:id="propostasContainer" spacing="15" alignment="TOP_LEFT"
+              style="-fx-padding: 10;
+                 -fx-background-color: white;
+                 -fx-background-radius: 10;
+                 -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 1);
+                 -fx-min-width: 700;"/>
+    </ScrollPane>
+
 </VBox>

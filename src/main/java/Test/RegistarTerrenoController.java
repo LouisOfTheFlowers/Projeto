@@ -41,7 +41,6 @@ public class RegistarTerrenoController {
 
     @FXML
     private void registarTerreno(ActionEvent event) {
-
         String area = areaField.getText();
         String coordenadas = coordenadasField.getText();
         Agricultor agricultor = agricultorComboBox.getValue();
@@ -88,12 +87,25 @@ public class RegistarTerrenoController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaura o estado da janela
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
-
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao voltar à gestão de terrenos.");
         }
     }
 }

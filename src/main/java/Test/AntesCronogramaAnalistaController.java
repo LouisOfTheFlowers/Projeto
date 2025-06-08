@@ -24,6 +24,11 @@ public class AntesCronogramaAnalistaController {
         carregarPagina(event, "/homepage_analista.fxml", "Homepage Analista");
     }
 
+    @FXML
+    private void abrirCronogramas(ActionEvent event) {
+        carregarPagina(event, "/cronogramas_analista.fxml", "Cronogramas");
+    }
+
     private void carregarPagina(ActionEvent event, String fxml, String titulo) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
@@ -31,8 +36,23 @@ public class AntesCronogramaAnalistaController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guarda o estado atual
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            // Muda a cena
+            stage.setScene(new Scene(root));
             stage.setTitle(titulo);
+
+            // Restaura o estado anterior
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             showAlert("Erro", "Não foi possível carregar a página.");
@@ -46,10 +66,5 @@ public class AntesCronogramaAnalistaController {
         alert.setHeaderText(null);
         alert.setContentText(mensagem);
         alert.showAndWait();
-    }
-
-    @FXML
-    private void abrirCronogramas(ActionEvent event) {
-        carregarPagina(event, "/cronogramas_analista.fxml", "Cronogramas");
     }
 }

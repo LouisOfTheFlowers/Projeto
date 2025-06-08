@@ -64,7 +64,6 @@ public class HomeGestorController {
         loadScene(event, "/relatorio_gestor.fxml", "Relatório");
     }
 
-
     @FXML
     private void logout(ActionEvent event) {
         loadScene(event, "/login.fxml", "Login");
@@ -77,9 +76,21 @@ public class HomeGestorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar o estado atual da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
-            stage.show();
+
+            // Restaurar o estado da janela
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
         } catch (IOException | NullPointerException e) {
             showAlert("Erro", "Não foi possível carregar o ecrã: " + title);
             e.printStackTrace();
@@ -94,4 +105,3 @@ public class HomeGestorController {
         alert.showAndWait();
     }
 }
-

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.Objects;
+
 @Component
 public class HomeAgricultorController {
     @FXML private Button logoutButton;
@@ -75,9 +76,22 @@ public class HomeAgricultorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Guardar o estado da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
-            stage.show();
+
+            // Restaurar o estado da janela
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
         } catch (Exception e) {
             showAlert("Erro", "Não foi possível carregar o ecrã: " + title);
             e.printStackTrace();

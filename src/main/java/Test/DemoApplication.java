@@ -37,10 +37,6 @@ public class DemoApplication  implements CommandLineRunner  {
 	@Autowired
 	private TerrenoService terrenoService;
 	@Autowired
-	private ProdutoService produtoService;
-	@Autowired
-	private ProdutoTerrenoService produtoTerrenoService;
-	@Autowired
 	private EmailService emailService;
 	@Autowired
 	private TelefoneService telefoneService;
@@ -50,8 +46,6 @@ public class DemoApplication  implements CommandLineRunner  {
 	private CronogramaService cronogramaService;
 	@Autowired
 	private AnaliseSoloService analiseSoloService;
-	@Autowired
-	private AmostraSoloService amostraSoloService;
 	@Autowired
 	private PropostaPlantioService propostaPlantioService;
 	@Autowired

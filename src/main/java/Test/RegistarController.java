@@ -33,7 +33,6 @@ public class RegistarController {
 
         if (!validateInput(username, password, confirmPassword, selectedRole)) return;
 
-        // Redirecionar para a página específica com base no tipo de utilizador
         switch (selectedRole.toLowerCase()) {
             case "agricultor":
                 loadSceneWithData(event, "/registoAgricultor.fxml", "Registo Agricultor");
@@ -74,8 +73,20 @@ public class RegistarController {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar o ecrã: " + title);
@@ -88,13 +99,21 @@ public class RegistarController {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             Parent root = loader.load();
 
-            // Aqui podes passar dados ao controller se necessário:
-            // Ex: RegistarAgricultorController controller = loader.getController();
-            // controller.setUserData(usernameField.getText(), passwordField.getText());
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível carregar o ecrã: " + title);

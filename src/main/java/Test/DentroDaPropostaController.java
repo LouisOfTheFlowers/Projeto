@@ -16,8 +16,10 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+
 @Component
 public class DentroDaPropostaController {
+
     @FXML private Label tituloLabel;
     @FXML private Label tituloPropostaLabe;
     @FXML private Label dataPropostaLabe;
@@ -30,12 +32,10 @@ public class DentroDaPropostaController {
     @FXML private TableColumn<?, ?> especieColumn;
     @FXML private TableColumn<?, ?> observacoesColumn;
 
-    // Variável para armazenar a proposta selecionada
     private PropostaPlantio propostaSelecionada;
     private Stage previousStage;
     private int propostaId;
 
-    // Método para inicializar os dados da proposta
     public void initData(PropostaPlantio proposta) {
         this.propostaSelecionada = proposta;
         atualizarUI();
@@ -45,13 +45,12 @@ public class DentroDaPropostaController {
         this.propostaId = propostaId;
     }
 
-    // Método para definir o stage anterior
     public void setPreviousStage(Stage stage) {
         this.previousStage = stage;
     }
 
     private void atualizarUI() {
-
+        // Implementa a lógica de atualizar o UI com dados da propostaSelecionada
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {
@@ -68,11 +67,21 @@ public class DentroDaPropostaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsultarPropostas.fxml"));
             Parent root = loader.load();
 
-            // Obtém o stage atual
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Define a cena anterior no mesmo stage
+            // Guardar estado da janela
+            boolean maximized = currentStage.isMaximized();
+            double width = currentStage.getWidth();
+            double height = currentStage.getHeight();
+
             currentStage.setScene(new Scene(root));
+
+            // Restaurar estado da janela
+            currentStage.setMaximized(maximized);
+            if (!maximized) {
+                currentStage.setWidth(width);
+                currentStage.setHeight(height);
+            }
 
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Erro", "Não foi possível voltar à página anterior");

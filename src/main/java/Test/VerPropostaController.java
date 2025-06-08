@@ -1,4 +1,3 @@
-// --- VerPropostaController.java ---
 package Test;
 
 import Models.trabalhoprojeto.PropostaPlantio;
@@ -59,13 +58,25 @@ public class VerPropostaController {
     @FXML
     private void goBack(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConsultarPropostas.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consultar_propostas.fxml"));
             loader.setControllerFactory(AppContextProvider.getApplicationContext()::getBean);
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle("Propostas Submetidas");
+
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -13,15 +13,16 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.Objects;
+
 @Component
 public class PropostaPlantioAgricultorController {
+
     @FXML private Button backButton;
     @FXML private Button registrarPropostaButton;
     @FXML private Button consultarPropostasButton;
 
     @FXML
     private void goBack(ActionEvent event) {
-
         loadScene(event, "/homepage_agricultor.fxml", "Área do Agricultor");
     }
 
@@ -32,7 +33,7 @@ public class PropostaPlantioAgricultorController {
 
     @FXML
     private void abrirConsultarPropostas(ActionEvent event) {
-        loadScene(event, "/Consultar_Propostas.fxml", "Consultar Propostas");
+        loadScene(event, "/ConsultarPropostas.fxml", "Consultar Propostas");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {
@@ -46,12 +47,26 @@ public class PropostaPlantioAgricultorController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            // Preservar o estado atual da janela
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaurar o estado
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
-
             e.printStackTrace();
+            showAlert("Erro", "Não foi possível carregar o ecrã: " + title);
         }
     }
 

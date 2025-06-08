@@ -16,7 +16,7 @@
         <!-- Imagem lateral -->
         <StackPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <ImageView fx:id="loginImage" fitWidth="720" fitHeight="900" preserveRatio="true">
-                <Image url="@Icons/login_image.png"/> <!-- coloca aqui a imagem que pretendes -->
+                <Image url="@images/novaImagem.jpg"/>
             </ImageView>
         </StackPane>
 

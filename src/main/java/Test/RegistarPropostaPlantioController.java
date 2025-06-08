@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.Objects;
+
 @Component
 public class RegistarPropostaPlantioController {
 
@@ -23,7 +24,7 @@ public class RegistarPropostaPlantioController {
             showAlert(Alert.AlertType.INFORMATION, "Registar Proposta de Plantio", "Opening Planting Proposal Registration...");
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while registering a planting proposal.");
+            showAlert(Alert.AlertType.ERROR, "Erro", "Ocorreu um erro ao registar a proposta de plantio.");
         }
     }
 
@@ -52,12 +53,25 @@ public class RegistarPropostaPlantioController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1440, 600));
+
+            boolean maximized = stage.isMaximized();
+            double width = stage.getWidth();
+            double height = stage.getHeight();
+
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
+
+            // Restaura o estado da janela
+            stage.setMaximized(maximized);
+            if (!maximized) {
+                stage.setWidth(width);
+                stage.setHeight(height);
+            }
+
             stage.show();
         } catch (Exception e) {
-
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Ocorreu um erro ao carregar a página.");
         }
     }
 }
